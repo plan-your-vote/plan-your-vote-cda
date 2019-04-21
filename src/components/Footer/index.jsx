@@ -1,29 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import * as routes from '../../constants/routes';
 
 const Footer = () => {
   return (
     <footer>
-      <div class='container'>
-        <div class='row'>
-          <div class='col-md-6'>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-6'>
             <img alt='Logo' />
             <div>&copy; 2019 Vancouver</div>
             <ul>
               <li>
-                <a href='#' target='_blank'>
+                <Link to={routes.TERMS_OF_USE}>
                   Terms of Use
                   <span>(opens in a new window)</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href='#' target='_blank'>
+                <Link to={routes.PRIVACY_POLICY}>
                   Privacy Policy
                   <span>(opens in a new window)</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
-          <div class='col-md-6'>
+          <div className='col-md-6'>
             <ul>
               <li>Twitter</li>
               <li>Facebook </li>
