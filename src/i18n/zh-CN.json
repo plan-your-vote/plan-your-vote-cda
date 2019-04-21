@@ -1,0 +1,12 @@
+{
+  "APP": {
+    "TITLE": "Vancouver Votes",
+    "SUBTITLE": "Plan your vote",
+    "LANGUAGE": "简体中文"
+  },
+  "FOOTER": {
+    "TERMS_OF_USE": "使用条款",
+    "PRIVACY_POLICY": "私隐政策",
+    "CITY": "北京"
+  }
+}

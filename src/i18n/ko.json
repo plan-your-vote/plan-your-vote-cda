@@ -1,0 +1,12 @@
+{
+  "APP": {
+    "TITLE": "Vancouver Votes",
+    "SUBTITLE": "Plan your vote",
+    "LANGUAGE": "한국어"
+  },
+  "FOOTER": {
+    "TERMS_OF_USE": "이용약관",
+    "PRIVACY_POLICY": "개인정보처리방침",
+    "CITY": "서울"
+  }
+}
