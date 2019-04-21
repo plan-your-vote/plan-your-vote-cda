@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Navigation from '../Navigation';
-import FrontPage from '../FrontPage';
-import Footer from '../Footer';
-import * as routes from '../../constants/routes';
-import SelectionPage from '../SelectionPage';
-import TermsOfUse from '../../pages/terms-of-use';
-import PrivacyPolicy from '../../pages/privacy-policy';
+import * as routes from 'constants/routes';
+import Navigation from 'components/Navigation';
+import Footer from 'components/Footer';
+
+import Home from 'pages/home';
+import Selection from 'pages/selection';
+import TermsOfUse from 'pages/terms-of-use';
+import PrivacyPolicy from 'pages/privacy-policy';
 
 class App extends Component {
   render() {
@@ -18,12 +19,12 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path={routes.FRONTPAGE}
-              component={() => <FrontPage />}
+              path={routes.HOME}
+              component={() => <Home />}
             />
             <Route
               path={routes.SELECTION}
-              component={() => <SelectionPage />}
+              component={() => <Selection />}
             />
             <Route
               path={routes.TERMS_OF_USE}

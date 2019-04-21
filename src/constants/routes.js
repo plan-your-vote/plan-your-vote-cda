@@ -1,4 +1,4 @@
-export const FRONTPAGE = '/';
+export const HOME = '/';
 
 export const SELECTION = '/selection';
 export const CANDIDATES = '/selection/candidates';
