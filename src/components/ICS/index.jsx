@@ -3,7 +3,7 @@ import React from 'react';
 const ICS = () => {
   return (
     <>
-      <label for='dateSelector' aria-label='format: year month day'>
+      <label htmlFor='dateSelector' aria-label='format: year month day'>
         Date:
       </label>
       <select id='dateSelector'>
@@ -14,11 +14,11 @@ const ICS = () => {
 
       <div title='Add to Calendar'>
         Add to Calendar
-        <span class='start'>2019-06-28 08:00 AM</span>
-        <span class='end'>2019-06-28 03:00 PM</span>
-        <span class='timezone'>America/Vancouver</span>
-        <span class='title'>Canadian Federal Election 2020</span>
-        <span class='description'>
+        <span className='start'>2019-06-28 08:00 AM</span>
+        <span className='end'>2019-06-28 03:00 PM</span>
+        <span className='timezone'>America/Vancouver</span>
+        <span className='title'>Canadian Federal Election 2020</span>
+        <span className='description'>
           Elect members of the Legislative Assembly in Canada
         </span>
       </div>

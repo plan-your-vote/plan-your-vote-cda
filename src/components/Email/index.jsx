@@ -3,7 +3,7 @@ import React from 'react';
 const Email = () => {
   return (
     <>
-      <label for='email'>E-mail Address</label>
+      <label htmlFor='email'>E-mail Address</label>
       <input
         id='email'
         aria-describedby='email'
@@ -11,14 +11,14 @@ const Email = () => {
         type='text'
         name='email'
       />
-      <label for='subject'>Subject</label>
+      <label htmlFor='subject'>Subject</label>
       <input
         id='subject'
         aria-describedby='subject'
         type='text'
         name='subject'
       />
-      <label for='message'>Message:</label>
+      <label htmlFor='message'>Message:</label>
       <input
         id='message'
         aria-describedby='message'
