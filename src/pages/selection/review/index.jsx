@@ -1,7 +1,13 @@
 import React from 'react';
+import Email from 'components/Email';
 
 const Review = () => {
-  return <div>Review</div>;
+  return (
+    <>
+      Review
+      <Email />
+    </>
+  );
 };
 
 export default Review;
