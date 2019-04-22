@@ -104,3 +104,17 @@ p {
     max-width: 10vw;
   }
 }
+
+#nav-logo {
+  height: 2em;
+  max-width: 50vw;
+}
+
+nav {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  nav {
+    font-size: 16px;
+  }
+}

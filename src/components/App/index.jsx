@@ -17,7 +17,7 @@ class App extends Component {
     themeName: null,
     images: [
       {
-        id: '',
+        id: 'Logo',
         type: '',
         value: '',
         description: '',
@@ -65,7 +65,11 @@ class App extends Component {
           <link rel='stylesheet' href={this.state.themeHref} id='theme' />
         </Helmet>
         <Router>
-          <Navigation />
+          <Navigation
+            logo={this.state.images.find(image => {
+              return (image.id === 'Logo');
+            })}
+          />
           <Switch>
             <Route exact path={routes.HOME} component={() => <Home />} />
             <Route path={routes.SELECTION} component={() => <Selection />} />
