@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import * as routes from '../../constants/routes';
 
 const Footer = () => {
   return (
@@ -12,16 +10,14 @@ const Footer = () => {
             <div>&copy; 2019 Vancouver</div>
             <ul>
               <li>
-                <Link to={routes.TERMS_OF_USE}>
+                <a href='https://vancouver.ca/your-government/terms-of-use.aspx'>
                   Terms of Use
-                  <span>(opens in a new window)</span>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to={routes.PRIVACY_POLICY}>
+                <a href='https://vancouver.ca/your-government/privacy-policy.aspx'>
                   Privacy Policy
-                  <span>(opens in a new window)</span>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
