@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import * as routes from 'constants/routes';
 
@@ -12,12 +12,14 @@ import Review from './review';
 const SelectionPage = () => {
   return (
     <>
-      SelectionPage
       <Navigation />
-      <Route path={routes.CANDIDATES} component={() => <Candidates />} />
-      <Route path={routes.CAPITAL} component={() => <Capital />} />
-      <Route path={routes.SCHEDULE} component={() => <Schedule />} />
-      <Route path={routes.REVIEW} component={() => <Review />} />
+      <Switch>
+        <Route path={routes.CANDIDATES} component={() => <Candidates />} />
+        <Route path={routes.CAPITAL} component={() => <Capital />} />
+        <Route path={routes.SCHEDULE} component={() => <Schedule />} />
+        <Route path={routes.REVIEW} component={() => <Review />} />
+        <Route render={() => <Candidates />} />
+      </Switch>
     </>
   );
 };
