@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import pyv from 'utils/api/pyv';
 import * as routes from 'constants/routes';
+import * as themes from 'constants/themes';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
 
@@ -11,6 +13,7 @@ import Selection from 'pages/selection';
 
 class App extends Component {
   state = {
+    title: 'Plan Your Vote',
     themeName: null,
     images: [
       {
@@ -20,11 +23,14 @@ class App extends Component {
         description: '',
         format: ''
       }
-    ]
+    ],
+    themeHref: ''
   };
 
   componentDidMount() {
-    this.loadApiData();
+    this.loadApiData().then(() => {
+      this.setTheme();
+    });
   }
 
   loadApiData = async () => {
@@ -37,9 +43,27 @@ class App extends Component {
     });
   };
 
+  setTheme = () => {
+    switch (this.state.themeName) {
+      case 'Maple':
+        this.setState({ themeHref: `${themes.BASE}${themes.MAPLE}` });
+        break;
+      case 'Snowdrop':
+        this.setState({ themeHref: `${themes.BASE}${themes.SNOWDROP}` });
+        break;
+      default:
+        this.setState({ themeHref: `${themes.BASE}${themes.DEFAULT}` });
+        break;
+    }
+  };
+
   render() {
     return (
       <>
+        <Helmet>
+          <title>{this.state.title}</title>
+          <link rel='stylesheet' href={this.state.themeHref} id='theme' />
+        </Helmet>
         <Router>
           <Navigation />
           <Switch>
