@@ -22,6 +22,13 @@ class App extends Component {
         value: '',
         description: '',
         format: ''
+      },
+      {
+        id: 'Footer Logo',
+        type: '',
+        value: '',
+        description: '',
+        format: ''
       }
     ],
     themeHref: ''
@@ -67,7 +74,7 @@ class App extends Component {
         <Router>
           <Navigation
             logo={this.state.images.find(image => {
-              return (image.id === 'Logo');
+              return image.id === 'Logo';
             })}
           />
           <Switch>
@@ -75,7 +82,11 @@ class App extends Component {
             <Route path={routes.SELECTION} component={() => <Selection />} />
             <Route render={() => <h1>Page not found</h1>} />
           </Switch>
-          <Footer />
+          <Footer
+            logo={this.state.images.find(image => {
+              return image.id === 'Footer Logo';
+            })}
+          />
         </Router>
       </>
     );

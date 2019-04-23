@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Footer = () => {
+const Footer = ({ logo }) => {
   return (
     <footer>
       <div className='container'>
         <div className='row'>
           <div className='col-md-6'>
-            <img alt='Logo' />
+            <img src={logo.value} alt={logo.description} />
             <div>&copy; 2019 Vancouver</div>
             <ul>
               <li>
