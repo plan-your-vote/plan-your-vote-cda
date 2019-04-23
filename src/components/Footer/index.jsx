@@ -6,9 +6,9 @@ const Footer = ({ logo }) => {
       <div className='container'>
         <div className='row'>
           <div className='col-md-6'>
-            <img src={logo.value} alt={logo.description} />
-            <div>&copy; 2019 Vancouver</div>
-            <ul>
+            <img id='footer-logo' src={logo.value} alt={logo.description} />
+            <div id='footer-copyright'>&copy; 2019 Vancouver</div>
+            <ul id='footer-nav'>
               <li>
                 <a href='https://vancouver.ca/your-government/terms-of-use.aspx'>
                   Terms of Use
@@ -22,7 +22,7 @@ const Footer = ({ logo }) => {
             </ul>
           </div>
           <div className='col-md-6'>
-            <ul>
+            <ul id='footer-share'>
               <li>Twitter</li>
               <li>Facebook </li>
               <li>LinkedIn</li>
