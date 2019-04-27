@@ -12,9 +12,11 @@ const MultipleChoiceQuestion = ({ title, description, name, values }) => {
 
   return (
     <>
-      <p>{title}</p>
-      <p>{description}</p>
-      {options}
+      <div className="col-md-12 mb40">
+        <h5>{title}</h5>
+        <p>{description}</p>
+        {options}
+      </div>
     </>
   );
 };

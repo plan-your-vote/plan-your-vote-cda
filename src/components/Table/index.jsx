@@ -21,12 +21,14 @@ const Table = ({ head, body }) => {
   });
 
   return (
-    <table>
-      <thead>
-        <tr>{th}</tr>
-      </thead>
-      <tbody>{tr}</tbody>
-    </table>
+    <div className="table-responsive table-container">
+      <table className="table">
+        <thead>
+          <tr>{th}</tr>
+        </thead>
+        <tbody>{tr}</tbody>
+      </table>
+    </div>
   );
 };
 
