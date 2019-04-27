@@ -35,13 +35,19 @@ class Capital extends Component {
 
     return (
       <>
-        <SectionHeader
-          title={dummyHeader[1].title}
-          subtitle={dummyHeader[1].subtitle}
-          level='1'
-          description={dummyHeader[1].description}
-        />
-        {multipleChoice}
+        <div className="container">
+          <div className="row">
+            <SectionHeader
+              title={dummyHeader[1].title}
+              subtitle={dummyHeader[1].subtitle}
+              level='2'
+              description={dummyHeader[1].description}
+            />
+          </div>
+          <div className="row">
+            {multipleChoice}
+          </div>
+        </div>
       </>
     );
   }
