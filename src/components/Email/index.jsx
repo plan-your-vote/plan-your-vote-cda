@@ -48,7 +48,7 @@ const Email = () => {
             </tr>
           </tbody>
         </table>
-        <button className="btn" aria-label='send email'>Send Reminder Email</button>
+        <button className="btn btn-secondary" aria-label='send email'>Send Reminder Email</button>
       </div>
     </>
   );
