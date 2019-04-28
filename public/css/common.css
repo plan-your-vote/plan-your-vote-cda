@@ -1,0 +1,244 @@
+/* Intro page */
+.intro {
+  margin-bottom: 2em;
+}
+
+.intro h1 {
+  font-size: 3em;
+  border-bottom: none;
+  padding-left: 0;
+  width: 75%;
+  margin: 0 auto;
+  color: #e60050;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.get-started {
+  display: block;
+  clear: both;
+  box-sizing: border-box;
+  width: 350px;
+  margin: 0 auto 2.5em;
+  padding: 0;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  background: url(https://vancouver.ca/plan-your-vote/img/get-started.png) no-repeat;
+  background-size: contain;
+  height: 54px;
+  letter-spacing: 2px;
+}
+
+.get-started span.text {
+  display: inline-block;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+.intro p:first-of-type {
+  text-align: center;
+  font-weight: normal;
+  font-size: 1.5em;
+}
+
+.intro-left {
+  margin-bottom: 3em;
+  text-align: center;
+}
+
+.intro-right {
+  overflow: auto;
+  position: relative;
+  box-sizing: border-box;
+  padding-left: 2em;
+  padding-bottom: 5em;
+  border-bottom: none;
+  text-align: center;
+  float: right;
+}
+
+@media (min-width: 481px) {
+  .intro-left,
+  .intro-right {
+    box-sizing: border-box;
+    float: left;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .intro-left,
+  .intro-right {
+    width: 50%;
+    padding-right: 2em;
+  }
+}
+
+.intro-right span {
+  display: none;
+  position: absolute;
+  right: 120px;
+  font-size: 0.875em;
+  color: #666;
+}
+
+.intro-right span.candidates {
+  margin-top: 5em;
+  top: 340px;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.intro .intro-tips li {
+  display: list-item;
+  float: none;
+  width: auto;
+  margin: 0 0 2em 0;
+  padding: 0 0 0 3em;
+  text-align: left;
+}
+
+.intro-tips {
+  list-style: none;
+  margin: 0 0 3em;
+  padding: 0;
+  overflow: auto;
+}
+
+.intro-center > p {
+    clear: both;
+}
+
+.reassurance {
+  text-align: center;
+  text-transform: uppercase;
+  color: #666;
+  font-size: 0.875em;
+}
+
+.intro p.note {
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0 8%;
+  color: #666;
+}
+
+.to-election-site {
+  position: relative;
+  display: block;
+  width: 30em;
+  margin: 1.5em auto 0;
+  font-size: 1em;
+  text-align: center;
+  max-width: 88%;
+}
+
+/* NavBar */
+#nav-logo {
+  height: 2em;
+  max-width: 50vw;
+}
+
+#navbar {
+  border-bottom: 0 !important;
+}
+
+/* Footer */
+
+@media (min-width: 768px) {
+  #footer-copyright,
+  #footer-nav {
+    margin-bottom: 0;
+  }
+}
+
+footer {
+  background-color: #ddd;
+  padding-bottom: 1.2em;
+}
+
+footer > .container {
+  padding-top: 2em;
+}
+
+#nav-logo {
+  height: 2em;
+  max-width: 50vw;
+}
+
+nav {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  nav {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  footer > .container > .row > .col-md-6:first-child {
+    text-align: left;
+  }
+  footer > .container > .row > .col-md-6:not(:first-child) {
+    text-align: right;
+  }
+}
+
+@media (max-width: 767.98px) {
+  footer > .container > .row > .col-md-6 {
+    text-align: center;
+  }
+  #footer-logo {
+    width: 45vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #footer-logo {
+    width: 20vw;
+  }
+}
+
+@media (min-width: 992px) {
+  #footer-logo {
+    width: 15vw;
+  }
+}
+
+#footer-share {
+  list-style-type: none;
+  padding: 0;
+}
+
+#footer-share li {
+  display: inline-block;
+}
+
+footer #footer-nav {
+  padding-left: 0;
+}
+
+footer #footer-nav li:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+
+footer #footer-nav li {
+  display: inline-block;
+  list-style-type: none;
+  line-height: 1;
+  border-left: solid 1px white;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
