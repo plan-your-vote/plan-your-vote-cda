@@ -23,11 +23,16 @@ const Footer = ({ logo }) => {
           </div>
           <div className='col-md-6'>
             <ul id='footer-share'>
-              <li>Twitter</li>
-              <li>Facebook </li>
-              <li>LinkedIn</li>
+              <li id="twitter"></li>
+              <li id="facebook"></li>
+              <li id="linkedin"></li>
             </ul>
-            <select aria-label='Change language to: ' />
+            <select
+              aria-label='Change language to: '
+              className="custom-select custom-select-sm"
+            >
+              <option value="0">en</option>
+            </select>
           </div>
         </div>
       </div>
