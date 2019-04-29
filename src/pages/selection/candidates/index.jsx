@@ -5,9 +5,6 @@ import dummyCandidates from 'constants/dummyData/candidates.json';
 import dummyHeader from 'constants/dummyData/pages.json';
 
 class Candidates extends Component {
-  myfunction = () => {
-    // start from here
-  };
 
   render() {
     return (
@@ -19,6 +16,7 @@ class Candidates extends Component {
           description={dummyHeader[0].description}
         />
         <Table head={dummyCandidates.head} body={dummyCandidates.body} />
+
       </>
     );
   }

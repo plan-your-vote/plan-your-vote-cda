@@ -40,6 +40,10 @@ class App extends Component {
     });
   }
 
+  handleTest = () => console.log("hello")
+
+  
+
   loadApiData = async () => {
     const response = await pyv.get('/theme');
     const data = response.data;
@@ -79,9 +83,12 @@ class App extends Component {
           />
           <Switch>
             <Route exact path={routes.HOME} component={() => <Home />} />
-            <Route path={routes.SELECTION} component={() => <Selection />} />
+            <Route path={routes.SELECTION} component={() => <Selection handleTest= {this.handleTest}/>} />
             <Route render={() => <h1>Page not found</h1>} />
           </Switch>
+
+          {/* <button onClick={this.handleTest}>Press ME</button>  */}
+          
           <Footer
             logo={this.state.images.find(image => {
               return image.id === 'Footer Logo';
