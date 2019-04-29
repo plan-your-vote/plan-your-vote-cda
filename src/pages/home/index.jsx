@@ -11,7 +11,7 @@ const Home = () => {
       className='get-started get-started-new'
     >
       <span className="text">Start Planning!</span>
-      <span className="material-icons">chevron_right</span>
+      <span className="fas fa-chevron-right"></span>
     </Link>
   );
 
