@@ -8,6 +8,7 @@ class MultipleChoiceQuestion extends Component {
     values: []
   };
 
+
   componentDidMount() {
     this.setState({
       title: this.props.title,

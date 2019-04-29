@@ -42,7 +42,7 @@ class App extends Component {
 
   handleTest = () => {
     console.log("hello")
-    localStorage.setItem("chris", "Truong")
+    // localStorage.setItem("chris", "Truong")
   }
   
 

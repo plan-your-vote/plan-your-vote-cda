@@ -7,7 +7,7 @@ const SelectionNavitation = ({handleTest}) => {
   return (
     <>
       <Link to={routes.CANDIDATES} onClick={handleTest}>Candidates</Link>
-      <Link onClick={handleTest} to={routes.CAPITAL} >Capital</Link>
+      <Link to={routes.CAPITAL} onClick={handleTest}>Capital</Link>
       <Link to={routes.SCHEDULE} onClick={handleTest}>Schedule</Link>
       <Link to={routes.REVIEW} onClick={handleTest}>Review</Link>
     </>
