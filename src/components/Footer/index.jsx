@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 const Footer = ({ logo }) => {
   return (
@@ -23,15 +24,24 @@ const Footer = ({ logo }) => {
           </div>
           <div className='col-md-6'>
             <ul id='footer-share'>
-              <li id="twitter"></li>
-              <li id="facebook"></li>
-              <li id="linkedin"></li>
+              <li id='twitter' class='fa-stack'>
+                <i class='fas fa-circle fa-stack-2x' />
+                <i class='fab fa-twitter fa-stack-1x fa-inverse' />
+              </li>
+              <li id='facebook' class='fa-stack'>
+                <i class='fas fa-circle fa-stack-2x' />
+                <i class='fab fa-facebook-f fa-stack-1x fa-inverse' />
+              </li>
+              <li id='linkedin' class='fa-stack'>
+                <i class='fas fa-circle fa-stack-2x' />
+                <i class='fab fa-linkedin-in fa-stack-1x fa-inverse' />
+              </li>
             </ul>
             <select
               aria-label='Change language to: '
-              className="custom-select custom-select-sm"
+              className='custom-select custom-select-sm'
             >
-              <option value="0">en</option>
+              <option value='0'>en</option>
             </select>
           </div>
         </div>

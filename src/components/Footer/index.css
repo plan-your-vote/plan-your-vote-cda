@@ -1,0 +1,26 @@
+#twitter > .fa-circle {
+  color: #38a1f3;
+}
+
+#twitter:hover {
+  color: #38a1f3;
+  filter: opacity(0.65);
+}
+
+#facebook > .fa-circle {
+  color: #3c5a99;
+}
+
+#facebook:hover {
+  color: #3c5a99;
+  filter: opacity(0.65);
+}
+
+#linkedin > .fa-circle {
+  color: #0077b5;
+}
+
+#linkedin:hover {
+  color: #0077b5;
+  filter: opacity(0.65);
+}
