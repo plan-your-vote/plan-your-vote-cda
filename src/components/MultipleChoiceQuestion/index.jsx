@@ -1,35 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class MultipleChoiceQuestion extends Component {
-
   state = {
-    title : '',
+    title: '',
     description: '',
     name: '',
-    values: '',
-  }
+    values: []
+  };
 
-  constructor(props) {
-    super(props);
-
-    this.setState({title: props.title})
-    this.setState({description: props.description})
-    this.setState({name: props.name})
-    this.setState({values: props.values})
-
-    // ({ title, description, name, values, handleRadioBtn })
+  componentDidMount() {
+    this.setState({
+      title: this.props.title,
+      description: this.props.description,
+      name: this.props.name,
+      values: this.props.values
+    });
   }
 
   render() {
     const options = this.state.values.map(item => {
       return (
         <div key={item.value}>
-          <input type='radio' name={this.state.name} value={item.value} onChange ={handleRadioBtn}/>
+          <input
+            type='radio'
+            name={this.state.name}
+            value={item.value}
+            onChange={this.props.handleRadioBtn}
+          />
           {item.text}
         </div>
       );
     });
-  
+
     return (
       <>
         <p>{this.state.title}</p>
@@ -38,6 +40,6 @@ class MultipleChoiceQuestion extends Component {
       </>
     );
   }
-};
+}
 
 export default MultipleChoiceQuestion;

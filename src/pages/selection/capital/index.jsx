@@ -15,7 +15,8 @@ class Capital extends Component {
   }
 
   handleRadioBtn(e) {
-    console.log(e.target.name)
+    console.log(e.target.name);
+    console.log(e.target.value);
     // this.setState({
     //   [e.target.name]: e.target.checked
     // })
@@ -36,7 +37,7 @@ class Capital extends Component {
           description={question.description}
           name={question.name}
           values={question.values}
-          handleRadioBtn={handleRadioBtn}
+          handleRadioBtn={this.handleRadioBtn}
         />
       );
     });
