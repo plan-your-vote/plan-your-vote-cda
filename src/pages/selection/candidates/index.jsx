@@ -6,19 +6,17 @@ import dummyHeader from 'constants/dummyData/pages.json';
 
 const Candidates = () => {
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <SectionHeader
-            title={dummyHeader[0].title}
-            subtitle={dummyHeader[0].subtitle}
-            level='2'
-            description={dummyHeader[0].description}
-          />
-          <Table head={dummyCandidates.head} body={dummyCandidates.body} />
-        </div>
+    <div className="container">
+      <div className="row">
+        <SectionHeader
+          title={dummyHeader[0].title}
+          subtitle={dummyHeader[0].subtitle}
+          level='2'
+          description={dummyHeader[0].description}
+        />
+        <Table head={dummyCandidates.head} body={dummyCandidates.body} />
       </div>
-    </>
+    </div>
   );
 };
 

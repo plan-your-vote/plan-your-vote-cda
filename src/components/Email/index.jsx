@@ -2,7 +2,6 @@ import React from 'react';
 
 const Email = () => {
   return (
-    <>
       <div>
         <table>
           <tbody>
@@ -50,7 +49,6 @@ const Email = () => {
         </table>
         <button className="btn btn-secondary" aria-label='send email'>Send Reminder Email</button>
       </div>
-    </>
   );
 };
 
