@@ -14,6 +14,13 @@ class Capital extends Component {
     this.loadApiData();
   }
 
+  handleRadioBtn(e) {
+    console.log(e.target.name)
+    // this.setState({
+    //   [e.target.name]: e.target.checked
+    // })
+  }
+
   loadApiData = async () => {
     const response = await pyv.get('/ballotissues');
     const data = response.data;
@@ -29,6 +36,7 @@ class Capital extends Component {
           description={question.description}
           name={question.name}
           values={question.values}
+          handleRadioBtn={handleRadioBtn}
         />
       );
     });

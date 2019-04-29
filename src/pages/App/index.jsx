@@ -40,8 +40,10 @@ class App extends Component {
     });
   }
 
-  handleTest = () => console.log("hello")
-
+  handleTest = () => {
+    console.log("hello")
+    localStorage.setItem("chris", "Truong")
+  }
   
 
   loadApiData = async () => {

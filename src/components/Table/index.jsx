@@ -20,6 +20,7 @@ const Table = ({ head, body }) => {
     );
   });
 
+
   return (
     <table>
       <thead>
