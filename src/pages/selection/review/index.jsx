@@ -6,16 +6,23 @@ import dummyHeader from 'constants/dummyData/pages.json';
 
 const Review = () => {
   return (
-    <>
-      <SectionHeader
-        title={dummyHeader[3].title}
-        subtitle={dummyHeader[3].subtitle}
-        level='1'
-        description={dummyHeader[3].description}
-      />
-      <Email />
-      <ICS />
-    </>
+    <div className="container">
+      <div className="row">
+        <SectionHeader
+          title={dummyHeader[3].title}
+          subtitle={dummyHeader[3].subtitle}
+          level='2'
+          description={dummyHeader[3].description}
+        />
+      </div>
+      <div className="row">
+        <div className="col-md-6"></div>
+        <div className="col-md-6">
+          <Email />
+          <ICS />
+        </div>
+      </div>
+    </div>
   );
 };
 
