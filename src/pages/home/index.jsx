@@ -29,6 +29,8 @@ const Home = () => {
             />
             {startPlanning}
 
+            <div class="divider"></div>
+
             <div className="center">
               <div
                 className='intro-left'
@@ -85,6 +87,8 @@ const Home = () => {
               </div>
             </div>
 
+            <div class="divider"></div>
+            
             <div
               className='intro-center'
               role='region'

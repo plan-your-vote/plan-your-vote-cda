@@ -10,23 +10,24 @@
 }
 
 .get-started {
-  display: block;
+  background-color: #e60050;
+  border-radius: 25px;
   box-sizing: border-box;
-  width: 350px;
+  color: white;
+  display: block;
+  font-size: 22px;
+  letter-spacing: 2px;
+  height: 54px;
   margin: 0 auto 2.5em;
   padding: 0;
-  font-size: 22px;
-  color: white;
   text-align: center;
   text-decoration: none;
-  background: url(https://vancouver.ca/plan-your-vote/img/get-started.png) no-repeat;
-  background-size: contain;
-  height: 54px;
-  letter-spacing: 2px;
+  width: 350px;
 }
 
 .get-started:hover {
-  background: none;
+  background-color: white;
+  border: 2px solid #e60050;
   color: #e60050;
   text-decoration: none;
 }
@@ -171,6 +172,10 @@ nav {
   font-weight: bold;
 }
 
+.navbar {
+  justify-content: flex-start;
+}
+
 /* Footer */
 footer {
   background-color: #333;
@@ -228,4 +233,64 @@ footer #footer-nav li {
   border-left: solid 1px white;
   padding-left: 0.5em;
   padding-right: 0.5em;
+}
+
+/* Content pages */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  color: #e60050;
+}
+
+th,
+.btn {
+  background-color: #e60050;
+  border: none;
+  color: white;
+}
+
+.divider {
+  background-image: linear-gradient(to right, #e60050, white);
+  clear: both;
+  height: 10px;
+  margin: 5% 0;
+  width: 100%;
+}
+
+.plan-step {
+  margin-bottom: 2em;
+}
+
+.step-selection .navbar {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.step-selection .navbar a {
+  background-color: #e60050;
+  border-radius: 25px;
+  border-right: 2px solid white;
+  color: white;
+}
+
+.mcq-options {
+  border: solid 2px #e60050;
+  margin-top: 30px;
+}
+
+.mcq-options legend {
+  background-color: #e60050;
+  color: white;
+  font-size: 1rem;
+  margin: auto;
+  padding: 1%;
+  width: 95%;
+}
+
+.mcq-options div {
+  display: inline-block;
+  padding: 3%;
 }
