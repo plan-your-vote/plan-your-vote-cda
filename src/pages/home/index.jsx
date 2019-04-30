@@ -11,6 +11,7 @@ const Home = () => {
       className='get-started get-started-new'
     >
       <span className="text">Start Planning!</span>
+      &nbsp;
       <span className="fas fa-chevron-right"></span>
     </Link>
   );
@@ -36,18 +37,22 @@ const Home = () => {
               >
                 <ul className='intro-tips'>
                   <li>
+                    <span>1</span>
                     Browse candidates for mayor, councillor, Park Board commissioner,
                     and school trustee, then add your favourites to your plan.
                   </li>
                   <li>
+                    <span>2</span>
                     Answer 3 Capital Plan borrowing questions about whether the City
                     can borrow money to help pay for certain projects.
                   </li>
                   <li>
+                    <span>3</span>
                     Choose from 9 voting days and over 100 locations to fit your
                     schedule.
                   </li>
                   <li>
+                    <span>4</span>
                     Email your plan and add voting day details to your calendar. Your
                     plan will show your chosen candidates in the order you’ll find
                     them on your ballot.
@@ -116,6 +121,8 @@ const Home = () => {
                   aria-label=' or details on voter registration, identification, and more, visit the full election site on vancouver.ca'
                 >
                   visit full election site
+                  &nbsp;
+                  <span className="fas fa-chevron-right"></span>
                 </a>
               </p>
             </div>
