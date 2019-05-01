@@ -29,7 +29,7 @@ const Home = () => {
             />
             {startPlanning}
 
-            <div class="divider"></div>
+            <div className="divider"></div>
 
             <div className="center">
               <div
@@ -87,7 +87,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div class="divider"></div>
+            <div className="divider"></div>
             
             <div
               className='intro-center'

@@ -16,7 +16,7 @@ const SelectionPage = () => {
         <Navigation />
       </div>
 
-      <div class="divider"></div>
+      <div className="divider"></div>
       
       <Switch>
         <Route path={routes.CANDIDATES} component={() => <Candidates />} />
