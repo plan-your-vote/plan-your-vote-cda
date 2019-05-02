@@ -3,7 +3,8 @@
     { "id": 1, "text": "First Name" },
     { "id": 2, "text": "Last Name" },
     { "id": 3, "text": "Picture" },
-    { "id": 4, "text": "Biography" }
+    { "id": 4, "text": "Biography" },
+    { "id": 5, "text": "Selection" }
   ],
   "body": [
     [
@@ -28,7 +29,7 @@
       { "id": 1, "text": "Chris" },
       { "id": 2, "text": "Truong" },
       { "id": 3, "text": "" },
-      { "id": 4, "text": "Ut labore et dolore magna aliqua"}
+      { "id": 4, "text": "Ut labore et dolore magna aliqua" }
     ]
   ]
 }

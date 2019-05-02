@@ -9,15 +9,27 @@ import Capital from './capital';
 import Schedule from './schedule';
 import Review from './review';
 
-const SelectionPage = ({handleTest}) => {
+const SelectionPage = ({ handleTest }) => {
   return (
     <>
-      <Navigation handleTest = {handleTest} />
+      <Navigation handleTest={handleTest} />
       <Switch>
-        <Route path={routes.CANDIDATES} component={({handleTest}) => <Candidates />} />
-        <Route path={routes.CAPITAL} component={({handleTest}) => <Capital />} />
-        <Route path={routes.SCHEDULE} component={({handleTest}) => <Schedule />} />
-        <Route path={routes.REVIEW} component={({handleTest}) => <Review />} />
+        <Route
+          path={routes.CANDIDATES}
+          component={({ handleTest }) => <Candidates />}
+        />
+        <Route
+          path={routes.CAPITAL}
+          component={({ handleTest }) => <Capital />}
+        />
+        <Route
+          path={routes.SCHEDULE}
+          component={({ handleTest }) => <Schedule />}
+        />
+        <Route
+          path={routes.REVIEW}
+          component={({ handleTest }) => <Review />}
+        />
         <Route render={() => <Candidates />} />
       </Switch>
     </>

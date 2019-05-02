@@ -7,7 +7,6 @@ import pyv from 'utils/api/pyv';
 import dummyData from 'constants/dummyData/multipleChoice.json';
 import dummyHeader from 'constants/dummyData/pages.json';
 
-
 class Capital extends Component {
   state = {};
 
@@ -16,8 +15,8 @@ class Capital extends Component {
   }
 
   handleRadioBtn(e) {
-    console.log(e.target.name + " - " + e.target.value);
-    localStorage.setItem("candidates - " + e.target.name, e.target.value)
+    console.log(e.target.name + ' - ' + e.target.value);
+    localStorage.setItem('candidates - ' + e.target.name, e.target.value);
   }
 
   loadApiData = async () => {
