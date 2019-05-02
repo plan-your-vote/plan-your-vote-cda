@@ -9,6 +9,8 @@
 // site configuration options.
 
 const PROJECT_NAME = 'Plan Your Vote';
+const GITHUB_USERNAME = 'AmyHong0502';
+const GITHUB_REPO_NAME = 'pyv-spa';
 
 // List of projects/orgs using your project for the users page.
 const users = [
@@ -29,22 +31,12 @@ const users = [
 ];
 
 const siteConfig = {
-  title: PROJECT_NAME, // Title for your website.
+  title: PROJECT_NAME,
   tagline: 'A website for testing', // TODO
-  url: 'https://your-docusaurus-test-site.com', // Your website URL // TODO
-  baseUrl: '/', // Base URL for your project */ // TODO
-  // For github.io type URLs, you would set the url and baseUrl like:
-  //   url: 'https://facebook.github.io',
-  //   baseUrl: '/test-site/',
-
-  // Used for publishing and more
+  url: `https://${GITHUB_USERNAME}.github.io`,
+  baseUrl: `/${GITHUB_REPO_NAME}/`,
   projectName: PROJECT_NAME,
-  organizationName: 'facebook', // TODO
-  // For top-level user or org sites, the organization is still the same.
-  // e.g., for the https://JoelMarcey.github.io site, it would be set like...
-  //   organizationName: 'JoelMarcey'
-
-  // For no header links in the top nav bar -> headerLinks: [],
+  organizationName: GITHUB_USERNAME,
   headerLinks: [
     { doc: 'installation', label: 'Docs' },
     { doc: 'setting-up', label: 'Tutorial' },
@@ -79,11 +71,8 @@ const siteConfig = {
   },
   */
 
-  // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
   copyright: `Copyright © ${new Date().getFullYear()} ${PROJECT_NAME}`,
-
   highlight: {
-    // Highlight.js theme to use for syntax highlighting in code blocks.
     theme: 'default'
   },
 
@@ -92,17 +81,11 @@ const siteConfig = {
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
-  // No .html extensions for paths.
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
   ogImage: 'img/undraw_online.svg',
   twitterImage: 'img/undraw_tweetstorm.svg',
-
-  // Show documentation's last contributor's name.
-  // enableUpdateBy: true,
-
-  // Show documentation's last update time.
   enableUpdateTime: true
 
   // You may provide arbitrary config keys to be used as needed by your
