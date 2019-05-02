@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Dockerization · Plan Your Vote</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;h1&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; id=&quot;dockerization&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#dockerization&quot; aria-hidden=&quot;true&quot; class=&quot;hash-link&quot;&gt;&lt;svg class=&quot;hash-link-icon&quot; aria-hidden=&quot;true&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Dockerization&lt;/h1&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Dockerization · Plan Your Vote"/><meta property="og:type" content="website"/><meta property="og:url" content="https://AmyHong0502.github.io/pyv-spa/"/><meta property="og:description" content="&lt;h1&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; id=&quot;dockerization&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#dockerization&quot; aria-hidden=&quot;true&quot; class=&quot;hash-link&quot;&gt;&lt;svg class=&quot;hash-link-icon&quot; aria-hidden=&quot;true&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Dockerization&lt;/h1&gt;
+"/><meta property="og:image" content="https://AmyHong0502.github.io/pyv-spa/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://AmyHong0502.github.io/pyv-spa/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/pyv-spa/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/pyv-spa/css/main.css"/><script src="/pyv-spa/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pyv-spa/"><img class="logo" src="/pyv-spa/img/favicon.ico" alt="Plan Your Vote"/><h2 class="headerTitleWithLogo">Plan Your Vote</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/pyv-spa/docs/installation" target="_self">Docs</a></li><li class=""><a href="/pyv-spa/docs/setting-up" target="_self">Tutorial</a></li><li class=""><a href="/pyv-spa/help" target="_self">Help</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Dockerization</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="dockerization"></a><a href="#dockerization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dockerization</h1>
+<p>This document helps you to set up Docker and run it on your local machine with only one console command.</p>
+<h2><a class="anchor" aria-hidden="true" id="table-of-contents"></a><a href="#table-of-contents" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table of Contents</h2>
+<ul>
+<li><a href="#install-docker">Install Docker</a></li>
+<li><a href="#how-to-use">How to Use</a></li>
+<li><a href="#containers">Containers</a></li>
+<li><a href="#customization">Customization</a>
+<ul>
+<li><a href="#sql-server">SQL Server</a></li>
+<li><a href="#mysql">MySQL</a></li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="install-docker"></a><a href="#install-docker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install Docker</h2>
+<p>Please refer to <a href="https://www.docker.com/">Docker Official Website</a> to download the latest version of Docker for your own Operating System</p>
+<h2><a class="anchor" aria-hidden="true" id="how-to-use"></a><a href="#how-to-use" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Use</h2>
+<ul>
+<li>Once the installation is done, navigate to the root folder of the project.</li>
+<li>Open a terminal in the current directory</li>
+<li>Open Docker</li>
+<li>Test the docker command by running: <code>docker ps -a</code></li>
+</ul>
+<p>At this point, you should be able to run this app without worrying about how to install .NET Core or config your database. Simply just copy and run this command on your terminal window. Open <a href="http:localhost:8888">localhost:8888</a> to see the result !</p>
+<ul>
+<li>MySQL: <code>docker-compose -f docker/mysql.yml up --build</code></li>
+<li>SQL Server: <code>docker-compose -f docker/sqlserver.yml up --build</code></li>
+<li>SQLite: <code>docker-compose -f docker/sqlite.yml up --build</code></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="containers"></a><a href="#containers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Containers</h2>
+<p>To Dockerize this application, we have used .Net Core 2.2 for the website. For the database you can choose between using SQLite (by default), MySql or Linux SQL Server.</p>
+<h2><a class="anchor" aria-hidden="true" id="customization"></a><a href="#customization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customization</h2>
+<h3><a class="anchor" aria-hidden="true" id="sql-server"></a><a href="#sql-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SQL Server</h3>
+<p>To change the database name or the password, please open the <strong>sqlserver.yml</strong> in the root folder using your favourite text editor and you should see the following:</p>
+<pre><code class="hljs css language-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">'3'</span>
+
+<span class="hljs-attr">services:</span>
+<span class="hljs-attr">  db:</span>
+<span class="hljs-attr">    image:</span> <span class="hljs-string">microsoft/mssql-server-linux</span>
+<span class="hljs-attr">    restart:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">    ports:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"1433:1433"</span>
+<span class="hljs-attr">    environment:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">SA_PASSWORD=Sql!Expre55</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">ACCEPT_EULA=Y</span>
+
+<span class="hljs-attr">  mvc:</span>
+<span class="hljs-attr">    build:</span>
+<span class="hljs-attr">      context:</span> <span class="hljs-string">.</span>
+<span class="hljs-attr">      dockerfile:</span> <span class="hljs-string">Dockerfile</span>
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">db</span>
+<span class="hljs-attr">    ports:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"8888:80"</span>
+<span class="hljs-attr">    restart:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">    environment:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBHOST=db</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBNAME=openvoting</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBPORT=1433</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBUSERNAME=sa</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBPASSWORD=Sql!Expre55</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">ASPNETCORE_ENVIRONMENT=Production</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">APPSETTING_DB_TYPE=mssql</span>
+</code></pre>
+<ul>
+<li><p>To change the <strong>database name</strong>, simply replace a new name for <code>DBNAME</code></p></li>
+<li><p>To change the <strong>database password</strong>, you have to change both the <code>SA_PASSWORD</code> for the database and <code>DBPASSWORD</code> for the web part. <strong>Make sure that your password is strong enough (more than 8 characters with at least one uppercase, one lowercase, one number and one special character)</strong></p></li>
+<li><p>To change the <strong>port</strong>, you also need to change the <code>DBPORT</code> and <code>ports</code> to match the pattern <code>- &quot;[DBPORT]:1433&quot;</code></p></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="mysql"></a><a href="#mysql" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MySQL</h3>
+<p>Similarly to customize your setting for MySQL you can modify the variable in the <strong>mysql.yml</strong>. The password for MySQL is less strict and you can name whatever you want</p>
+<pre><code class="hljs css language-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">'3'</span>
+
+<span class="hljs-attr">services:</span>
+<span class="hljs-attr">  db:</span>
+<span class="hljs-attr">    image:</span> <span class="hljs-attr">mysql:8.0.0</span>
+<span class="hljs-attr">    restart:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">    environment:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">MYSQL_ROOT_PASSWORD=secret</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">MYSQL_TCP_PORT=3306</span>
+
+<span class="hljs-attr">  mvc:</span>
+<span class="hljs-attr">    build:</span>
+<span class="hljs-attr">      context:</span> <span class="hljs-string">.</span>
+<span class="hljs-attr">      dockerfile:</span> <span class="hljs-string">Dockerfile</span>
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">db</span>
+<span class="hljs-attr">    ports:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"8888:80"</span>
+<span class="hljs-attr">    restart:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">    environment:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBHOST=db</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBPORT=3306</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBNAME=openvoting</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">DBPASSWORD=secret</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">ASPNETCORE_ENVIRONMENT=Production</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">APPSETTING_DB_TYPE=mysql</span>
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 5/2/2019</em></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#install-docker">Install Docker</a></li><li><a href="#how-to-use">How to Use</a></li><li><a href="#containers">Containers</a></li><li><a href="#customization">Customization</a><ul class="toc-headings"><li><a href="#sql-server">SQL Server</a></li><li><a href="#mysql">MySQL</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/pyv-spa/" class="nav-home"><img src="/pyv-spa/img/favicon.ico" alt="Plan Your Vote" width="66" height="58"/></a><div><h5>Docs</h5><a href="/pyv-spa/docs/en/installation.html">Getting Started</a><a href="/pyv-spa/docs/en/setting-up.html">Tutorial</a></div><div><h5>More</h5><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/pyv-spa/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Plan Your Vote</section></footer></div></body></html>
