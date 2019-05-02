@@ -1,10 +1,9 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
+    "Getting Started": ["installation"],
+    "Guides": ["adding-a-race", "adding-a-candidate"]
   },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+  "tutorials": {
+    "Tutorials": ["setting-up", "create-a-new-website"]
   }
 }
