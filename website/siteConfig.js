@@ -35,7 +35,7 @@ const siteConfig = {
   tagline: 'A website for testing', // TODO
   url: `https://${GITHUB_USERNAME}.github.io`,
   baseUrl: `/${GITHUB_REPO_NAME}/`,
-  projectName: PROJECT_NAME,
+  projectName: GITHUB_REPO_NAME,
   organizationName: GITHUB_USERNAME,
   headerLinks: [
     { doc: 'installation', label: 'Docs' },
