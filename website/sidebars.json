@@ -3,7 +3,7 @@
     "Getting Started": ["installation"],
     "Guides": ["adding-a-race", "adding-a-candidate"]
   },
-  "tutorials": {
-    "Tutorials": ["setting-up", "create-a-new-website"]
+  "tutorial": {
+    "Tutorial": ["setting-up", "create-a-new-website"]
   }
 }
