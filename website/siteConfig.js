@@ -18,13 +18,13 @@ const users = [
     caption: 'City of Foo',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/undraw_open_source.svg', // TODO
+    image: `/${GITHUB_REPO_NAME}/img/undraw_open_source.svg`, // TODO
     infoLink: 'https://www.facebook.com', // TODO
     pinned: true
   },
   {
     caption: 'Bar Highschool',
-    image: '/img/undraw_open_source.svg', // TODO
+    image: `/${GITHUB_REPO_NAME}/img/undraw_open_source.svg`, // TODO
     infoLink: 'https://www.facebook.com', // TODO
     pinned: true
   }
