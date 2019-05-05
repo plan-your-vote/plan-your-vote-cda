@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import MultipleChoiceQuestion from 'components/MultipleChoiceQuestion';
 import SectionHeader from 'components/SectionHeader';
-
 import pyv from 'utils/api/pyv';
-
 import dummyData from 'constants/dummyData/multipleChoice.json';
 import dummyHeader from 'constants/dummyData/pages.json';
 
@@ -34,9 +32,9 @@ class Capital extends Component {
     });
 
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-12'>
             <SectionHeader
               title={dummyHeader[1].title}
               subtitle={dummyHeader[1].subtitle}
@@ -45,9 +43,7 @@ class Capital extends Component {
             />
           </div>
         </div>
-        <div className="row mb-4">
-          {multipleChoice}
-        </div>
+        <div className='row mb-4'>{multipleChoice}</div>
       </div>
     );
   }
