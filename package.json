@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mapbox": "^1.0.0-beta10",
+    "mapbox-gl": "^0.54.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
