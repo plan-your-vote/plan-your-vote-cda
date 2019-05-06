@@ -15,6 +15,10 @@ class Map extends Component {
       center: [-123.1139269, 49.2608838],
       zoom: 12
     });
+
+    const marker = new mapboxgl.Marker()
+      .setLngLat([-123.115625, 49.279719])
+      .addTo(this.map);
   }
 
   render() {
