@@ -36,6 +36,9 @@
       "Localization": {
         "title": "Localization"
       },
+      "map": {
+        "title": "map"
+      },
       "PDF": {
         "title": "PDF"
       },
