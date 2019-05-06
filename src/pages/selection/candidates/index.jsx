@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Table from 'components/Table';
 import SectionHeader from 'components/SectionHeader';
-import dummyCandidates from 'constants/dummyData/candidates.json';
 import dummyHeader from 'constants/dummyData/pages.json';
 import pyv from 'utils/api/pyv';
+
+
 class Candidates extends Component {
   _isMounted = false;
   state = {
@@ -14,7 +15,7 @@ class Candidates extends Component {
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
         this.setState({
-          data
+          candidates:data
         });
       }
     });
@@ -29,6 +30,27 @@ class Candidates extends Component {
     return data;
   };
   render() {
+    const cardStyle = {
+      'maxWidth': '540px'
+    };
+
+    let candidate = this.state.candidates.map(cData => {
+      return (
+        <div className='col-sm-3'>
+            <div className="card" style={cardStyle}>
+              <img src={cData.picture} className="card-img-top" alt="..."/>
+              <div className="card-body">
+                <h5 className="card-title">{cData.name}</h5>
+                {/* <h6 className="card-subtitle mb-2 text-muted">cData.organization</h6> */}
+                {/* <h6 className="card-subtitle mb-2 text-muted">cData.position</h6> */}
+                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+      );
+    });
+
     return (
       <div className='container'>
         <div className='row'>
@@ -38,7 +60,7 @@ class Candidates extends Component {
             level='2'
             description={dummyHeader[0].description}
           />
-          {/* <Table head={dummyCandidates.head} body={dummyCandidates.name} /> */}
+          {candidate}
         </div>
       </div>
     );
