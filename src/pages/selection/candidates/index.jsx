@@ -40,16 +40,16 @@ class Candidates extends Component {
 
     
 
-    // for (var cSection in candidatesHeader) { 
-    //   cTitleDescription.push( 
-    //     <SectionHeader
-    //         title={candidatesHeader[cSection].pageTitle} 
-    //         subtitle=""
-    //         level='2'
-    //         description={candidatesHeader[cSection].pageDescription}
-    //       /> 
-    //   )
-    // } 
+    for (var cSection in candidatesHeader) { 
+      cTitleDescription.push( 
+        <SectionHeader
+            title={candidatesHeader[cSection].pageTitle} 
+            subtitle=""
+            level='2'
+            description={candidatesHeader[cSection].pageDescription}
+          /> 
+      )
+    } 
 
     let candidates = this.state.candidates.map(cData => {
       return (
@@ -73,17 +73,11 @@ class Candidates extends Component {
       );
     });
 
-    console.log(this.state.candidatesHeader) //one sec how did u want me to do it last time?
+    console.log(this.state.candidatesHeader) 
     return (
       <div className='container'>
         <div className='row'>
-          {/* {cTitleDescription} */}
-          <SectionHeader
-            title={candidatesHeader["votingPage"].pageTitle} 
-            subtitle=""
-            level='2'
-            description={candidatesHeader["votingPage"].pageDescription} 
-          />
+          {cTitleDescription}
           {candidates}
         </div>
       </div>
