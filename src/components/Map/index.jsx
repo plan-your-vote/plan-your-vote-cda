@@ -6,6 +6,10 @@ import { MAPBOX } from 'credentials.js';
 class Map extends Component {
   map;
 
+  state = {
+    markers: []
+  };
+
   componentDidMount() {
     mapboxgl.accessToken = MAPBOX;
 
@@ -16,10 +20,23 @@ class Map extends Component {
       zoom: 12
     });
 
-    const marker = new mapboxgl.Marker()
-      .setLngLat([-123.115625, 49.279719])
-      .addTo(this.map);
+    this.addMarker(49.2608838, -123.1139269);
+    this.addMarker(49.279719, -123.115625);
+    this.addMarker(49.2830231, -123.1161401);
   }
+
+  addMarker = (latitude, longitude) => {
+    const marker = new mapboxgl.Marker()
+      .setLngLat([longitude, latitude])
+      .addTo(this.map);
+
+    const currentMarkers = this.state.markers;
+    currentMarkers.push(marker);
+
+    this.setState({
+      markers: currentMarkers
+    });
+  };
 
   render() {
     return <div id='map' style={{ width: '100%', height: '500px' }} />;
