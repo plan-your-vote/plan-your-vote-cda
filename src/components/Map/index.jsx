@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX } from 'credentials.js';
+import coordinates from 'constants/coordinates.json';
 
 class Map extends Component {
   map;
@@ -15,14 +16,14 @@ class Map extends Component {
 
     this.map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v9',
+      style: 'mapbox://styles/mapbox/streets-v11',
       center: [-123.1139269, 49.2608838],
-      zoom: 12
+      zoom: 13
     });
 
-    this.addMarker(49.2608838, -123.1139269);
-    this.addMarker(49.279719, -123.115625);
-    this.addMarker(49.2830231, -123.1161401);
+    coordinates.map(address => {
+      return this.addMarker(address.latitude, address.longitude);
+    });
   }
 
   addMarker = (latitude, longitude) => {
