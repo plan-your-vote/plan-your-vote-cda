@@ -6,7 +6,10 @@ class Candidates extends Component {
   _isMounted = false;
   state = {
     candidates: [],
-    candidatesHeader: {}
+    candidatesHeader: {
+      pageTitle: '',
+      pageDescription: ''
+    }
   };
   componentDidMount() {
     this._isMounted = true;
@@ -14,7 +17,11 @@ class Candidates extends Component {
       if (this._isMounted) {
         this.setState({
           candidates: data[0], 
-          candidatesHeader: data[1]
+          candidatesHeader: {
+            pageTitle: data[1].votingPage.pageTitle,
+            pageDescription: data[1].votingPage.pageDescription,
+            pageNum: data[1].votingPage.pageNumber
+          }
         });
       }
     }
@@ -29,33 +36,16 @@ class Candidates extends Component {
     return [response.data, response2.data];
   };
 
-  somethingFunc() {
-    console.log("hello")
-  }
-
   render() {
     const {candidatesHeader} = this.state
-    const cTitleDescription = []  
     const cardStyle = {
       maxWidth: '540px'
     };
 
-    
-
-    for (var cSection in candidatesHeader) { 
-      cTitleDescription.push( 
-        <SectionHeader
-            title={candidatesHeader[cSection].pageTitle} 
-            subtitle=""
-            level='2'
-            description={candidatesHeader[cSection].pageDescription}
-        /> 
-      )
-    } 
 
     let candidates = this.state.candidates.map(cData => {
       return (
-        <div className='col-sm-3'>
+        <div className='col-sm-3' key={cData.candidateId}>
           <div className='card' style={cardStyle}>
             <img src={cData.picture} className='card-img-top' alt='...' />
             <div className='card-body'>
@@ -66,7 +56,7 @@ class Candidates extends Component {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href='#' className='btn btn-primary' onClick={this.somethingFunc}>
+              <a href='#' className='btn btn-primary'>
                 Go somewhere
               </a>
             </div>
@@ -78,7 +68,12 @@ class Candidates extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          {cTitleDescription}
+          <SectionHeader
+            title={candidatesHeader.pageTitle} 
+            subtitle=''
+            level='2'
+            description={candidatesHeader.pageDescription}
+          />
           {candidates}
         </div>
       </div>
