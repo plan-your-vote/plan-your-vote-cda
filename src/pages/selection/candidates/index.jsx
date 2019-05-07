@@ -57,7 +57,7 @@ class Candidates extends Component {
                 the bulk of the card's content.
               </p>
               <a href='#' className='btn btn-primary'>
-                Go somewhere
+                Select
               </a>
             </div>
           </div>
