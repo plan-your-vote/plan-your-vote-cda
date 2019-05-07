@@ -39,7 +39,6 @@ class Capital extends Component {
   render() {
     console.log(this.state.header)
     const ballotIssuesHeader = []
-    const ballotIssueQuestions = []
 
     const mcQ = this.state.ballotIssues.map(mcQuestions => {
       return (

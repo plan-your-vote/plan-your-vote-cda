@@ -29,6 +29,10 @@ class Candidates extends Component {
     return [response.data, response2.data];
   };
 
+  somethingFunc() {
+    console.log("hello")
+  }
+
   render() {
     const {candidatesHeader} = this.state
     const cTitleDescription = []  
@@ -62,7 +66,7 @@ class Candidates extends Component {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href='#' className='btn btn-primary'>
+              <a href='#' className='btn btn-primary' onClick={this.somethingFunc}>
                 Go somewhere
               </a>
             </div>
