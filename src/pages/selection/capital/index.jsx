@@ -2,48 +2,88 @@ import React, { Component } from 'react';
 import MultipleChoiceQuestion from 'components/MultipleChoiceQuestion';
 import SectionHeader from 'components/SectionHeader';
 import pyv from 'utils/api/pyv';
-import dummyData from 'constants/dummyData/multipleChoice.json';
-import dummyHeader from 'constants/dummyData/pages.json';
+// import dummyData from 'constants/dummyData/multipleChoice.json';
 
 class Capital extends Component {
-  state = {};
+  _isMounted = false;
+
+  state = {
+    header: {},
+    ballotIssues: []
+  };
 
   componentDidMount() {
-    this.loadApiData();
+    this._isMounted = true;
+    this.loadApiData().then(data => {
+      if (this._isMounted) {
+        this.setState({
+          ballotIssues: data.ballotIssues,
+          header: data
+        })
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   loadApiData = async () => {
     const response = await pyv.get('/ballotissues');
     const data = response.data;
-    console.log(data);
+    return data;
   };
 
+ 
+
   render() {
-    const multipleChoice = dummyData.map(question => {
+    console.log(this.state.header)
+    const ballotIssuesHeader = []
+    const ballotIssueQuestions = []
+
+    const mcQ = this.state.ballotIssues.map(mcQuestions => {
       return (
         <MultipleChoiceQuestion
-          key={question.name}
-          title={question.title}
-          description={question.description}
-          name={question.name}
-          values={question.values}
+          key={mcQuestions.ballotIssueId}
+          title={mcQuestions.ballotIssueTitle}
+          description={mcQuestions.description}
+          name={mcQuestions.ballotIssueId}
+          values={mcQuestions.ballotIssueOptions}
         />
-      );
-    });
+      )
+    })
 
+    // const formerMC = dummyData.map(test => {
+    //   return (
+    //     <MultipleChoiceQuestion
+    //       key={test.name}
+    //       title={test.title}
+    //       description={test.description}
+    //       name={test.name}
+    //       values={test.values}
+    //     />
+    //   )
+    // })
+
+
+    for (var bSection in this.state.header) {
+      ballotIssuesHeader.push(
+        <SectionHeader
+            title={this.state.header[bSection].pageTitle} 
+            subtitle=""
+            level='2'
+            description={this.state.header[bSection].pageDescription}
+        /> 
+      )
+    }
     return (
       <div className='container'>
         <div className='row'>
           <div className='col-md-12'>
-            <SectionHeader
-              title={dummyHeader[1].title}
-              subtitle={dummyHeader[1].subtitle}
-              level='2'
-              description={dummyHeader[1].description}
-            />
+            {ballotIssuesHeader}
           </div>
         </div>
-        <div className='row mb-4'>{multipleChoice}</div>
+        <div className='row mb-4'>{mcQ}</div>
       </div>
     );
   }

@@ -11,7 +11,6 @@ class Candidates extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
-      
       if (this._isMounted) {
         this.setState({
           candidates: data[0], 
@@ -20,7 +19,6 @@ class Candidates extends Component {
       }
     }
     );
-    console.log(this.state.candidates);
   }
   componentWillUnmount() {
     this._isMounted = false;
@@ -47,7 +45,7 @@ class Candidates extends Component {
             subtitle=""
             level='2'
             description={candidatesHeader[cSection].pageDescription}
-          /> 
+        /> 
       )
     } 
 
@@ -73,7 +71,6 @@ class Candidates extends Component {
       );
     });
 
-    console.log(this.state.candidatesHeader) 
     return (
       <div className='container'>
         <div className='row'>
