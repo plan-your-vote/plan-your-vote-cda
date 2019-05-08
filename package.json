@@ -16,7 +16,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "now-dev": "react-scripts start",
-    "now-build": "NODE_PATH=src/ react-scripts build"
+    "now-build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
