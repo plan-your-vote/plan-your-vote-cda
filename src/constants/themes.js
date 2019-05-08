@@ -1,4 +1,4 @@
-export const BASE = '/css';
+export const BASE = 'css';
 export const DEFAULT = '/default.css';
 
 export const MAPLE = '/maple.css';
