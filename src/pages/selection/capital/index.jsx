@@ -5,7 +5,6 @@ import pyv from 'utils/api/pyv';
 
 class Capital extends Component {
   _isMounted = false;
-
   state = {
     header: {
       pageTitle: '',
@@ -20,6 +19,11 @@ class Capital extends Component {
       if (this._isMounted) {
         this.setState({
           ballotIssues: data.ballotIssues,
+         
+         
+         
+         
+         
           header: {
             pageTitle: data.votingPage.pageTitle,
             pageDescription: data.votingPage.pageDescription
@@ -38,9 +42,7 @@ class Capital extends Component {
     const data = response.data;
     return data;
   };
-
  
-
   render() {
     const mcQ = this.state.ballotIssues.map(mcQuestions => {
       return (
