@@ -1,7 +1,7 @@
 {
   "head": [
-    { "id": 1, "text": "First Name" },
-    { "id": 2, "text": "Last Name" },
+    { "id": 1, "text": "Name" },
+    { "id": 2, "text": "Organization" },
     { "id": 3, "text": "Picture" },
     { "id": 4, "text": "Biography" }
   ],
