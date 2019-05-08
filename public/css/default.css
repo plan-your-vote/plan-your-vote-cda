@@ -77,6 +77,10 @@
   }
 }
 
+.card-body {
+  text-align: center;
+}
+
 .intro-right span {
   display: none;
   position: absolute;

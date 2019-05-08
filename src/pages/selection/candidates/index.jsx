@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
 import pyv from 'utils/api/pyv';
+import {IMAGE_BASE} from 'utils/image';
 
 class Candidates extends Component {
   _isMounted = false;
@@ -31,8 +32,8 @@ class Candidates extends Component {
     this._isMounted = false;
   }
   loadCandidatesApi = async () => {
-    const response = await pyv.get('/candidates');
-    const response2 = await pyv.get('/races'); 
+    const response = await pyv.get('/api/candidates');
+    const response2 = await pyv.get('/api/races'); 
     return [response.data, response2.data];
   };
 
@@ -47,15 +48,15 @@ class Candidates extends Component {
       return (
         <div className='col-sm-3' key={cData.candidateId}>
           <div className='card' style={cardStyle}>
-            <img src={cData.picture} className='card-img-top' alt='...' />
+            <img src={`${IMAGE_BASE}/${cData.picture}`} className='card-img-top' alt='...' />
             <div className='card-body'>
               <h5 className='card-title'>{cData.name}</h5>
               {/* <h6 className="card-subtitle mb-2 text-muted">cData.organization</h6> */}
               {/* <h6 className="card-subtitle mb-2 text-muted">cData.position</h6> */}
-              <p className='card-text'>
+              {/* <p className='card-text'>
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
-              </p>
+              </p> */}
               <a href='#' className='btn btn-primary'>
                 Select
               </a>

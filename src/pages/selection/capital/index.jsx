@@ -34,7 +34,7 @@ class Capital extends Component {
   }
 
   loadApiData = async () => {
-    const response = await pyv.get('/ballotissues');
+    const response = await pyv.get('/api/ballotissues');
     const data = response.data;
     return data;
   };

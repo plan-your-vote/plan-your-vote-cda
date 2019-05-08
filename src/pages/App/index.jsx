@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   loadApiData = async () => {
-    const response = await pyv.get('/theme');
+    const response = await pyv.get('/api/theme');
     const data = response.data;
 
     this.setState({
