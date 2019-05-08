@@ -3,9 +3,9 @@ import React from 'react';
 const MultipleChoiceQuestion = ({ title, description, name, values }) => {
   const options = values.map(item => {
     return (
-      <div key={item.value}>
-        <input type='radio' name={name} value={item.value} />
-        {item.text}
+      <div key={item.issueOptionInfo}>
+        <input type='radio' name={name} value={item.issueOptionInfo} />
+        {item.issueOptionInfo}
       </div>
     );
   });
