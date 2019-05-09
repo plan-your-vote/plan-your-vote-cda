@@ -58,7 +58,6 @@ class Capital extends Component {
           <div className='col-md-12'>
             <SectionHeader
               title={this.state.header.pageTitle}
-              subtitle=''
               level='2'
               description={this.state.header.pageDescription}
             />
