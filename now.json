@@ -5,6 +5,9 @@
     {
       "src": "package.json",
       "use": "@now/static-build",
+      "env": {
+        "SECRET": "@pyv-mapbox-api-key"
+      },
       "config": { "distDir": "build" }
     }
   ],
