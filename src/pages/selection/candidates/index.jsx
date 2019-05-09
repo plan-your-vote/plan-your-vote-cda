@@ -1,77 +1,106 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
 import pyv from 'utils/api/pyv';
-import {IMAGE_BASE} from 'utils/image';
+import { IMAGE_BASE } from 'utils/image';
 
 class Candidates extends Component {
   _isMounted = false;
   state = {
-    candidates: [],
+    races: [],
     candidatesHeader: {
       pageTitle: '',
       pageDescription: ''
-    }
+    },
+    selectedCandidates: []
   };
+
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
+        const {
+          pageTitle,
+          pageDescription,
+          pageNumber
+        } = data.votingPage;
+
         this.setState({
-          candidates: data[0], 
+          races: data.races,
           candidatesHeader: {
-            pageTitle: data[1].votingPage.pageTitle,
-            pageDescription: data[1].votingPage.pageDescription,
-            pageNum: data[1].votingPage.pageNumber
+            pageTitle: pageTitle,
+            pageDescription: pageDescription,
+            pageNum: pageNumber
           }
         });
       }
-    }
-    );
+    });
   }
   componentWillUnmount() {
     this._isMounted = false;
   }
   loadCandidatesApi = async () => {
-    const response = await pyv.get('/api/candidates');
-    const response2 = await pyv.get('/api/races'); 
-    return [response.data, response2.data];
+    const response = await pyv.get('/api/races');
+    return response.data;
+  };
+
+  selectBtn = data => {
+    const temp = {
+      candidateId: data.candidateId,
+      name: data.name,
+      electionId: data.electionId,
+      election: data.election,
+      details: data.details,
+      organizationId: data.organizationId,
+      organization: data.organization,
+      candidateRaces: data.candidateRaces,
+      contacts: data.contacts
+    };
+    
+
+    this.state.selectedCandidates.push(temp);
+
+    localStorage.setItem(
+      'selectedCandidateRaces',
+      JSON.stringify(this.state.selectedCandidates)
+    );
   };
 
   render() {
-    const {candidatesHeader} = this.state
+    const { candidatesHeader } = this.state;
     const cardStyle = {
       maxWidth: '540px'
     };
 
-
-    let candidates = this.state.candidates.map(cData => {
-      return (
-        <div className='col-sm-3' key={cData.candidateId}>
+    let candidates = this.state.races.map(rData => {
+      return rData.candidates.map(cData => {
+        return (
+        <div className='col-sm-3' key={cData.candidate.candidateId}>
           <div className='card' style={cardStyle}>
-            <img src={`${IMAGE_BASE}/${cData.picture}`} className='card-img-top' alt='...' />
+            <img
+              src={`${IMAGE_BASE}/${cData.candidate.picture}`}
+              className='card-img-top'
+              alt={cData.candidate.name}
+            />
             <div className='card-body'>
-              <h5 className='card-title'>{cData.name}</h5>
-              {/* <h6 className="card-subtitle mb-2 text-muted">cData.organization</h6> */}
-              {/* <h6 className="card-subtitle mb-2 text-muted">cData.position</h6> */}
-              {/* <p className='card-text'>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p> */}
-              <a href='#' className='btn btn-primary'>
+              <h5 className='card-title'>{cData.candidate.name}</h5>
+              <button
+                className='btn btn-primary'
+                onClick={e => this.selectBtn(cData.candidate)}
+              >
                 Select
-              </a>
+              </button>
             </div>
           </div>
         </div>
       );
-    });
+      })
+    })
 
     return (
       <div className='container'>
         <div className='row'>
           <SectionHeader
-            title={candidatesHeader.pageTitle} 
-            subtitle=''
+            title={candidatesHeader.pageTitle}
             level='2'
             description={candidatesHeader.pageDescription}
           />
