@@ -84,23 +84,22 @@ class Map extends Component {
 
   renderMarkers = () => {
     this.state.pollingStations.map(pollingStation => {
-      console.log(pollingStation)
-      return this.addMarker(pollingStation.latitude, pollingStation.longitude);
+      console.log(pollingStation);
+      return this.addMarker(pollingStation);
     });
   };
 
-  addMarker = (latitude, longitude) => {
+  addMarker = pollingStation => {
     const marker = new mapboxgl.Marker()
-      .setLngLat([longitude, latitude])
+      .setLngLat([pollingStation.longitude, pollingStation.latitude])
       .setPopup(
-        new mapboxgl.Popup({ offset: 25 }) // add popups
-          .setHTML(
-            '<h3>' +
-              latitude +
-              '</h3><p>' +
-              longitude +
-              '</p>'
-          )
+        new mapboxgl.Popup({ offset: 25 }).setHTML(
+          '<strong>' +
+            pollingStation.name +
+            '</strong><p>' +
+            pollingStation.address +
+            '</p>'
+        )
       )
       .addTo(this._map);
 
@@ -112,10 +111,6 @@ class Map extends Component {
         markers: currentMarkers
       });
     }
-
-    const popup = new mapboxgl.Popup()
-      .setHTML('<h1>hi</h1>')
-      .setMaxWidth('300px');
 
     this._map.on('click', '', e => {
       const { lng, lat } = this._map.getCenter();
