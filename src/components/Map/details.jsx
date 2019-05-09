@@ -8,28 +8,51 @@ const Details = ({ pollingStation, distance }) => {
       <span className='lead'>{pollingStation.name}</span>
       <p>{pollingStation.address}</p>
       <p>{distance} km away</p>
-      <ul>
-        <li>General Access: {pollingStation.generalAccessInfo}</li>
+      <ul className='fa-ul'>
         <li>
-          <i className='fab fa-accessible-icon' /> Wheelchair Access:
+          <span className='fa-li'>
+            <i className='fas fa-door-open' />
+          </span>
+          General Access: {pollingStation.generalAccessInfo}
+        </li>
+        <li>
+          <span className='fa-li'>
+            <i className='fab fa-accessible-icon' />
+          </span>
+          Wheelchair Access:
           {pollingStation.wheelchairInfo}
         </li>
         <li>
-          <i className='fas fa-parking' /> Parking:
+          <span className='fa-li'>
+            <i className='fas fa-parking' />
+          </span>
+          Parking:
           {pollingStation.parkingInfo}
         </li>
         <li>
-          <i className='fas fa-toilet' /> Washrooms:
+          <span className='fa-li'>
+            <i className='fas fa-toilet' />
+          </span>
+          Washrooms:
           {pollingStation.washroomInfo}
         </li>
         <li>
-          <i className='fas fa-phone' /> 604-456-7890
+          <span className='fa-li'>
+            <i className='fas fa-phone' />
+          </span>
+          604-456-7890
         </li>
         <li>
-          <i className='fas fa-envelope' /> dummy@planyourvote.com
+          <span className='fa-li'>
+            <i className='fas fa-envelope' />
+          </span>
+          dummy@planyourvote.com
         </li>
         <li>
-          <i className='far fa-clock' /> Voting Hours:
+          <span className='fa-li'>
+            <i className='far fa-clock' />
+          </span>
+          Voting Hours:
           <ul>
             <li>May 12: 08:30AM - 05:00PM</li>
             <li>May 13: 10:00AM - 02:00PM</li>
