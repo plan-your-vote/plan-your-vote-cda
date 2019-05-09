@@ -35,7 +35,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log(process.env.PYV_MAPBOX_API_KEY);
     this.loadApiData().then(() => {
       this.setTheme();
     });

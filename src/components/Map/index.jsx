@@ -11,9 +11,7 @@ class Map extends Component {
   };
 
   componentDidMount() {
-    mapboxgl.accessToken =
-      process.env.PYV_MAPBOX_API_KEY ||
-      process.env.REACT_APP_PYV_MAPBOX_API_KEY;
+    mapboxgl.accessToken = process.env.REACT_APP_PYV_MAPBOX_API_KEY;
 
     this.map = new mapboxgl.Map({
       container: 'map',
