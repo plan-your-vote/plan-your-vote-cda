@@ -117,12 +117,8 @@ class Map extends Component {
   render() {
     const details = this.state.pollingStations.map(pollingStation => {
       return (
-        <li className='list-group-item'>
-          <Details
-            key={pollingStation.pollingStationId}
-            pollingStation={pollingStation}
-            distance={0.42}
-          />
+        <li className='list-group-item' key={pollingStation.pollingStationId}>
+          <Details pollingStation={pollingStation} distance={0.42} />
         </li>
       );
     });
