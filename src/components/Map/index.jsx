@@ -24,7 +24,7 @@ class Map extends Component {
         electionId: 1,
         generalAccessInfo: null,
         latitude: 0,
-        longitute: 0, // TODO longitude
+        longitude: 0, // TODO longitude
         name: '',
         parkingInfo: null,
         pollingStationId: 0,
@@ -84,13 +84,24 @@ class Map extends Component {
 
   renderMarkers = () => {
     this.state.pollingStations.map(pollingStation => {
-      return this.addMarker(pollingStation.latitude, pollingStation.longitute);
+      console.log(pollingStation)
+      return this.addMarker(pollingStation.latitude, pollingStation.longitude);
     });
   };
 
   addMarker = (latitude, longitude) => {
     const marker = new mapboxgl.Marker()
       .setLngLat([longitude, latitude])
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML(
+            '<h3>' +
+              latitude +
+              '</h3><p>' +
+              longitude +
+              '</p>'
+          )
+      )
       .addTo(this._map);
 
     const currentMarkers = this.state.markers;
@@ -101,6 +112,18 @@ class Map extends Component {
         markers: currentMarkers
       });
     }
+
+    const popup = new mapboxgl.Popup()
+      .setHTML('<h1>hi</h1>')
+      .setMaxWidth('300px');
+
+    this._map.on('click', '', e => {
+      const { lng, lat } = this._map.getCenter();
+
+      console.log(e);
+
+      this._map.flyTo({ center: e.features[0].geometry.coordinates });
+    });
   };
 
   render() {
