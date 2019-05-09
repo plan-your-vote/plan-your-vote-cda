@@ -13,16 +13,17 @@ class Candidates extends Component {
     },
     selectedCandidates: []
   };
+
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
         this.setState({
-          candidates: data[0],
+          candidates: data.races.candidates,
           candidatesHeader: {
-            pageTitle: data[1].votingPage.pageTitle,
-            pageDescription: data[1].votingPage.pageDescription,
-            pageNum: data[1].votingPage.pageNumber
+            pageTitle: data.votingPage.pageTitle,
+            pageDescription: data.votingPage.pageDescription,
+            pageNum: data.votingPage.pageNumber
           }
         });
       }
@@ -32,9 +33,9 @@ class Candidates extends Component {
     this._isMounted = false;
   }
   loadCandidatesApi = async () => {
-    const response = await pyv.get('/api/candidates');
-    const response2 = await pyv.get('/api/races');
-    return [response.data, response2.data];
+    // const response = await pyv.get('/api/candidates');
+    const response = await pyv.get('/api/races');
+    return response.data;
   };
 
   selectBtn = data => {
@@ -48,18 +49,17 @@ class Candidates extends Component {
     temp['organization'] = data.organization;
     temp['candidateRaces'] = data.candidateRaces;
     temp['contacts'] = data.contacts;
-    
+
     this.state.selectedCandidates.push(temp);
 
     localStorage.setItem(
       'selectedCandidateRaces',
       JSON.stringify(this.state.selectedCandidates)
     );
-    // console.log(temp);
-    console.log(this.state.selectedCandidates);
   };
 
   render() {
+    console.log(this.state.candidates)
     const { candidatesHeader } = this.state;
     const cardStyle = {
       maxWidth: '540px'
