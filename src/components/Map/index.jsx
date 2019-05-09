@@ -45,9 +45,7 @@ class Map extends Component {
       center: [longitude, latitude],
       zoom
     });
-
     this.liveGetCenter();
-
     this.loadApiData().then(() => {
       this.renderMarkers();
     });
@@ -94,11 +92,9 @@ class Map extends Component {
       .setLngLat([pollingStation.longitude, pollingStation.latitude])
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
-          '<strong>' +
-            pollingStation.name +
-            '</strong><p>' +
-            pollingStation.address +
-            '</p>'
+          `<strong>${pollingStation.name}</strong><p>${
+            pollingStation.address
+          }</p>`
         )
       )
       .addTo(this._map);
@@ -112,9 +108,8 @@ class Map extends Component {
       });
     }
 
-    this._map.on('click', '', e => {
-      console.log(e);
-      this._map.flyTo({ center: e.features[0].geometry.coordinates });
+    this._map.on('click', e => {
+      this._map.flyTo({ center: e.lngLat, speed: 0.25 });
     });
   };
 
