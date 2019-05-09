@@ -24,6 +24,8 @@ class Map extends Component {
     coordinates.map(address => {
       return this.addMarker(address.latitude, address.longitude);
     });
+
+    this.getUserLocation();
   }
 
   addMarker = (latitude, longitude) => {
@@ -37,6 +39,17 @@ class Map extends Component {
     this.setState({
       markers: currentMarkers
     });
+  };
+
+  getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        console.log('latitude', latitude, 'longitude', longitude);
+      });
+    } else {
+      console.warn('Geolocation is not supported by this browser.');
+    }
   };
 
   render() {
