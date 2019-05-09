@@ -59,7 +59,6 @@ class Candidates extends Component {
   };
 
   render() {
-    console.log(this.state.races)
     const { candidatesHeader } = this.state;
     const cardStyle = {
       maxWidth: '540px'
@@ -67,7 +66,6 @@ class Candidates extends Component {
 
     let candidates = this.state.races.map(rData => {
       return rData.candidates.map(cData => {
-        console.log(cData);
         return (
         <div className='col-sm-3' key={cData.candidate.candidateId}>
           <div className='card' style={cardStyle}>
@@ -86,7 +84,7 @@ class Candidates extends Component {
               </p> */}
               <button
                 className='btn btn-primary'
-                onClick={e => this.selectBtn(cData)}
+                onClick={e => this.selectBtn(cData.candidate)}
               >
                 Select
               </button>
