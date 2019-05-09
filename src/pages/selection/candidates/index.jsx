@@ -18,12 +18,18 @@ class Candidates extends Component {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
+        const {
+          pageTitle,
+          pageDescription,
+          pageNumber
+        } = data.votingPage;
+
         this.setState({
           races: data.races,
           candidatesHeader: {
-            pageTitle: data.votingPage.pageTitle,
-            pageDescription: data.votingPage.pageDescription,
-            pageNum: data.votingPage.pageNumber
+            pageTitle: pageTitle,
+            pageDescription: pageDescription,
+            pageNum: pageNumber
           }
         });
       }
@@ -33,22 +39,23 @@ class Candidates extends Component {
     this._isMounted = false;
   }
   loadCandidatesApi = async () => {
-    // const response = await pyv.get('/api/candidates');
     const response = await pyv.get('/api/races');
     return response.data;
   };
 
   selectBtn = data => {
-    let temp = {};
-    temp['candidateId'] = data.candidateId;
-    temp['name'] = data.name;
-    temp['electionId'] = data.electionId;
-    temp['election'] = data.election;
-    temp['details'] = data.details;
-    temp['organizationId'] = data.organizationId;
-    temp['organization'] = data.organization;
-    temp['candidateRaces'] = data.candidateRaces;
-    temp['contacts'] = data.contacts;
+    const temp = {
+      candidateId: data.candidateId,
+      name: data.name,
+      electionId: data.electionId,
+      election: data.election,
+      details: data.details,
+      organizationId: data.organizationId,
+      organization: data.organization,
+      candidateRaces: data.candidateRaces,
+      contacts: data.contacts
+    };
+    
 
     this.state.selectedCandidates.push(temp);
 
@@ -72,16 +79,10 @@ class Candidates extends Component {
             <img
               src={`${IMAGE_BASE}/${cData.candidate.picture}`}
               className='card-img-top'
-              alt='...'
+              alt={cData.candidate.name}
             />
             <div className='card-body'>
               <h5 className='card-title'>{cData.candidate.name}</h5>
-              {/* <h6 className="card-subtitle mb-2 text-muted">cData.organization</h6> */}
-              {/* <h6 className="card-subtitle mb-2 text-muted">cData.position</h6> */}
-              {/* <p className='card-text'>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p> */}
               <button
                 className='btn btn-primary'
                 onClick={e => this.selectBtn(cData.candidate)}
@@ -100,7 +101,6 @@ class Candidates extends Component {
         <div className='row'>
           <SectionHeader
             title={candidatesHeader.pageTitle}
-            subtitle=''
             level='2'
             description={candidatesHeader.pageDescription}
           />
