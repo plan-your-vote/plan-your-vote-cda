@@ -15,49 +15,7 @@ const Schedule = () => {
             description={dummyHeader[2].description}
           />
         </div>
-        <div className='col-md-6'>
-          <i className='far fa-calendar-check' />
-          <select name='schedule'>
-            <option value='May 12, 2019'>May 12, 2019</option>
-            <option value='May 13, 2019'>May 13, 2019</option>
-            <option value='May 14, 2019'>May 14, 2019</option>
-            <option value='May 15, 2019'>May 15, 2019</option>
-          </select>
-          <br />
-          <i className='fas fa-map-marker-alt' />
-          <input name='location' type='text' />
-          <Map />
-        </div>
-        <div className='col-md-6'>
-          <ul className='list-group list-group-flush'>
-            <li className='list-group-item'>
-              <div>
-                <span className='lead'>Centre Branch</span>
-                <p>350 W Georgia st / 0.4km away</p>
-                <i className='fab fa-accessible-icon' /> Wheelchair Access: via ramp
-                at the main entrance on East Hastings St
-                <br />
-                <i className='fas fa-parking' /> Parking: Street
-                <br />
-                <i className='fas fa-toilet' /> Washrooms: Wheelchair Accessible
-                <br />
-                <i className='fas fa-phone' /> 604-456-7890
-                <br />
-                <i className='fas fa-envelope' /> dummy@planyourvote.com
-                <br />
-                <i className='far fa-clock' /> Voting Hours:
-                <br />
-                May 12: 08:30AM - 05:00PM
-                <br />
-                May 13: 10:00AM - 03:00PM
-              </div>
-            </li>
-            <li className='list-group-item'>Dapibus ac facilisis in</li>
-            <li className='list-group-item'>Morbi leo risus</li>
-            <li className='list-group-item'>Porta ac consectetur ac</li>
-            <li className='list-group-item'>Vestibulum at eros</li>
-          </ul>
-        </div>
+        <Map />
       </div>
     </div>
   );
