@@ -6,7 +6,7 @@ import { IMAGE_BASE } from 'utils/image';
 class Candidates extends Component {
   _isMounted = false;
   state = {
-    candidates: [],
+    races: [],
     candidatesHeader: {
       pageTitle: '',
       pageDescription: ''
@@ -19,7 +19,7 @@ class Candidates extends Component {
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
         this.setState({
-          candidates: data.races.candidates,
+          races: data.races,
           candidatesHeader: {
             pageTitle: data.votingPage.pageTitle,
             pageDescription: data.votingPage.pageDescription,
@@ -59,23 +59,25 @@ class Candidates extends Component {
   };
 
   render() {
-    console.log(this.state.candidates)
+    console.log(this.state.races)
     const { candidatesHeader } = this.state;
     const cardStyle = {
       maxWidth: '540px'
     };
 
-    let candidates = this.state.candidates.map(cData => {
-      return (
-        <div className='col-sm-3' key={cData.candidateId}>
+    let candidates = this.state.races.map(rData => {
+      return rData.candidates.map(cData => {
+        console.log(cData);
+        return (
+        <div className='col-sm-3' key={cData.candidate.candidateId}>
           <div className='card' style={cardStyle}>
             <img
-              src={`${IMAGE_BASE}/${cData.picture}`}
+              src={`${IMAGE_BASE}/${cData.candidate.picture}`}
               className='card-img-top'
               alt='...'
             />
             <div className='card-body'>
-              <h5 className='card-title'>{cData.name}</h5>
+              <h5 className='card-title'>{cData.candidate.name}</h5>
               {/* <h6 className="card-subtitle mb-2 text-muted">cData.organization</h6> */}
               {/* <h6 className="card-subtitle mb-2 text-muted">cData.position</h6> */}
               {/* <p className='card-text'>
@@ -92,7 +94,8 @@ class Candidates extends Component {
           </div>
         </div>
       );
-    });
+      })
+    })
 
     return (
       <div className='container'>
