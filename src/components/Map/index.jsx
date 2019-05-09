@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX } from 'credentials.js';
 import pyv from 'utils/api/pyv';
+import Details from './details';
 
 mapboxgl.accessToken = MAPBOX;
 
@@ -114,6 +115,18 @@ class Map extends Component {
   };
 
   render() {
+    const details = this.state.pollingStations.map(pollingStation => {
+      return (
+        <li className='list-group-item'>
+          <Details
+            key={pollingStation.pollingStationId}
+            pollingStation={pollingStation}
+            distance={0.42}
+          />
+        </li>
+      );
+    });
+
     return (
       <>
         <div className='col-md-6'>
@@ -130,34 +143,7 @@ class Map extends Component {
           <div id='map' style={{ width: '100%', height: '500px' }} />
         </div>
         <div className='col-md-6'>
-          <ul className='list-group list-group-flush'>
-            <li className='list-group-item'>
-              <div>
-                <span className='lead'>Centre Branch</span>
-                <p>350 W Georgia st / 0.4km away</p>
-                <i className='fab fa-accessible-icon' /> Wheelchair Access: via
-                ramp at the main entrance on East Hastings St
-                <br />
-                <i className='fas fa-parking' /> Parking: Street
-                <br />
-                <i className='fas fa-toilet' /> Washrooms: Wheelchair Accessible
-                <br />
-                <i className='fas fa-phone' /> 604-456-7890
-                <br />
-                <i className='fas fa-envelope' /> dummy@planyourvote.com
-                <br />
-                <i className='far fa-clock' /> Voting Hours:
-                <br />
-                May 12: 08:30AM - 05:00PM
-                <br />
-                May 13: 10:00AM - 03:00PM
-              </div>
-            </li>
-            <li className='list-group-item'>Dapibus ac facilisis in</li>
-            <li className='list-group-item'>Morbi leo risus</li>
-            <li className='list-group-item'>Porta ac consectetur ac</li>
-            <li className='list-group-item'>Vestibulum at eros</li>
-          </ul>
+          <ul className='list-group list-group-flush'>{details}</ul>
         </div>
       </>
     );
