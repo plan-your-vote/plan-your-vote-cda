@@ -19,18 +19,14 @@ class Capital extends Component {
       if (this._isMounted) {
         this.setState({
           ballotIssues: data.ballotIssues,
-         
-         
-         
-         
-         
+
           header: {
             pageTitle: data.votingPage.pageTitle,
             pageDescription: data.votingPage.pageDescription
           }
-        })
+        });
       }
-    })
+    });
   }
 
   componentWillUnmount() {
@@ -42,7 +38,7 @@ class Capital extends Component {
     const data = response.data;
     return data;
   };
- 
+
   render() {
     const mcQ = this.state.ballotIssues.map(mcQuestions => {
       return (
@@ -53,19 +49,19 @@ class Capital extends Component {
           name={mcQuestions.ballotIssueId}
           values={mcQuestions.ballotIssueOptions}
         />
-      )
-    })
+      );
+    });
 
     return (
       <div className='container'>
         <div className='row'>
           <div className='col-md-12'>
             <SectionHeader
-              title={this.state.header.pageTitle} 
-              subtitle=""
+              title={this.state.header.pageTitle}
+              subtitle=''
               level='2'
               description={this.state.header.pageDescription}
-            /> 
+            />
           </div>
         </div>
         <div className='row mb-4'>{mcQ}</div>
