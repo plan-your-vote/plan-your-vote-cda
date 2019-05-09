@@ -28,5 +28,8 @@
       "headers": { "cache-control": "s-maxage=0" },
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "PYV_MAPBOX_API_KEY": "@pyv-mapbox-api-key"
+  }
 }

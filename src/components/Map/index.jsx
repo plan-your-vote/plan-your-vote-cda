@@ -12,7 +12,7 @@ class Map extends Component {
   };
 
   componentDidMount() {
-    mapboxgl.accessToken = MAPBOX;
+    mapboxgl.accessToken = MAPBOX || process.env.PYV_MAPBOX_API_KEY;
 
     this.map = new mapboxgl.Map({
       container: 'map',
