@@ -24,7 +24,7 @@ class Map extends Component {
         electionId: 1,
         generalAccessInfo: null,
         latitude: 0,
-        longitude: 0, // TODO longitude
+        longitude: 0,
         name: '',
         parkingInfo: null,
         pollingStationId: 0,
@@ -46,6 +46,34 @@ class Map extends Component {
       zoom
     });
 
+    this.liveGetCenter();
+
+    this.loadApiData().then(() => {
+      this.renderMarkers();
+    });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  loadApiData = async () => {
+    await pyv.get('/api/PollingStations').then(response => {
+      if (this._isMounted) {
+        this.setState({
+          pollingStations: response.data.pollingStations
+        });
+      }
+    });
+  };
+
+  renderMarkers = () => {
+    this.state.pollingStations.map(pollingStation => {
+      return this.addMarker(pollingStation);
+    });
+  };
+
+  liveGetCenter = () => {
     this._map.on('move', () => {
       const { lng, lat } = this._map.getCenter();
 
@@ -58,34 +86,6 @@ class Map extends Component {
           }
         });
       }
-    });
-
-    this.loadApiData()
-      .then(data => {
-        if (this._isMounted) {
-          this.setState({
-            pollingStations: data.pollingStations
-          });
-        }
-      })
-      .then(() => {
-        this.renderMarkers();
-      });
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  loadApiData = async () => {
-    const response = await pyv.get('/api/PollingStations');
-    return response.data;
-  };
-
-  renderMarkers = () => {
-    this.state.pollingStations.map(pollingStation => {
-      console.log(pollingStation);
-      return this.addMarker(pollingStation);
     });
   };
 
@@ -113,10 +113,7 @@ class Map extends Component {
     }
 
     this._map.on('click', '', e => {
-      const { lng, lat } = this._map.getCenter();
-
       console.log(e);
-
       this._map.flyTo({ center: e.features[0].geometry.coordinates });
     });
   };
