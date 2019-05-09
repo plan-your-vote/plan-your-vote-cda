@@ -31,8 +31,5 @@
   ],
   "env": {
     "REACT_APP_PYV_MAPBOX_API_KEY": "@pyv-mapbox-api-key"
-  },
-  "github": {
-    "enabled": true
   }
 }
