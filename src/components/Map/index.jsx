@@ -4,11 +4,18 @@ import mapboxgl from 'mapbox-gl';
 import { MAPBOX } from 'credentials.js';
 import pyv from 'utils/api/pyv';
 
+mapboxgl.accessToken = MAPBOX;
+
 class Map extends Component {
   _map;
   _isMounted = false;
 
   state = {
+    map: {
+      latitude: 49.2608838,
+      longitude: -123.1139269,
+      zoom: 13
+    },
     pollingStations: [
       {
         additionalInfo: '',
@@ -30,13 +37,27 @@ class Map extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    mapboxgl.accessToken = MAPBOX;
+    const { longitude, latitude, zoom } = this.state.map;
 
     this._map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-123.1139269, 49.2608838],
-      zoom: 13
+      center: [longitude, latitude],
+      zoom
+    });
+
+    this._map.on('move', () => {
+      const { lng, lat } = this._map.getCenter();
+
+      if (this._isMounted) {
+        this.setState({
+          map: {
+            longitude: lng.toFixed(7),
+            latitude: lat.toFixed(7),
+            zoom: this._map.getZoom().toFixed(2)
+          }
+        });
+      }
     });
 
     this.loadApiData()
@@ -83,7 +104,15 @@ class Map extends Component {
   };
 
   render() {
-    return <div id='map' style={{ width: '100%', height: '500px' }} />;
+    const { latitude, longitude, zoom } = this.state.map;
+
+    return (
+      <>
+        <div>{`Lng: ${longitude} Lat: ${latitude} Zoom: ${zoom}`}</div>
+
+        <div id='map' style={{ width: '100%', height: '500px' }} />
+      </>
+    );
   }
 }
 
