@@ -15,8 +15,8 @@ class Map extends Component {
 
   state = {
     map: {
-      latitude: 49.2608838,
-      longitude: -123.1139269,
+      latitude: 0,
+      longitude: 0,
       zoom: 13
     },
     user: {
@@ -132,13 +132,20 @@ class Map extends Component {
 
         if (this._isMounted) {
           this.setState({
+            map: {
+              latitude,
+              longitude
+            },
             user: {
               latitude,
               longitude
             }
           });
 
-          console.log(this.state.user);
+          this._map.setCenter([
+            this.state.map.longitude,
+            this.state.map.latitude
+          ]);
           this.getDistance();
         }
       });
