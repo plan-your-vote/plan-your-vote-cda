@@ -36,7 +36,8 @@ class Map extends Component {
         parkingInfo: null,
         pollingStationId: 0,
         washroomInfo: null,
-        wheelchairInfo: null
+        wheelchairInfo: null,
+        distance: 0
       }
     ],
     markers: []
@@ -52,8 +53,9 @@ class Map extends Component {
       center: [longitude, latitude],
       zoom
     });
-    this.liveGetCenter();
+
     this.loadApiData().then(() => {
+      this.sortPollingStationsByDistance();
       this.renderMarkers();
     });
 
@@ -75,25 +77,46 @@ class Map extends Component {
     });
   };
 
-  renderMarkers = () => {
-    this.state.pollingStations.map(pollingStation => {
-      return this.addMarker(pollingStation);
+  getDistance = async (latitude, longitude) => {
+    const result = await mapboxDistance.get(
+      `${longitude},${latitude};${this.state.user.longitude},${
+        this.state.user.latitude
+      }`,
+      {
+        params: {
+          access_token: MAPBOX
+        }
+      }
+    );
+
+    return result.data.routes[0].distance;
+  };
+
+  sortPollingStationsByDistance = () => {
+    const stations = this.state.pollingStations;
+
+    stations.forEach(pollingStation => {
+      this.getDistance(pollingStation.latitude, pollingStation.longitude)
+        .then(distance => {
+          pollingStation['distance'] = distance;
+        })
+        .then(() => {
+          stations.sort((a, b) => {
+            return a.distance - b.distance;
+          });
+
+          if (this._isMounted) {
+            this.setState({
+              pollingStations: stations
+            });
+          }
+        });
     });
   };
 
-  liveGetCenter = () => {
-    this._map.on('move', () => {
-      const { lng, lat } = this._map.getCenter();
-
-      if (this._isMounted) {
-        this.setState({
-          map: {
-            longitude: lng.toFixed(7),
-            latitude: lat.toFixed(7),
-            zoom: this._map.getZoom().toFixed(2)
-          }
-        });
-      }
+  renderMarkers = () => {
+    this.state.pollingStations.map(pollingStation => {
+      return this.addMarker(pollingStation);
     });
   };
 
@@ -129,7 +152,6 @@ class Map extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-
         if (this._isMounted) {
           this.setState({
             map: {
@@ -146,9 +168,6 @@ class Map extends Component {
             this.state.map.longitude,
             this.state.map.latitude
           ]);
-          this.getDistance(49.26, -123.11).then(distance => {
-            console.log(distance);
-          });
         }
       });
     } else {
@@ -156,26 +175,11 @@ class Map extends Component {
     }
   };
 
-  getDistance = async (latitude, longitude) => {
-    const result = await mapboxDistance.get(
-      `${longitude},${latitude};${this.state.user.longitude},${
-        this.state.user.latitude
-      }`,
-      {
-        params: {
-          access_token: MAPBOX
-        }
-      }
-    );
-
-    return result.data.routes[0].distance;
-  };
-
   render() {
     const details = this.state.pollingStations.map(pollingStation => {
       return (
         <li className='list-group-item' key={pollingStation.pollingStationId}>
-          <Details pollingStation={pollingStation} distance={0.42} />
+          <Details pollingStation={pollingStation} />
         </li>
       );
     });
