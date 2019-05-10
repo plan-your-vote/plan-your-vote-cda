@@ -5,6 +5,7 @@ import { MAPBOX } from 'credentials.js';
 import pyv from 'utils/api/pyv';
 import mapboxDistance from 'utils/api/mapboxDistance';
 import Details from './details';
+import './locations.css';
 
 mapboxgl.accessToken = MAPBOX;
 
@@ -137,7 +138,7 @@ class Map extends Component {
             }
           });
 
-          console.log(this.state.user)
+          console.log(this.state.user);
           this.getDistance();
         }
       });
@@ -198,10 +199,12 @@ class Map extends Component {
               aria-label='Your Location'
             />
           </div>
-          <div id='map' style={{ width: '100%', height: '500px' }} />
+          <div id='map' />
         </div>
         <div className='col-md-6'>
-          <ul className='list-group list-group-flush'>{details}</ul>
+          <ul className='list-group list-group-flush' id='station-list'>
+            {details}
+          </ul>
         </div>
       </>
     );
