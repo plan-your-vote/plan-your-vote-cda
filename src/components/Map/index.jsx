@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX } from 'credentials.js';
 import pyv from 'utils/api/pyv';
+import mapboxDistance from 'utils/api/mapboxDistance';
 import Details from './details';
 
 mapboxgl.accessToken = MAPBOX;
@@ -50,6 +51,8 @@ class Map extends Component {
     this.loadApiData().then(() => {
       this.renderMarkers();
     });
+
+    this.getUserLocation();
   }
 
   componentWillUnmount() {
@@ -112,6 +115,30 @@ class Map extends Component {
     this._map.on('click', e => {
       this._map.flyTo({ center: e.lngLat, speed: 0.25 });
     });
+  };
+
+  getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        this.getDistance(latitude, longitude);
+      });
+    } else {
+      console.warn('Geolocation is not supported by this browser.');
+    }
+  };
+
+  getDistance = async (latitude, longitude) => {
+    const result = await mapboxDistance.get(
+      `-123.11,49.26;${longitude},${latitude}`,
+      {
+        params: {
+          access_token: MAPBOX
+        }
+      }
+    );
+
+    console.log(result.data.routes);
   };
 
   render() {
