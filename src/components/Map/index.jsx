@@ -47,14 +47,13 @@ class Map extends Component {
       center: [0, 0],
       zoom: 13
     });
+    this.getUserLocation();
+    this.flyToClickedLocation();
 
     this.loadApiData().then(() => {
       this.sortPollingStationsByDistance();
       this.renderMarkers();
     });
-
-    this.getUserLocation();
-    this.flyToClickedLocation();
   }
 
   componentWillUnmount() {
@@ -88,6 +87,10 @@ class Map extends Component {
 
   sortPollingStationsByDistance = () => {
     const stations = this.state.pollingStations;
+
+    if (stations[0].latitude === 0 && stations[0].longitude === 0) {
+      return;
+    }
 
     stations.forEach(pollingStation => {
       this.getDistance(pollingStation.latitude, pollingStation.longitude)
@@ -126,12 +129,9 @@ class Map extends Component {
       )
       .addTo(this._map);
 
-    const currentMarkers = this.state.markers;
-    currentMarkers.push(marker);
-
     if (this._isMounted) {
       this.setState({
-        markers: currentMarkers
+        markers: [...this.state.markers, marker]
       });
     }
   };
