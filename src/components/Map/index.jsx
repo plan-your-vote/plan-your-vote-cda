@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX } from 'credentials.js';
 import coordinates from 'constants/coordinates.json';
+import mapboxDistance from 'utils/api/mapboxDistance';
 
 class Map extends Component {
   map;
@@ -45,11 +46,24 @@ class Map extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        console.log('latitude', latitude, 'longitude', longitude);
+        this.getDistance(latitude, longitude);
       });
     } else {
       console.warn('Geolocation is not supported by this browser.');
     }
+  };
+
+  getDistance = async (latitude, longitude) => {
+    const result = await mapboxDistance.get(
+      `-123.11,49.26;${longitude},${latitude}`,
+      {
+        params: {
+          access_token: MAPBOX
+        }
+      }
+    );
+
+    console.log(result.data.routes);
   };
 
   render() {
