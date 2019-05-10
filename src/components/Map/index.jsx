@@ -153,29 +153,29 @@ class Map extends Component {
     return (
       <>
         <div className='col-md-6'>
-          <div class='input-group mb-3'>
-            <div class='input-group-prepend'>
-              <label class='input-group-text' for='votingdate'>
+          <div className='input-group mb-3'>
+            <div className='input-group-prepend'>
+              <label className='input-group-text' htmlFor='votingdate'>
                 <i className='far fa-calendar-check' />
               </label>
             </div>
-            <select class='custom-select form-control-sm' id='votingdate'>
+            <select className='custom-select form-control-sm' id='votingdate'>
               <option value='May 12, 2019'>May 12, 2019</option>
               <option value='May 13, 2019'>May 13, 2019</option>
               <option value='May 14, 2019'>May 14, 2019</option>
               <option value='May 15, 2019'>May 15, 2019</option>
             </select>
           </div>
-          <div class='input-group mb-3'>
-            <div class='input-group-prepend'>
-              <span class='input-group-text'>
+          <div className='input-group mb-3'>
+            <div className='input-group-prepend'>
+              <span className='input-group-text'>
                 <i className='fas fa-map-marker-alt' />
               </span>
             </div>
             <input
               type='text'
               name='location'
-              class='form-control'
+              className='form-control'
               placeholder='123 Awesome st'
               aria-label='Your Location'
             />
