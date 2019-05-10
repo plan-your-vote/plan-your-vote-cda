@@ -40,16 +40,7 @@ class Map extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-
-    this._map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [0, 0],
-      zoom: 13
-    });
-    this.getUserLocation();
-    this.flyToClickedLocation();
-
+    this.initializeMap();
     this.loadApiData().then(() => {
       this.sortPollingStationsByDistance();
       this.renderMarkers();
@@ -59,6 +50,43 @@ class Map extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+  initializeMap = () => {
+    this._map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [0, 0],
+      zoom: 13
+    });
+    this.flyToClickedLocation();
+    this.getUserLocation();
+  };
+
+  flyToClickedLocation = () => {
+    this._map.on('click', e => {
+      this._map.flyTo({ center: e.lngLat, speed: 0.25 });
+    });
+  };
+
+  getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        if (this._isMounted) {
+          this.setState({
+            user: {
+              latitude,
+              longitude
+            }
+          });
+
+          this._map.setCenter([longitude, latitude]);
+        }
+      });
+    } else {
+      console.warn('Geolocation is not supported by this browser.');
+    }
+  };
 
   loadApiData = async () => {
     await pyv.get('/api/PollingStations').then(response => {
@@ -133,32 +161,6 @@ class Map extends Component {
       this.setState({
         markers: [...this.state.markers, marker]
       });
-    }
-  };
-
-  flyToClickedLocation = () => {
-    this._map.on('click', e => {
-      this._map.flyTo({ center: e.lngLat, speed: 0.25 });
-    });
-  };
-
-  getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        if (this._isMounted) {
-          this.setState({
-            user: {
-              latitude,
-              longitude
-            }
-          });
-
-          this._map.setCenter([longitude, latitude]);
-        }
-      });
-    } else {
-      console.warn('Geolocation is not supported by this browser.');
     }
   };
 
