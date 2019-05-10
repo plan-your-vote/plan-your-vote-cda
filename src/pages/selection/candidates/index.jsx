@@ -65,6 +65,10 @@ class Candidates extends Component {
     );
   };
 
+  handleModal = data => {
+
+  }
+
   render() {
     const { candidatesHeader } = this.state;
     const cardStyle = {
@@ -106,6 +110,8 @@ class Candidates extends Component {
           />
           {candidates}
         </div>
+
+        
       </div>
     );
   }
