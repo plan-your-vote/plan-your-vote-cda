@@ -81,6 +81,16 @@
   text-align: center;
 }
 
+.card {
+  cursor: pointer;
+}
+
+.card:hover {
+  border: 5px solid #D30D80;
+	color: #3a7999;
+	background: rgba(0,0,0,0);
+}
+
 .intro-right span {
   display: none;
   position: absolute;

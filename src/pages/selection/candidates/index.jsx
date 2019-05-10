@@ -65,6 +65,11 @@ class Candidates extends Component {
     );
   };
 
+
+  displayModal = data => {
+    console.log("activating modal")
+  }
+
   render() {
     const { candidatesHeader } = this.state;
     const cardStyle = {
@@ -74,25 +79,29 @@ class Candidates extends Component {
     let candidates = this.state.races.map(rData => {
       return rData.candidates.map(cData => {
         return (
-        <div className='col-sm-3' key={cData.candidate.candidateId}>
-          <div className='card' style={cardStyle}>
-            <img
-              src={`${IMAGE_BASE}/${cData.candidate.picture}`}
-              className='card-img-top'
-              alt={cData.candidate.name}
-            />
-            <div className='card-body'>
-              <h5 className='card-title'>{cData.candidate.name}</h5>
-              <button
-                className='btn btn-primary'
-                onClick={e => this.selectBtn(cData.candidate)}
-              >
-                Select
-              </button>
+          <div className='col-sm-3' key={cData.candidate.candidateId}>
+            <div
+              className='card'
+              onClick={this.displayModal}
+              style={cardStyle}
+            >
+              <img
+                src={`${IMAGE_BASE}/${cData.candidate.picture}`}
+                className='card-img-top'
+                alt={cData.candidate.name}
+              />
+              <div className='card-body'>
+                <h5 className='card-title'>{cData.candidate.name}</h5>
+                <button
+                  className='btn btn-primary'
+                  onClick={e => this.selectBtn(cData.candidate)}
+                >
+                  Select
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
       })
     })
 
