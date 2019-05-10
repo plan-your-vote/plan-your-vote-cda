@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX } from 'credentials.js';
-import coordinates from 'constants/coordinates.json';
-
 import pyv from 'utils/api/pyv';
 import mapboxDistance from 'utils/api/mapboxDistance';
 import Details from './details';
