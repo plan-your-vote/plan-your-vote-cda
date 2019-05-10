@@ -14,11 +14,6 @@ class Map extends Component {
   _isMounted = false;
 
   state = {
-    map: {
-      latitude: 0,
-      longitude: 0,
-      zoom: 13
-    },
     user: {
       latitude: 0,
       longitude: 0
@@ -45,13 +40,12 @@ class Map extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    const { longitude, latitude, zoom } = this.state.map;
 
     this._map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [longitude, latitude],
-      zoom
+      center: [0, 0],
+      zoom: 13
     });
 
     this.loadApiData().then(() => {
@@ -154,20 +148,13 @@ class Map extends Component {
         const { latitude, longitude } = position.coords;
         if (this._isMounted) {
           this.setState({
-            map: {
-              latitude,
-              longitude
-            },
             user: {
               latitude,
               longitude
             }
           });
 
-          this._map.setCenter([
-            this.state.map.longitude,
-            this.state.map.latitude
-          ]);
+          this._map.setCenter([longitude, latitude]);
         }
       });
     } else {
