@@ -28,7 +28,7 @@ class Map extends Component {
         additionalInfo: '',
         address: '',
         election: null,
-        electionId: 1,
+        electionId: 0,
         generalAccessInfo: null,
         latitude: 0,
         longitude: 0,
@@ -146,7 +146,9 @@ class Map extends Component {
             this.state.map.longitude,
             this.state.map.latitude
           ]);
-          this.getDistance();
+          this.getDistance(49.26, -123.11).then(distance => {
+            console.log(distance);
+          });
         }
       });
     } else {
@@ -154,9 +156,11 @@ class Map extends Component {
     }
   };
 
-  getDistance = async () => {
+  getDistance = async (latitude, longitude) => {
     const result = await mapboxDistance.get(
-      `-123.11,49.26;${this.state.user.longitude},${this.state.user.latitude}`,
+      `${longitude},${latitude};${this.state.user.longitude},${
+        this.state.user.latitude
+      }`,
       {
         params: {
           access_token: MAPBOX
@@ -164,7 +168,7 @@ class Map extends Component {
       }
     );
 
-    console.log(result.data.routes);
+    return result.data.routes[0].distance;
   };
 
   render() {
