@@ -18,6 +18,10 @@ class Map extends Component {
       longitude: -123.1139269,
       zoom: 13
     },
+    user: {
+      latitude: 0,
+      longitude: 0
+    },
     pollingStations: [
       {
         additionalInfo: '',
@@ -53,6 +57,7 @@ class Map extends Component {
     });
 
     this.getUserLocation();
+    this.flyToClickedLocation();
   }
 
   componentWillUnmount() {
@@ -111,7 +116,9 @@ class Map extends Component {
         markers: currentMarkers
       });
     }
+  };
 
+  flyToClickedLocation = () => {
     this._map.on('click', e => {
       this._map.flyTo({ center: e.lngLat, speed: 0.25 });
     });
@@ -121,16 +128,27 @@ class Map extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        this.getDistance(latitude, longitude);
+
+        if (this._isMounted) {
+          this.setState({
+            user: {
+              latitude,
+              longitude
+            }
+          });
+
+          console.log(this.state.user)
+          this.getDistance();
+        }
       });
     } else {
       console.warn('Geolocation is not supported by this browser.');
     }
   };
 
-  getDistance = async (latitude, longitude) => {
+  getDistance = async () => {
     const result = await mapboxDistance.get(
-      `-123.11,49.26;${longitude},${latitude}`,
+      `-123.11,49.26;${this.state.user.longitude},${this.state.user.latitude}`,
       {
         params: {
           access_token: MAPBOX
