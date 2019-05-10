@@ -153,16 +153,33 @@ class Map extends Component {
     return (
       <>
         <div className='col-md-6'>
-          <i className='far fa-calendar-check' />
-          <select name='schedule'>
-            <option value='May 12, 2019'>May 12, 2019</option>
-            <option value='May 13, 2019'>May 13, 2019</option>
-            <option value='May 14, 2019'>May 14, 2019</option>
-            <option value='May 15, 2019'>May 15, 2019</option>
-          </select>
-          <br />
-          <i className='fas fa-map-marker-alt' />
-          <input name='location' type='text' />
+          <div class='input-group mb-3'>
+            <div class='input-group-prepend'>
+              <label class='input-group-text' for='votingdate'>
+                <i className='far fa-calendar-check' />
+              </label>
+            </div>
+            <select class='custom-select form-control-sm' id='votingdate'>
+              <option value='May 12, 2019'>May 12, 2019</option>
+              <option value='May 13, 2019'>May 13, 2019</option>
+              <option value='May 14, 2019'>May 14, 2019</option>
+              <option value='May 15, 2019'>May 15, 2019</option>
+            </select>
+          </div>
+          <div class='input-group mb-3'>
+            <div class='input-group-prepend'>
+              <span class='input-group-text'>
+                <i className='fas fa-map-marker-alt' />
+              </span>
+            </div>
+            <input
+              type='text'
+              name='location'
+              class='form-control'
+              placeholder='123 Awesome st'
+              aria-label='Your Location'
+            />
+          </div>
           <div id='map' style={{ width: '100%', height: '500px' }} />
         </div>
         <div className='col-md-6'>
