@@ -2,12 +2,12 @@ import React from 'react';
 //   phone,
 //   email,
 //   hours
-const Details = ({ pollingStation, distance }) => {
+const Details = ({ pollingStation }) => {
   return (
     <div>
       <span className='lead'>{pollingStation.name}</span>
       <p>{pollingStation.address}</p>
-      <p>{distance} km away</p>
+      <p>{(pollingStation.distance / 1000).toFixed(2)} km away</p>
       <ul className='fa-ul'>
         <li>
           <span className='fa-li'>
