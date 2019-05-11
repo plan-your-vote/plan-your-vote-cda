@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
 import pyv from 'utils/api/pyv';
-import { IMAGE_BASE } from 'utils/image';
+import { CMS_BASE_URL } from 'constants/api';
 
 class Candidates extends Component {
   _isMounted = false;
@@ -18,11 +18,7 @@ class Candidates extends Component {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
-        const {
-          pageTitle,
-          pageDescription,
-          pageNumber
-        } = data.votingPage;
+        const { pageTitle, pageDescription, pageNumber } = data.votingPage;
 
         this.setState({
           races: data.races,
@@ -55,7 +51,6 @@ class Candidates extends Component {
       candidateRaces: data.candidateRaces,
       contacts: data.contacts
     };
-    
 
     this.state.selectedCandidates.push(temp);
 
@@ -74,27 +69,27 @@ class Candidates extends Component {
     let candidates = this.state.races.map(rData => {
       return rData.candidates.map(cData => {
         return (
-        <div className='col-sm-3' key={cData.candidate.candidateId}>
-          <div className='card' style={cardStyle}>
-            <img
-              src={`${IMAGE_BASE}/${cData.candidate.picture}`}
-              className='card-img-top'
-              alt={cData.candidate.name}
-            />
-            <div className='card-body'>
-              <h5 className='card-title'>{cData.candidate.name}</h5>
-              <button
-                className='btn btn-primary'
-                onClick={e => this.selectBtn(cData.candidate)}
-              >
-                Select
-              </button>
+          <div className='col-sm-3' key={cData.candidate.candidateId}>
+            <div className='card' style={cardStyle}>
+              <img
+                src={`${CMS_BASE_URL}/${cData.candidate.picture}`}
+                className='card-img-top'
+                alt={cData.candidate.name}
+              />
+              <div className='card-body'>
+                <h5 className='card-title'>{cData.candidate.name}</h5>
+                <button
+                  className='btn btn-primary'
+                  onClick={e => this.selectBtn(cData.candidate)}
+                >
+                  Select
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      );
-      })
-    })
+        );
+      });
+    });
 
     return (
       <div className='container'>
