@@ -82,10 +82,10 @@ class Candidates extends Component {
     );
   };
 
-  displayModal = data => {
+  displayModal = candidate => {
     if (this._isMounted) {
       this.setState({
-        currentCard: data
+        currentCard: candidate
       });
     } else {
       console.error('unable to set state');
@@ -107,6 +107,14 @@ class Candidates extends Component {
       });
     });
 
+    const modals = this.state.races.map(race => {
+      return race.candidates.map(candidate => {
+        return (
+          <CandidateModal key={candidate.candidateId} candidate={candidate} />
+        );
+      });
+    });
+
     return (
       <div className='container'>
         <div className='row'>
@@ -116,7 +124,7 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
           {candidates}
-          <CandidateModal currentCard={this.state.currentCard} />
+          {modals}
         </div>
       </div>
     );

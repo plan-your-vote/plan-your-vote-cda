@@ -1,10 +1,10 @@
 import React from 'react';
 import { IMAGE_BASE } from 'utils/image';
 
-const CandidateModal = ({ currentCard }) => {
+const CandidateModal = ({ candidate }) => {
   const getDesiredDetail = key => {
     let desiredDetail;
-    currentCard.details.map(detail => {
+    candidate.details.map(detail => {
       if (detail.title === key) {
         desiredDetail = detail;
         return '';
@@ -15,7 +15,7 @@ const CandidateModal = ({ currentCard }) => {
   };
 
   const getContactDetail = key => {
-    currentCard.contacts.map(contact => {
+    candidate.contacts.map(contact => {
       return contact;
     });
   };
@@ -37,10 +37,10 @@ const CandidateModal = ({ currentCard }) => {
   return (
     <div
       className='modal fade'
-      id={`candidate-${currentCard.candidateId}-modal`}
+      id={`candidate-${candidate.candidateId}-modal`}
       tabIndex='-1'
       role='dialog'
-      aria-labelledby={`candidate-${currentCard.candidateId}-modal-label`}
+      aria-labelledby={`candidate-${candidate.candidateId}-modal-label`}
       aria-hidden='true'
     >
       <div className='modal-dialog modal-dialog-centered' role='document'>
@@ -48,9 +48,9 @@ const CandidateModal = ({ currentCard }) => {
           <div className='modal-header'>
             <h5
               className='modal-title'
-              id={`candidate-${currentCard.candidateId}-modal-label`}
+              id={`candidate-${candidate.candidateId}-modal-label`}
             >
-              {currentCard.name}
+              {candidate.name}
             </h5>
             <button
               type='button'
@@ -63,12 +63,12 @@ const CandidateModal = ({ currentCard }) => {
           </div>
           <div className='modal-body'>
             <img
-              src={`${IMAGE_BASE}/${currentCard.picture}`}
+              src={`${IMAGE_BASE}/${candidate.picture}`}
               className='card-img-top'
-              alt={currentCard.name}
+              alt={candidate.name}
             />
             <br />
-            Candidate ID: {currentCard.candidateId}
+            Candidate ID: {candidate.candidateId}
             <br />
             Top 3 Priorities:
             <br />
@@ -83,7 +83,7 @@ const CandidateModal = ({ currentCard }) => {
             <br />
             Biography: <br /> {displayPriority(getDesiredDetail('Biography'))}
             <br />
-            {/* HELLO: {currentCard.details.id} */}
+            {/* HELLO: {candidate.details.id} */}
             <br />
             {displayContact(getContactDetail('contactValue'))}
           </div>
