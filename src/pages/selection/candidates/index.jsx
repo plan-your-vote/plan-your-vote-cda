@@ -102,14 +102,11 @@ class Candidates extends Component {
     const candidates = this.state.races.map(rData => {
       return rData.candidates.map(candidate => {
         return (
-          <>
-            <CandidateCard
-              key={candidate.candidate.candidateId}
-              candidate={candidate}
-              displayModal={this.displayModal}
-            />
-            <CandidateModal currentCard={this.state.currentCard} />
-          </>
+          <CandidateCard
+            key={candidate.candidate.candidateId}
+            candidate={candidate}
+            displayModal={this.displayModal}
+          />
         );
       });
     });
@@ -123,6 +120,7 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
           {candidates}
+          <CandidateModal currentCard={this.state.currentCard} />
         </div>
       </div>
     );
