@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
+import CandidateCard from 'components/CandidateCard';
 import pyv from 'utils/api/pyv';
-import { IMAGE_BASE } from 'utils/image';
+import CandidateModal from 'components/CandidateModal';
 
 class Candidates extends Component {
   _isMounted = false;
@@ -100,97 +101,18 @@ class Candidates extends Component {
   render() {
     console.log(this.state.currentCard.details);
     const { candidatesHeader } = this.state;
-    const cardStyle = {
-      maxWidth: '540px'
-    };
 
-    let candidates = this.state.races.map(rData => {
-      return rData.candidates.map(cData => {
+    const candidates = this.state.races.map(rData => {
+      return rData.candidates.map(candidate => {
         return (
-          <div className='col-sm-3' key={cData.candidate.candidateId}>
-            <div
-              className='card'
-              onClick={e => this.displayModal(cData)}
-              style={cardStyle}
-              data-toggle='modal'
-              data-target='#exampleModal'
-            >
-              <img
-                src={`${IMAGE_BASE}/${cData.candidate.picture}`}
-                className='card-img-top'
-                alt={cData.candidate.name}
-              />
-              <div className='card-body'>
-                <h5 className='card-title'>{cData.candidate.name}</h5>
-              </div>
-            </div>
-            {/* <!-- Modal --> */}
-            <div
-              className='modal fade'
-              id='exampleModal'
-              tabIndex='-1'
-              role='dialog'
-              aria-labelledby='exampleModalLabel'
-              aria-hidden='true'
-            >
-              <div
-                className='modal-dialog modal-dialog-centered'
-                role='document'
-              >
-                <div className='modal-content'>
-                  <div className='modal-header'>
-                    <h5 className='modal-title' id='exampleModalLabel'>
-                      {this.state.currentCard.candidate.name}
-                    </h5>
-                    <button
-                      type='button'
-                      className='close'
-                      data-dismiss='modal'
-                      aria-label='Close'
-                    >
-                      <span aria-hidden='true'>&times;</span>
-                    </button>
-                  </div>
-                  <div className='modal-body'>
-                    <img
-                      src={`${IMAGE_BASE}/${
-                        this.state.currentCard.candidate.picture
-                      }`}
-                      className='card-img-top'
-                      alt={cData.candidate.name}
-                    />
-                    <br />
-                    Candidate ID:{' '}
-                    {this.state.currentCard.candidate.candidateId}
-                    <br />
-                    Top 3 Priorities:
-                    <br />
-                    1. {this.state.currentCard.details[0].text}
-                    {/* 1. {this.state.currentCard.details[0].text} */}
-                    {/* 1. {this.state.currentCard.details[0].text} */}
-                  </div>
-                  <div className='modal-footer'>
-                    {/* <button
-                      className='btn btn-primary'
-                      onClick={e => this.selectBtn(cData.candidate)}
-                    >
-                      Select
-                    </button> */}
-                    <button
-                      type='button'
-                      className='btn btn-secondary'
-                      data-dismiss='modal'
-                    >
-                      Close
-                    </button>
-                    <button type='button' className='btn btn-primary'>
-                      Save changes
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <>
+            <CandidateCard
+              key={candidate.candidate.candidateId}
+              candidate={candidate}
+              displayModal={this.displayModal}
+            />
+            <CandidateModal currentCard={this.state.currentCard} />
+          </>
         );
       });
     });
