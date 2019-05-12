@@ -6,6 +6,7 @@ import CandidateModal from 'components/CandidateModal';
 
 class Candidates extends Component {
   _isMounted = false;
+
   state = {
     races: [],
     candidatesHeader: {
@@ -55,9 +56,11 @@ class Candidates extends Component {
       }
     });
   }
+
   componentWillUnmount() {
     this._isMounted = false;
   }
+
   loadCandidatesApi = async () => {
     const response = await pyv.get('/api/races');
     return response.data;
@@ -85,7 +88,6 @@ class Candidates extends Component {
   };
 
   displayModal = data => {
-    console.log(data);
     if (this._isMounted) {
       this.setState({
         currentCard: data
@@ -96,11 +98,10 @@ class Candidates extends Component {
   };
 
   render() {
-    console.log(this.state.currentCard.details);
     const { candidatesHeader } = this.state;
 
-    const candidates = this.state.races.map(rData => {
-      return rData.candidates.map(candidate => {
+    const candidates = this.state.races.map(race => {
+      return race.candidates.map(candidate => {
         return (
           <CandidateCard
             key={candidate.candidate.candidateId}
