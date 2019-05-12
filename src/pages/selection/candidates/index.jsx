@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
-import pyv from 'utils/api/pyv';
+import pyv from 'apis/pyv';
 import { CMS_BASE_URL } from 'constants/api';
 
 class Candidates extends Component {

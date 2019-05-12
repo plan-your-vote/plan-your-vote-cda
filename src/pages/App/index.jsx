@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import pyv from 'utils/api/pyv';
+import pyv from 'apis/pyv';
 import * as routes from 'constants/routes';
 import * as themes from 'constants/themes';
 import Navigation from 'components/Navigation';
