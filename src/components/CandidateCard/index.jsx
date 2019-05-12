@@ -9,7 +9,7 @@ const CandidateCard = ({ candidate, displayModal }) => {
         className='card'
         onClick={() => displayModal(candidate)}
         data-toggle='modal'
-        data-target='#exampleModal'
+        data-target={`#candidate-${candidate.candidateId}-modal`}
       >
         <img
           src={`${IMAGE_BASE}/${candidate.candidate.picture}`}

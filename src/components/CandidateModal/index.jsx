@@ -5,16 +5,19 @@ const CandidateModal = ({ currentCard }) => {
   return (
     <div
       className='modal fade'
-      id='exampleModal'
+      id={`candidate-${currentCard.candidateId}-modal`}
       tabIndex='-1'
       role='dialog'
-      aria-labelledby='exampleModalLabel'
+      aria-labelledby={`candidate-${currentCard.candidateId}-modal-label`}
       aria-hidden='true'
     >
       <div className='modal-dialog modal-dialog-centered' role='document'>
         <div className='modal-content'>
           <div className='modal-header'>
-            <h5 className='modal-title' id='exampleModalLabel'>
+            <h5
+              className='modal-title'
+              id={`candidate-${currentCard.candidateId}-modal-label`}
+            >
               {currentCard.candidate.name}
             </h5>
             <button
