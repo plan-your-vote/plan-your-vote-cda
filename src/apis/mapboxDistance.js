@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MAPBOX_BASE_URL } from 'constants/api';
+import { MAPBOX_BASE_URL } from 'constants/baseURL';
 
 // mapbox directions
 // https://docs.mapbox.com/api/navigation/
