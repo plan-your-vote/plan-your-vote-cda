@@ -15,33 +15,20 @@ class Candidates extends Component {
     },
     selectedCandidates: [],
     currentCard: {
-      candidate: {
-        name: '',
-        candidateId: '',
-        candidateRaces: '',
-        contacts: '',
-        details: '',
-        election: '',
-        electionId: '',
-        organization: '',
-        organizationId: '',
-        picture: ''
-      },
+      candidateId: '',
+      name: '',
+      picture: '',
       contacts: [
         {
-          contactId: '',
           contactMethod: '',
-          contactValue: '',
-          candidateId: '',
-          candidate: ''
+          contactValue: ''
         }
       ],
       details: [
         {
           title: '',
           text: '',
-          format: '',
-          lang: ''
+          format: ''
         }
       ]
     }
