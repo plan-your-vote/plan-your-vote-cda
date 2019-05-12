@@ -11,18 +11,40 @@ class Candidates extends Component {
       pageTitle: '',
       pageDescription: ''
     },
-    selectedCandidates: []
+    selectedCandidates: [],
+    currentCard: {
+      candidate: {
+        name: '',
+        candidateId: '',
+        candidateRaces: '',
+        contacts: '',
+        details: '',
+        election: '',
+        electionId: '',
+        organization: '',
+        organizationId: '',
+        picture: ''
+      },
+      contacts: [],
+      details: [
+        {
+          id: '',
+          candidateId: '',
+          candidate: '',
+          title: '',
+          text: '',
+          format: '',
+          lang: ''
+        }
+      ]
+    }
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
-        const {
-          pageTitle,
-          pageDescription,
-          pageNumber
-        } = data.votingPage;
+        const { pageTitle, pageDescription, pageNumber } = data.votingPage;
 
         this.setState({
           races: data.races,
@@ -55,7 +77,6 @@ class Candidates extends Component {
       candidateRaces: data.candidateRaces,
       contacts: data.contacts
     };
-    
 
     this.state.selectedCandidates.push(temp);
 
@@ -65,12 +86,19 @@ class Candidates extends Component {
     );
   };
 
-
   displayModal = data => {
-    console.log("activating modal")
-  }
+    console.log(data);
+    if (this._isMounted) {
+      this.setState({
+        currentCard: data
+      });
+    } else {
+      console.error('unable to set state');
+    }
+  };
 
   render() {
+    console.log(this.state.currentCard.details);
     const { candidatesHeader } = this.state;
     const cardStyle = {
       maxWidth: '540px'
@@ -82,8 +110,10 @@ class Candidates extends Component {
           <div className='col-sm-3' key={cData.candidate.candidateId}>
             <div
               className='card'
-              onClick={this.displayModal}
+              onClick={e => this.displayModal(cData)}
               style={cardStyle}
+              data-toggle='modal'
+              data-target='#exampleModal'
             >
               <img
                 src={`${IMAGE_BASE}/${cData.candidate.picture}`}
@@ -92,18 +122,78 @@ class Candidates extends Component {
               />
               <div className='card-body'>
                 <h5 className='card-title'>{cData.candidate.name}</h5>
-                <button
-                  className='btn btn-primary'
-                  onClick={e => this.selectBtn(cData.candidate)}
-                >
-                  Select
-                </button>
+              </div>
+            </div>
+            {/* <!-- Modal --> */}
+            <div
+              className='modal fade'
+              id='exampleModal'
+              tabIndex='-1'
+              role='dialog'
+              aria-labelledby='exampleModalLabel'
+              aria-hidden='true'
+            >
+              <div
+                className='modal-dialog modal-dialog-centered'
+                role='document'
+              >
+                <div className='modal-content'>
+                  <div className='modal-header'>
+                    <h5 className='modal-title' id='exampleModalLabel'>
+                      {this.state.currentCard.candidate.name}
+                    </h5>
+                    <button
+                      type='button'
+                      className='close'
+                      data-dismiss='modal'
+                      aria-label='Close'
+                    >
+                      <span aria-hidden='true'>&times;</span>
+                    </button>
+                  </div>
+                  <div className='modal-body'>
+                    <img
+                      src={`${IMAGE_BASE}/${
+                        this.state.currentCard.candidate.picture
+                      }`}
+                      className='card-img-top'
+                      alt={cData.candidate.name}
+                    />
+                    <br />
+                    Candidate ID:{' '}
+                    {this.state.currentCard.candidate.candidateId}
+                    <br />
+                    Top 3 Priorities:
+                    <br />
+                    1. {this.state.currentCard.details[0].text}
+                    {/* 1. {this.state.currentCard.details[0].text} */}
+                    {/* 1. {this.state.currentCard.details[0].text} */}
+                  </div>
+                  <div className='modal-footer'>
+                    {/* <button
+                      className='btn btn-primary'
+                      onClick={e => this.selectBtn(cData.candidate)}
+                    >
+                      Select
+                    </button> */}
+                    <button
+                      type='button'
+                      className='btn btn-secondary'
+                      data-dismiss='modal'
+                    >
+                      Close
+                    </button>
+                    <button type='button' className='btn btn-primary'>
+                      Save changes
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         );
-      })
-    })
+      });
+    });
 
     return (
       <div className='container'>
