@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import pyv from 'apis/pyv';
 import * as routes from 'constants/routes';
 import * as themes from 'constants/themes';
 import Navigation from 'components/Navigation';
@@ -36,26 +35,21 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.loadApiData2();
-    this.loadApiData().then(() => {
-      this.setTheme();
-    });
+    this.loadApiData();
   }
 
-  loadApiData = async () => {
-    const response = await pyv.get('/api/theme');
-    const data = response.data;
-
-    this.setState({
-      themeName: data.selectedTheme.themeName,
-      images: data.images
-    });
-  };
-
-  loadApiData2 = () => {
+  loadApiData = () => {
     fetch(`${CMS_BASE_URL}/api/theme`)
       .then(res => res.json())
-      .then(result => console.log(result));
+      .then(result => {
+        this.setState({
+          themeName: result.selectedTheme.themeName,
+          images: result.images
+        });
+      })
+      .then(() => {
+        this.setTheme();
+      });
   };
 
   setTheme = () => {
