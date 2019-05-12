@@ -1,9 +1,6 @@
 import React from 'react';
 import { IMAGE_BASE } from 'utils/image';
-
-const cardStyle = {
-  maxWidth: '540px'
-};
+import './style.css';
 
 const CandidateCard = ({ candidate, displayModal }) => {
   return (
@@ -11,7 +8,6 @@ const CandidateCard = ({ candidate, displayModal }) => {
       <div
         className='card'
         onClick={() => displayModal(candidate)}
-        style={cardStyle}
         data-toggle='modal'
         data-target='#exampleModal'
       >
