@@ -29,9 +29,6 @@ class Candidates extends Component {
       contacts: [],
       details: [
         {
-          id: '',
-          candidateId: '',
-          candidate: '',
           title: '',
           text: '',
           format: '',
