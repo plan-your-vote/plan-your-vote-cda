@@ -7,6 +7,7 @@ import * as routes from 'constants/routes';
 import * as themes from 'constants/themes';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
+import { CMS_BASE_URL } from 'constants/baseURL';
 
 import Home from 'pages/home';
 import Selection from 'pages/selection';
@@ -35,6 +36,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.loadApiData2();
     this.loadApiData().then(() => {
       this.setTheme();
     });
@@ -48,6 +50,12 @@ class App extends Component {
       themeName: data.selectedTheme.themeName,
       images: data.images
     });
+  };
+
+  loadApiData2 = () => {
+    fetch(`${CMS_BASE_URL}/api/theme`)
+      .then(res => res.json())
+      .then(result => console.log(result));
   };
 
   setTheme = () => {
