@@ -35,20 +35,19 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.loadApiData();
+    this.loadApiData().then(() => {
+      this.setTheme();
+    });
   }
 
-  loadApiData = () => {
-    fetch(`${CMS_BASE_URL}/api/theme`)
+  loadApiData = async () => {
+    await fetch(`${CMS_BASE_URL}/api/theme`)
       .then(res => res.json())
       .then(result => {
         this.setState({
           themeName: result.selectedTheme.themeName,
           images: result.images
         });
-      })
-      .then(() => {
-        this.setTheme();
       });
   };
 
