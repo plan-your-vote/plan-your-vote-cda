@@ -12,12 +12,12 @@ const CandidateCard = ({ candidate, displayModal }) => {
         data-target={`#candidate-${candidate.candidateId}-modal`}
       >
         <img
-          src={`${IMAGE_BASE}/${candidate.candidate.picture}`}
+          src={`${IMAGE_BASE}/${candidate.picture}`}
           className='card-img-top'
-          alt={candidate.candidate.name}
+          alt={candidate.name}
         />
         <div className='card-body'>
-          <h5 className='card-title'>{candidate.candidate.name}</h5>
+          <h5 className='card-title'>{candidate.name}</h5>
         </div>
       </div>
     </div>

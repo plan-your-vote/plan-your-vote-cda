@@ -112,7 +112,7 @@ class Candidates extends Component {
       return race.candidates.map(candidate => {
         return (
           <CandidateCard
-            key={candidate.candidate.candidateId}
+            key={candidate.candidateId}
             candidate={candidate}
             displayModal={this.displayModal}
           />
