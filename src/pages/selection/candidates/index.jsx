@@ -27,7 +27,15 @@ class Candidates extends Component {
         organizationId: '',
         picture: ''
       },
-      contacts: [],
+      contacts: [
+        {
+          contactId: '',
+          contactMethod: '',
+          contactValue: '',
+          candidateId: '',
+          candidate: ''
+        }
+      ],
       details: [
         {
           title: '',

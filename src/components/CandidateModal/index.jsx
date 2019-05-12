@@ -2,6 +2,7 @@ import React from 'react';
 import { IMAGE_BASE } from 'utils/image';
 
 const CandidateModal = ({ currentCard }) => {
+
   const getDesiredDetail = key => {
     let desiredDetail;
     currentCard.details.map(detail => {
@@ -14,12 +15,26 @@ const CandidateModal = ({ currentCard }) => {
     return desiredDetail;
   };
 
+  const getContactDetail = key => {
+    currentCard.contacts.map(contact => {
+      return contact;
+    });
+    
+  };
+
   const displayPriority = priority => {
     if (!priority) {
       return '';
     }
     return priority.text;
   };
+
+  const displayContact = item => {
+    if(!item) {
+      return 'Not Provided';
+    }
+    return item.contactValue;
+  }
 
   return (
     <div
@@ -59,11 +74,20 @@ const CandidateModal = ({ currentCard }) => {
             <br />
             Top 3 Priorities:
             <br />
-            {/* 1. {currentCard.details[0].text} */}
-            {console.log(getDesiredDetail('Priority 1'))}
-            {displayPriority(getDesiredDetail('Priority 1'))}
-            {/* 1. {currentCard.details[0].text} */}
-            {/* 1. {currentCard.details[0].text} */}
+            1. {displayPriority(getDesiredDetail('Priority 1'))}
+            <br />
+            2. {displayPriority(getDesiredDetail('Priority 2'))}
+            <br />
+            3. {displayPriority(getDesiredDetail('Priority 3'))}
+            <br />
+            Platform: <br />
+            {displayPriority(getDesiredDetail('Platform'))}
+            <br />
+            Biography: <br /> {displayPriority(getDesiredDetail('Biography'))}
+            <br />
+            HELLO: {currentCard.details.id}
+            <br />
+            {displayContact(getContactDetail('contactValue'))}
           </div>
           <div className='modal-footer'>
             {/* <button
