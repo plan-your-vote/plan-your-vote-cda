@@ -2,7 +2,6 @@ import React from 'react';
 import { IMAGE_BASE } from 'utils/image';
 
 const CandidateModal = ({ currentCard }) => {
-
   const getDesiredDetail = key => {
     let desiredDetail;
     currentCard.details.map(detail => {
@@ -19,7 +18,6 @@ const CandidateModal = ({ currentCard }) => {
     currentCard.contacts.map(contact => {
       return contact;
     });
-    
   };
 
   const displayPriority = priority => {
@@ -30,11 +28,11 @@ const CandidateModal = ({ currentCard }) => {
   };
 
   const displayContact = item => {
-    if(!item) {
+    if (!item) {
       return 'Not Provided';
     }
     return item.contactValue;
-  }
+  };
 
   return (
     <div
@@ -52,7 +50,7 @@ const CandidateModal = ({ currentCard }) => {
               className='modal-title'
               id={`candidate-${currentCard.candidateId}-modal-label`}
             >
-              {currentCard.candidate.name}
+              {currentCard.name}
             </h5>
             <button
               type='button'
@@ -65,12 +63,12 @@ const CandidateModal = ({ currentCard }) => {
           </div>
           <div className='modal-body'>
             <img
-              src={`${IMAGE_BASE}/${currentCard.candidate.picture}`}
+              src={`${IMAGE_BASE}/${currentCard.picture}`}
               className='card-img-top'
-              alt={currentCard.candidate.name}
+              alt={currentCard.name}
             />
             <br />
-            Candidate ID: {currentCard.candidate.candidateId}
+            Candidate ID: {currentCard.candidateId}
             <br />
             Top 3 Priorities:
             <br />
@@ -85,7 +83,7 @@ const CandidateModal = ({ currentCard }) => {
             <br />
             Biography: <br /> {displayPriority(getDesiredDetail('Biography'))}
             <br />
-            HELLO: {currentCard.details.id}
+            {/* HELLO: {currentCard.details.id} */}
             <br />
             {displayContact(getContactDetail('contactValue'))}
           </div>
