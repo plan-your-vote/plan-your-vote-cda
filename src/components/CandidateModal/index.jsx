@@ -7,9 +7,18 @@ const CandidateModal = ({ currentCard }) => {
     currentCard.details.map(detail => {
       if (detail.title === key) {
         desiredDetail = detail;
+        return '';
       }
+      return '';
     });
     return desiredDetail;
+  };
+
+  const displayPriority = priority => {
+    if (!priority) {
+      return '';
+    }
+    return priority.text;
   };
 
   return (
@@ -52,6 +61,7 @@ const CandidateModal = ({ currentCard }) => {
             <br />
             {/* 1. {currentCard.details[0].text} */}
             {console.log(getDesiredDetail('Priority 1'))}
+            {displayPriority(getDesiredDetail('Priority 1'))}
             {/* 1. {currentCard.details[0].text} */}
             {/* 1. {currentCard.details[0].text} */}
           </div>
