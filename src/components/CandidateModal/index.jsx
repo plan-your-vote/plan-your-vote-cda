@@ -2,10 +2,10 @@ import React from 'react';
 import { IMAGE_BASE } from 'utils/image';
 
 const CandidateModal = ({ currentCard }) => {
-  const getPriority1 = () => {
+  const getDesiredDetail = key => {
     let desiredDetail;
     currentCard.details.map(detail => {
-      if (detail.title === 'Priority 1') {
+      if (detail.title === key) {
         desiredDetail = detail;
       }
     });
@@ -51,7 +51,7 @@ const CandidateModal = ({ currentCard }) => {
             Top 3 Priorities:
             <br />
             {/* 1. {currentCard.details[0].text} */}
-            {console.log(getPriority1())}
+            {console.log(getDesiredDetail('Priority 1'))}
             {/* 1. {currentCard.details[0].text} */}
             {/* 1. {currentCard.details[0].text} */}
           </div>
