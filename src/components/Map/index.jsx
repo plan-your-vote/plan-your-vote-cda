@@ -99,21 +99,6 @@ class Map extends Component {
     });
   };
 
-  getDistance = async (latitude, longitude) => {
-    const result = await mapboxDistance.get(
-      `${longitude},${latitude};${this.state.user.longitude},${
-        this.state.user.latitude
-      }`,
-      {
-        params: {
-          access_token: MAPBOX
-        }
-      }
-    );
-
-    return result.data.routes[0].distance;
-  };
-
   sortPollingPlacesByDistance = () => {
     const stations = this.state.pollingPlaces;
 
@@ -121,23 +106,15 @@ class Map extends Component {
       return;
     }
 
-    stations.forEach(pollingPlace => {
-      this.getDistance(pollingPlace.latitude, pollingPlace.longitude)
-        .then(distance => {
-          pollingPlace['distance'] = distance;
-        })
-        .then(() => {
-          stations.sort((a, b) => {
-            return a.distance - b.distance;
-          });
-
-          if (this._isMounted) {
-            this.setState({
-              pollingPlaces: stations
-            });
-          }
-        });
+    stations.sort((a, b) => {
+      return a.distance - b.distance;
     });
+
+    if (this._isMounted) {
+      this.setState({
+        pollingPlaces: stations
+      });
+    }
   };
 
   renderMarkers = () => {
