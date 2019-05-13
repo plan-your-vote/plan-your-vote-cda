@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-import { MAPBOX } from 'credentials.js';
+import { MAPBOX_PUBLIC } from 'constants/mapbox';
 import pyv from 'utils/api/pyv';
 import pyvMap from 'utils/api/pyvMap';
 import Details from './details';
 import './locations.css';
 
-mapboxgl.accessToken = MAPBOX;
+mapboxgl.accessToken = MAPBOX_PUBLIC;
 
 class Map extends Component {
   _map;
