@@ -42,20 +42,49 @@ const CandidateModal = ({ candidate }) => {
       if (found.contactMethod === 'Instagram') {
         let splitURL = found.contactValue.split('/');
         let contactHandle = splitURL[splitURL.length - 1];
-        if (contactHandle === '') {
+
+        if (contactHandle === '?hl=en' || contactHandle === '') {
           contactHandle = splitURL[splitURL.length - 2];
-        }
+        }  
+
         contactMethod += `@${contactHandle}`;
         contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
-      } else if (found.contactMethod === 'Twitter') {
+      } 
+
+      if (found.contactMethod === 'Twitter') {
         let splitURL = found.contactValue.split('/');
         let contactHandle = splitURL[splitURL.length - 1];
         contactMethod += `@${contactHandle}`;
         contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
-      } else if (found.contactMethod === 'Website') {
+      }
+
+      if (found.contactMethod === 'Email') {
+        
         contactMethod += found.contactValue;
-        contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
-      } else {
+        contactMethod = <a href={`mailto: ${contactMethod}`}> {contactMethod}</a>;
+      }
+
+      if (
+        found.contactMethod === 'Website' ||
+        found.contactMethod === 'Facebook' ||
+        found.contactMethod === 'Youtube' ||
+        found.contactMethod === 'Other'
+      ) {
+        contactMethod += found.contactValue;
+        let splitURL = contactMethod.split('')
+        if (
+          splitURL[0] !== 'h' ||
+          splitURL[1] !== 't' ||
+          splitURL[2] !== 't' ||
+          splitURL[3] !== 'p' 
+        ) {
+          contactMethod = `https://${contactMethod}`;
+        }
+        
+        contactMethod = <a href={contactMethod}> {contactMethod}</a>;
+      }  
+
+      if (found.contactMethod === 'Phone') {
         contactMethod += found.contactValue;
       }
     } else {
@@ -86,6 +115,8 @@ const CandidateModal = ({ candidate }) => {
               id={`candidate-${candidate.candidateId}-modal-label`}
             >
               {candidate.name}
+              <br />
+              {candidate.organizationName}
             </h5>
             <button
               type='button'

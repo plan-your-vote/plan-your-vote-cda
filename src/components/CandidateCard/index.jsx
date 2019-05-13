@@ -18,6 +18,9 @@ const CandidateCard = ({ candidate, displayModal }) => {
         />
         <div className='card-body'>
           <h5 className='card-title'>{candidate.name}</h5>
+          <h6 className='card-subtitle mb-2 text-muted'>
+            {candidate.organizationName}
+          </h6>
         </div>
       </div>
     </div>
