@@ -14,12 +14,6 @@ const CandidateModal = ({ candidate }) => {
     return desiredDetail;
   };
 
-  const getContactDetail = key => {
-    candidate.contacts.map(contact => {
-      return contact;
-    });
-  };
-
   const displayPriority = priority => {
     if (!priority) {
       return '';
@@ -27,12 +21,53 @@ const CandidateModal = ({ candidate }) => {
     return priority.text;
   };
 
-  const displayContact = item => {
-    if (!item) {
-      return 'Not Provided';
+  const contactMethodList = [
+    'Phone',
+    'Email',
+    'Website',
+    'Twitter',
+    'Facebook',
+    'Instagram',
+    'Youtube',
+    'Other'
+  ];
+
+  const displayContact = contactMethodList.map(cmItem => {
+    let contactMethod = ``;
+    let key = `${cmItem}`;
+    const found = candidate.contacts.find(
+      contact => contact.contactMethod === cmItem
+    );
+    if (found) {
+      if (found.contactMethod === 'Instagram') {
+        let splitURL = found.contactValue.split('/');
+        let contactHandle = splitURL[splitURL.length - 1];
+        if (contactHandle === '') {
+          contactHandle = splitURL[splitURL.length - 2];
+        }
+        contactMethod += `@${contactHandle}`;
+        contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
+      } else if (found.contactMethod === 'Twitter') {
+        let splitURL = found.contactValue.split('/');
+        let contactHandle = splitURL[splitURL.length - 1];
+        contactMethod += `@${contactHandle}`;
+        contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
+      } else if (found.contactMethod === 'Website') {
+        contactMethod += found.contactValue;
+        contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
+      } else {
+        contactMethod += found.contactValue;
+      }
+    } else {
+      contactMethod += 'Not Provided';
     }
-    return item.contactValue;
-  };
+
+    return (
+      <p key={key}>
+        {key}: {contactMethod}
+      </p>
+    );
+  });
 
   return (
     <div
@@ -68,8 +103,6 @@ const CandidateModal = ({ candidate }) => {
               alt={candidate.name}
             />
             <br />
-            Candidate ID: {candidate.candidateId}
-            <br />
             Top 3 Priorities:
             <br />
             1. {displayPriority(getDesiredDetail('Priority 1'))}
@@ -83,9 +116,7 @@ const CandidateModal = ({ candidate }) => {
             <br />
             Biography: <br /> {displayPriority(getDesiredDetail('Biography'))}
             <br />
-            {/* HELLO: {candidate.details.id} */}
-            <br />
-            {displayContact(getContactDetail('contactValue'))}
+            {displayContact}
           </div>
           <div className='modal-footer'>
             {/* <button
