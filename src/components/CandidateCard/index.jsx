@@ -1,5 +1,5 @@
 import React from 'react';
-import { IMAGE_BASE } from 'utils/image';
+import { CMS_BASE_URL } from 'constants/api';
 import './style.css';
 
 const CandidateCard = ({ candidate, displayModal }) => {
@@ -12,7 +12,7 @@ const CandidateCard = ({ candidate, displayModal }) => {
         data-target={`#candidate-${candidate.candidateId}-modal`}
       >
         <img
-          src={`${IMAGE_BASE}/${candidate.picture}`}
+          src={`${CMS_BASE_URL}/${candidate.picture}`}
           className='card-img-top'
           alt={candidate.name}
         />

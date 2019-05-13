@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MultipleChoiceQuestion from 'components/MultipleChoiceQuestion';
 import SectionHeader from 'components/SectionHeader';
-import pyv from 'utils/api/pyv';
+import pyv from 'apis/pyv';
 
 class Capital extends Component {
   _isMounted = false;

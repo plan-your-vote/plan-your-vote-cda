@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
 import CandidateCard from 'components/CandidateCard';
-import pyv from 'utils/api/pyv';
 import CandidateModal from 'components/CandidateModal';
+import pyv from 'apis/pyv';
 
 class Candidates extends Component {
   _isMounted = false;
