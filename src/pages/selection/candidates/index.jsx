@@ -107,6 +107,21 @@ class Candidates extends Component {
       });
     });
 
+    // const candidates = positionKey => {
+    //   this.state.races.map(race => {
+    //     return race.candidates.map(candidate => {
+    //       return (
+    //         <CandidateCard
+    //           key={candidate.candidateId}
+    //           candidate={candidate}
+    //           displayModal={this.displayModal}
+    //           candidatePostion = {positionKey}
+    //         />
+    //       );
+    //     });
+    //   });
+    // };
+
     const modals = this.state.races.map(race => {
       return race.candidates.map(candidate => {
         return (
