@@ -1,5 +1,5 @@
 import React from 'react';
-import { CMS_BASE_URL } from 'constants/api';
+import { CMS_BASE_URL } from 'constants/baseURL';
 import './style.css';
 
 const CandidateCard = ({ candidate, displayModal }) => {
