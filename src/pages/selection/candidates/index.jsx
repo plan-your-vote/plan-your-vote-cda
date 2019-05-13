@@ -1,17 +1,37 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
+import CandidateCard from 'components/CandidateCard';
+import CandidateModal from 'components/CandidateModal';
 import pyv from 'apis/pyv';
-import { CMS_BASE_URL } from 'constants/baseURL';
 
 class Candidates extends Component {
   _isMounted = false;
+
   state = {
     races: [],
     candidatesHeader: {
       pageTitle: '',
       pageDescription: ''
     },
-    selectedCandidates: []
+    selectedCandidates: [],
+    currentCard: {
+      candidateId: '',
+      name: '',
+      picture: '',
+      contacts: [
+        {
+          contactMethod: '',
+          contactValue: ''
+        }
+      ],
+      details: [
+        {
+          title: '',
+          text: '',
+          format: ''
+        }
+      ]
+    }
   };
 
   componentDidMount() {
@@ -31,9 +51,11 @@ class Candidates extends Component {
       }
     });
   }
+
   componentWillUnmount() {
     this._isMounted = false;
   }
+
   loadCandidatesApi = async () => {
     const response = await pyv.get('/api/races');
     return response.data;
@@ -60,33 +82,50 @@ class Candidates extends Component {
     );
   };
 
+  displayModal = candidate => {
+    if (this._isMounted) {
+      this.setState({
+        currentCard: candidate
+      });
+    } else {
+      console.error('unable to set state');
+    }
+  };
+
   render() {
     const { candidatesHeader } = this.state;
-    const cardStyle = {
-      maxWidth: '540px'
-    };
 
-    let candidates = this.state.races.map(rData => {
-      return rData.candidates.map(cData => {
+    const candidates = this.state.races.map(race => {
+      return race.candidates.map(candidate => {
         return (
-          <div className='col-sm-3' key={cData.candidate.candidateId}>
-            <div className='card' style={cardStyle}>
-              <img
-                src={`${CMS_BASE_URL}/${cData.candidate.picture}`}
-                className='card-img-top'
-                alt={cData.candidate.name}
-              />
-              <div className='card-body'>
-                <h5 className='card-title'>{cData.candidate.name}</h5>
-                <button
-                  className='btn btn-primary'
-                  onClick={e => this.selectBtn(cData.candidate)}
-                >
-                  Select
-                </button>
-              </div>
-            </div>
-          </div>
+          <CandidateCard
+            key={candidate.candidateId}
+            candidate={candidate}
+            displayModal={this.displayModal}
+          />
+        );
+      });
+    });
+
+    // const candidates = positionKey => {
+    //   this.state.races.map(race => {
+    //     return race.candidates.map(candidate => {
+    //       return (
+    //         <CandidateCard
+    //           key={candidate.candidateId}
+    //           candidate={candidate}
+    //           displayModal={this.displayModal}
+    //           candidatePostion = {positionKey}
+    //         />
+    //       );
+    //     });
+    //   });
+    // };
+
+    const modals = this.state.races.map(race => {
+      return race.candidates.map(candidate => {
+        return (
+          <CandidateModal key={candidate.candidateId} candidate={candidate} />
         );
       });
     });
@@ -100,6 +139,7 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
           {candidates}
+          {modals}
         </div>
       </div>
     );

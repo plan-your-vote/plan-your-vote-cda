@@ -81,6 +81,18 @@
   text-align: center;
 }
 
+.card {
+  cursor: pointer;
+  border: none;
+}
+
+.card:hover {
+  box-shadow : 0 0 40px #D30D80;
+	color: #3a7999;
+  background: rgba(0,0,0,0);
+  transform: scale(1.1, 1.1);
+}
+
 .intro-right span {
   display: none;
   position: absolute;
@@ -255,6 +267,18 @@ th,
   border: none;
   color: white;
 }
+
+.modal-content {
+  text-align: center;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+
+.modal-body img {
+  height: 50%;
+  width: 50%;
+}
+
 
 .divider {
   background-image: linear-gradient(to right, #e60050, white);
