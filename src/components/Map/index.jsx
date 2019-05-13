@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX } from 'credentials.js';
 import pyv from 'utils/api/pyv';
+import pyvMap from 'utils/api/pyvMap';
 import mapboxDistance from 'utils/api/mapboxDistance';
 import Details from './details';
 import './locations.css';
@@ -18,7 +19,7 @@ class Map extends Component {
       latitude: 0,
       longitude: 0
     },
-    pollingStations: [
+    pollingPlaces: [
       {
         additionalInfo: '',
         address: '',
@@ -29,7 +30,7 @@ class Map extends Component {
         longitude: 0,
         name: '',
         parkingInfo: null,
-        pollingStationId: 0,
+        pollingPlaceId: 0,
         washroomInfo: null,
         wheelchairInfo: null,
         distance: 0
@@ -42,7 +43,7 @@ class Map extends Component {
     this._isMounted = true;
     this.initializeMap();
     this.loadApiData().then(() => {
-      this.sortPollingStationsByDistance();
+      this.sortPollingPlacesByDistance();
       this.renderMarkers();
     });
   }
@@ -89,10 +90,10 @@ class Map extends Component {
   };
 
   loadApiData = async () => {
-    await pyv.get('/api/PollingStations').then(response => {
+    await pyv.get('/api/PollingPlaces').then(response => {
       if (this._isMounted) {
         this.setState({
-          pollingStations: response.data.pollingStations
+          pollingPlaces: response.data.pollingPlaces
         });
       }
     });
@@ -113,17 +114,17 @@ class Map extends Component {
     return result.data.routes[0].distance;
   };
 
-  sortPollingStationsByDistance = () => {
-    const stations = this.state.pollingStations;
+  sortPollingPlacesByDistance = () => {
+    const stations = this.state.pollingPlaces;
 
     if (stations[0].latitude === 0 && stations[0].longitude === 0) {
       return;
     }
 
-    stations.forEach(pollingStation => {
-      this.getDistance(pollingStation.latitude, pollingStation.longitude)
+    stations.forEach(pollingPlace => {
+      this.getDistance(pollingPlace.latitude, pollingPlace.longitude)
         .then(distance => {
-          pollingStation['distance'] = distance;
+          pollingPlace['distance'] = distance;
         })
         .then(() => {
           stations.sort((a, b) => {
@@ -132,7 +133,7 @@ class Map extends Component {
 
           if (this._isMounted) {
             this.setState({
-              pollingStations: stations
+              pollingPlaces: stations
             });
           }
         });
@@ -140,18 +141,18 @@ class Map extends Component {
   };
 
   renderMarkers = () => {
-    this.state.pollingStations.map(pollingStation => {
-      return this.addMarker(pollingStation);
+    this.state.pollingPlaces.map(pollingPlace => {
+      return this.addMarker(pollingPlace);
     });
   };
 
-  addMarker = pollingStation => {
+  addMarker = pollingPlace => {
     const marker = new mapboxgl.Marker()
-      .setLngLat([pollingStation.longitude, pollingStation.latitude])
+      .setLngLat([pollingPlace.longitude, pollingPlace.latitude])
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<strong>${pollingStation.name}</strong><p>${
-            pollingStation.address
+          `<strong>${pollingPlace.name}</strong><p>${
+            pollingPlace.address
           }</p>`
         )
       )
@@ -165,10 +166,10 @@ class Map extends Component {
   };
 
   render() {
-    const details = this.state.pollingStations.map(pollingStation => {
+    const details = this.state.pollingPlaces.map(pollingPlace => {
       return (
-        <li className='list-group-item' key={pollingStation.pollingStationId}>
-          <Details pollingStation={pollingStation} />
+        <li className='list-group-item' key={pollingPlace.pollingPlaceId}>
+          <Details pollingPlace={pollingPlace} />
         </li>
       );
     });
