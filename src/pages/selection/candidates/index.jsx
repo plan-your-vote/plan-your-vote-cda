@@ -92,35 +92,51 @@ class Candidates extends Component {
     }
   };
 
+  renderCandidates = race => {
+    if (!race) {
+      return null;
+    }
+
+    return race.candidates.map(candidate => {
+      if (!candidate) {
+        console.log(candidate);
+        return null;
+      }
+
+      return (
+        <CandidateCard
+          key={candidate.candidateId}
+          candidate={candidate}
+          displayModal={this.displayModal}
+        />
+      );
+    });
+  };
+
   render() {
     const { candidatesHeader } = this.state;
 
-    const candidates = this.state.races.map(race => {
-      return race.candidates.map(candidate => {
-        return (
-          <CandidateCard
-            key={candidate.candidateId}
-            candidate={candidate}
-            displayModal={this.displayModal}
-          />
-        );
-      });
-    });
-
-    // const candidates = positionKey => {
-    //   this.state.races.map(race => {
-    //     return race.candidates.map(candidate => {
-    //       return (
-    //         <CandidateCard
-    //           key={candidate.candidateId}
-    //           candidate={candidate}
-    //           displayModal={this.displayModal}
-    //           candidatePostion = {positionKey}
-    //         />
-    //       );
-    //     });
+    // const candidates = this.state.races.map(race => {
+    //   return race.candidates.map(candidate => {
+    //     return (
+    //       <CandidateCard
+    //         key={candidate.candidateId}
+    //         candidate={candidate}
+    //         displayModal={this.displayModal}
+    //       />
+    //     );
     //   });
-    // };
+    // });
+
+    const candidates = this.state.races.map(race => {
+      return (
+        <>
+          <p key={race.numberNeeded}>{race.positionName}</p>
+          
+          {this.renderCandidates(race)}
+        </>
+      );
+    });
 
     const modals = this.state.races.map(race => {
       return race.candidates.map(candidate => {
