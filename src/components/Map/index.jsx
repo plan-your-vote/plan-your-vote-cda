@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
-
 import { MAPBOX_PUBLIC } from 'constants/mapbox';
 import pyvMap from 'apis/pyvMap';
 import pyv from 'apis/pyv';
