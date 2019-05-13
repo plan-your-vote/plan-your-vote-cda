@@ -4,7 +4,6 @@ import mapboxgl from 'mapbox-gl';
 import { MAPBOX } from 'credentials.js';
 import pyv from 'utils/api/pyv';
 import pyvMap from 'utils/api/pyvMap';
-import mapboxDistance from 'utils/api/mapboxDistance';
 import Details from './details';
 import './locations.css';
 
@@ -36,16 +35,23 @@ class Map extends Component {
         distance: 0
       }
     ],
+    locations: [],
     markers: []
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.initializeMap();
-    this.loadApiData().then(() => {
+    this.getUserLocation();
+    this.loadPollingPlaces().then(() => {
       this.sortPollingPlacesByDistance();
       this.renderMarkers();
     });
+  }
+
+  componentDidUpdate() {
+    this.setMapCenter();
+    this.loadDistance();
   }
 
   componentWillUnmount() {
@@ -60,7 +66,6 @@ class Map extends Component {
       zoom: 13
     });
     this.flyToClickedLocation();
-    this.getUserLocation();
   };
 
   flyToClickedLocation = () => {
@@ -80,8 +85,6 @@ class Map extends Component {
               longitude
             }
           });
-
-          this._map.setCenter([longitude, latitude]);
         }
       });
     } else {
@@ -89,11 +92,31 @@ class Map extends Component {
     }
   };
 
-  loadApiData = async () => {
+  setMapCenter = () => {
+    const { latitude, longitude } = this.state.user;
+    this._map.setCenter([longitude, latitude]);
+  };
+
+  loadPollingPlaces = async () => {
     await pyv.get('/api/PollingPlaces').then(response => {
       if (this._isMounted) {
         this.setState({
           pollingPlaces: response.data.pollingPlaces
+        });
+      }
+    });
+  };
+
+  loadDistance = async () => {
+    const { latitude, longitude } = this.state.user;
+    if (latitude === 0 && longitude === 0) {
+      return;
+    }
+
+    await pyvMap.get(`/api/map/${longitude},${latitude}`).then(response => {
+      if (this._isMounted) {
+        this.setState({
+          locations: response.data
         });
       }
     });
@@ -128,9 +151,7 @@ class Map extends Component {
       .setLngLat([pollingPlace.longitude, pollingPlace.latitude])
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<strong>${pollingPlace.name}</strong><p>${
-            pollingPlace.address
-          }</p>`
+          `<strong>${pollingPlace.name}</strong><p>${pollingPlace.address}</p>`
         )
       )
       .addTo(this._map);
