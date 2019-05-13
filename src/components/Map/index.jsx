@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 import { MAPBOX_PUBLIC } from 'constants/mapbox';
-import pyv from 'utils/api/pyv';
-import pyvMap from 'utils/api/pyvMap';
+import pyvMap from 'apis/pyvMap';
+import pyv from 'apis/pyv';
 import Details from './details';
 import './locations.css';
 

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import pyv from 'utils/api/pyv';
 import * as routes from 'constants/routes';
 import * as themes from 'constants/themes';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
+import { CMS_BASE_URL } from 'constants/baseURL';
 
 import Home from 'pages/home';
 import Selection from 'pages/selection';
@@ -41,13 +41,14 @@ class App extends Component {
   }
 
   loadApiData = async () => {
-    const response = await pyv.get('/api/theme');
-    const data = response.data;
-
-    this.setState({
-      themeName: data.selectedTheme.themeName,
-      images: data.images
-    });
+    await fetch(`${CMS_BASE_URL}/api/theme`)
+      .then(res => res.json())
+      .then(result => {
+        this.setState({
+          themeName: result.selectedTheme.themeName,
+          images: result.images
+        });
+      });
   };
 
   setTheme = () => {
