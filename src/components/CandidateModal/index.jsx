@@ -113,71 +113,77 @@ const CandidateModal = ({ candidate }) => {
         role='document'
       >
         <div className='modal-content'>
-          <div className='modal-header'>
-            <h3
-              className='modal-title'
-              id={`candidate-${candidate.candidateId}-modal-label`}
-            >
-              {candidate.name}
-              <br />
-              <h4 className='card-subtitle mb-2 text-muted'>
-                {candidate.organizationName}
-              </h4>
-            </h3>
-            <button
-              type='button'
-              className='close'
-              data-dismiss='modal'
-              aria-label='Close'
-            >
-              <span aria-hidden='true'>&times;</span>
-            </button>
+          <div className='nonScroll'>
+            <div className='modal-header'>
+              <h3
+                className='modal-title'
+                id={`candidate-${candidate.candidateId}-modal-label`}
+              >
+                {candidate.name}
+                <br />
+                <h4 className='card-subtitle mb-2 text-muted'>
+                  {candidate.organizationName}
+                </h4>
+              </h3>
+              <button
+                type='button'
+                className='close'
+                data-dismiss='modal'
+                aria-label='Close'
+              >
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
           </div>
           <div className='modal-body'>
-            <img
-              src={`${CMS_BASE_URL}/${candidate.picture}`}
-              className='card-img-top'
-              alt={candidate.name}
-            />
-            <button type='button' className='btn btn-primary addCanBtn'>
-              SELECT
-            </button>
+            <div className='nonScroll'>
+              <img
+                src={`${CMS_BASE_URL}/${candidate.picture}`}
+                className='card-img-top'
+                alt={candidate.name}
+              />
+              <button type='button' className='btn btn-primary addCanBtn'>
+                SELECT
+              </button>
+            </div>
             <br />
             <br />
-            <span className='modalTitles'>Top 3 Priorities:</span>
-            <br />
-            1. {displayPriority(getDesiredDetail('Priority 1'))}
-            <br />
-            2. {displayPriority(getDesiredDetail('Priority 2'))}
-            <br />
-            3. {displayPriority(getDesiredDetail('Priority 3'))}
-            <br />
-            <br />
-            <span className='modalTitles'>Platform:</span>
-            <br />
-            {displayPriority(getDesiredDetail('Platform'))}
-            <br />
-            <br />
-            <span className='modalTitles'>Biography:</span> <br />{' '}
-            {displayPriority(getDesiredDetail('Biography'))}
-            <br />
-            <br />
-            {displayContact}
-          </div>
-          <div className='modal-footer'>
-            {/* <button
-                      className='btn btn-primary'
-                      onClick={e => this.selectBtn(candidate.candidate)}
-                    >
-                      Select
-                    </button> */}
-            <button
-              type='button'
-              className='btn btn-secondary'
-              data-dismiss='modal'
-            >
-              Close
-            </button>
+            <div className='modalScroll'>
+              <span className='modalTitles'>Top 3 Priorities:</span>
+              <br />
+              1. {displayPriority(getDesiredDetail('Priority 1'))}
+              <br />
+              2. {displayPriority(getDesiredDetail('Priority 2'))}
+              <br />
+              3. {displayPriority(getDesiredDetail('Priority 3'))}
+              <br />
+              <br />
+              <span className='modalTitles'>Platform:</span>
+              <br />
+              {displayPriority(getDesiredDetail('Platform'))}
+              <br />
+              <br />
+              <span className='modalTitles'>Biography:</span> <br />{' '}
+              {displayPriority(getDesiredDetail('Biography'))}
+              <br />
+              <br />
+              {displayContact}
+            </div>
+            <div className='modal-footer'>
+              {/* <button
+                        className='btn btn-primary'
+                        onClick={e => this.selectBtn(candidate.candidate)}
+                      >
+                        Select
+                      </button> */}
+              <button
+                type='button'
+                className='btn btn-secondary'
+                data-dismiss='modal'
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
