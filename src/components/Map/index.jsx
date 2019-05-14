@@ -19,14 +19,12 @@ class Map extends Component {
     },
     pollingPlaces: [
       {
+        pollingPlaceId: 0,
         address: '',
+        pollingPlaceName: '',
+        pollingStationName: '',
         advanceOnly: false,
-        email: '',
-        latitude: 49.26131589,
         localArea: '',
-        longitude: -123.1139357,
-        parkingInfo: '',
-        phone: '',
         pollingPlaceDates: [
           {
             startTime: '',
@@ -34,10 +32,12 @@ class Map extends Component {
             pollingDate: ''
           }
         ],
-        pollingPlaceId: 0,
-        pollingPlaceName: '',
-        pollingStationName: '',
-        wheelchairInfo: ''
+        parkingInfo: '',
+        wheelchairInfo: '',
+        email: '',
+        phone: '',
+        latitude: 49.26131589,
+        longitude: -123.1139357
       }
     ],
     locations: []

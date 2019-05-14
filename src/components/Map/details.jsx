@@ -1,20 +1,15 @@
 import React from 'react';
-//   phone,
-//   email,
-//   hours
+
 const Details = ({ pollingPlace }) => {
   return (
     <div>
-      <span className='lead'>{pollingPlace.name}</span>
+      <span className='lead'>{pollingPlace.pollingPlaceName}</span>
+      <span className='lead'>{pollingPlace.pollingStationName}</span>
       <p>{pollingPlace.address}</p>
+      <p>{pollingPlace.advanceOnly}</p>
+      <p>{pollingPlace.localArea}</p>
       <p>{(pollingPlace.distance / 1000).toFixed(2)} km away</p>
       <ul className='fa-ul'>
-        <li>
-          <span className='fa-li'>
-            <i className='fas fa-door-open' />
-          </span>
-          General Access: {pollingPlace.generalAccessInfo}
-        </li>
         <li>
           <span className='fa-li'>
             <i className='fab fa-accessible-icon' />
@@ -40,13 +35,13 @@ const Details = ({ pollingPlace }) => {
           <span className='fa-li'>
             <i className='fas fa-phone' />
           </span>
-          604-456-7890
+          {pollingPlace.phone}
         </li>
         <li>
           <span className='fa-li'>
             <i className='fas fa-envelope' />
           </span>
-          dummy@planyourvote.com
+          {pollingPlace.email}
         </li>
         <li>
           <span className='fa-li'>
