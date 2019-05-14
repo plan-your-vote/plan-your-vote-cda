@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
-import { MAPBOX_PUBLIC } from 'constants/mapbox';
 import pyvMap from 'apis/pyvMap';
 import pyv from 'apis/pyv';
 import Details from './details';
 import './locations.css';
-
-mapboxgl.accessToken = MAPBOX_PUBLIC;
+import Mapbox from './map';
 
 class Map extends Component {
   _map;
@@ -45,38 +42,19 @@ class Map extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.initializeMap();
     this.getUserLocation();
     this.loadPollingPlaces().then(() => {
       this.sortPollingPlacesByDistance();
-      this.renderMarkers();
     });
   }
 
   componentDidUpdate() {
-    this.setMapCenter();
     this.loadDistance();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
-
-  initializeMap = () => {
-    this._map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [0, 0],
-      zoom: 13
-    });
-    this.flyToClickedLocation();
-  };
-
-  flyToClickedLocation = () => {
-    this._map.on('click', e => {
-      this._map.flyTo({ center: e.lngLat, speed: 0.25 });
-    });
-  };
 
   getUserLocation = () => {
     if (navigator.geolocation) {
@@ -94,11 +72,6 @@ class Map extends Component {
     } else {
       console.warn('Geolocation is not supported by this browser.');
     }
-  };
-
-  setMapCenter = () => {
-    const { latitude, longitude } = this.state.user;
-    this._map.setCenter([longitude, latitude]);
   };
 
   loadPollingPlaces = async () => {
@@ -144,25 +117,6 @@ class Map extends Component {
     }
   };
 
-  renderMarkers = () => {
-    this.state.pollingPlaces.map(pollingPlace => {
-      return this.addMarker(pollingPlace);
-    });
-  };
-
-  addMarker = pollingPlace => {
-    new mapboxgl.Marker()
-      .setLngLat([pollingPlace.longitude, pollingPlace.latitude])
-      .setPopup(
-        new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<strong>${pollingPlace.pollingPlaceName}</strong><p>${
-            pollingPlace.address
-          }</p>`
-        )
-      )
-      .addTo(this._map);
-  };
-
   render() {
     const details = this.state.pollingPlaces.map(pollingPlace => {
       return (
@@ -202,7 +156,10 @@ class Map extends Component {
               aria-label='Your Location'
             />
           </div>
-          <div id='map' />
+          <Mapbox
+            pollingPlaces={this.state.pollingPlaces}
+            user={this.state.user}
+          />
         </div>
         <div className='col-md-6'>
           <ul className='list-group list-group-flush' id='station-list'>
