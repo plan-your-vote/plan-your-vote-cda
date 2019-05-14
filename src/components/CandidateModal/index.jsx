@@ -161,7 +161,7 @@ const CandidateModal = ({ candidate }) => {
             {displayContact}
           </div>
           <div className='modal-footer'>
-            {/* <button
+             {/* <button
                       className='btn btn-primary'
                       onClick={e => this.selectBtn(candidate.candidate)}
                     >
@@ -173,9 +173,6 @@ const CandidateModal = ({ candidate }) => {
               data-dismiss='modal'
             >
               Close
-            </button>
-            <button type='button' className='btn btn-primary'>
-              Save changes
             </button>
           </div>
         </div>
