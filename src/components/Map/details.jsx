@@ -2,39 +2,39 @@ import React from 'react';
 //   phone,
 //   email,
 //   hours
-const Details = ({ pollingStation }) => {
+const Details = ({ pollingPlace }) => {
   return (
     <div>
-      <span className='lead'>{pollingStation.name}</span>
-      <p>{pollingStation.address}</p>
-      <p>{(pollingStation.distance / 1000).toFixed(2)} km away</p>
+      <span className='lead'>{pollingPlace.name}</span>
+      <p>{pollingPlace.address}</p>
+      <p>{(pollingPlace.distance / 1000).toFixed(2)} km away</p>
       <ul className='fa-ul'>
         <li>
           <span className='fa-li'>
             <i className='fas fa-door-open' />
           </span>
-          General Access: {pollingStation.generalAccessInfo}
+          General Access: {pollingPlace.generalAccessInfo}
         </li>
         <li>
           <span className='fa-li'>
             <i className='fab fa-accessible-icon' />
           </span>
           Wheelchair Access:
-          {pollingStation.wheelchairInfo}
+          {pollingPlace.wheelchairInfo}
         </li>
         <li>
           <span className='fa-li'>
             <i className='fas fa-parking' />
           </span>
           Parking:
-          {pollingStation.parkingInfo}
+          {pollingPlace.parkingInfo}
         </li>
         <li>
           <span className='fa-li'>
             <i className='fas fa-toilet' />
           </span>
           Washrooms:
-          {pollingStation.washroomInfo}
+          {pollingPlace.washroomInfo}
         </li>
         <li>
           <span className='fa-li'>
