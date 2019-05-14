@@ -62,6 +62,7 @@ class Candidates extends Component {
   };
 
   selectBtn = data => {
+    // console.log(data);
     const temp = {
       candidateId: data.candidateId,
       name: data.name,
@@ -92,42 +93,50 @@ class Candidates extends Component {
     }
   };
 
-  render() {
-    const { candidatesHeader } = this.state;
+  renderCandidates = race => {
+    if (!race) {
+      return null;
+    }
 
-    const candidates = this.state.races.map(race => {
+    return race.candidates.map(candidate => {
+      if (!candidate) {
+        return null;
+      }
+
+      return (
+        <CandidateCard
+          key={candidate.candidateId}
+          candidate={candidate}
+          displayModal={this.displayModal}
+        />
+      );
+    });
+  };
+
+  renderModal = () => {
+    return this.state.races.map(race => {
       return race.candidates.map(candidate => {
         return (
-          <CandidateCard
+          <CandidateModal
             key={candidate.candidateId}
             candidate={candidate}
-            displayModal={this.displayModal}
+            selectFunction={this.selectBtn}
           />
         );
       });
     });
+  };
 
-    // const candidates = positionKey => {
-    //   this.state.races.map(race => {
-    //     return race.candidates.map(candidate => {
-    //       return (
-    //         <CandidateCard
-    //           key={candidate.candidateId}
-    //           candidate={candidate}
-    //           displayModal={this.displayModal}
-    //           candidatePostion = {positionKey}
-    //         />
-    //       );
-    //     });
-    //   });
-    // };
+  render() {
+    const { candidatesHeader } = this.state;
 
-    const modals = this.state.races.map(race => {
-      return race.candidates.map(candidate => {
-        return (
-          <CandidateModal key={candidate.candidateId} candidate={candidate} />
-        );
-      });
+    const candidates = this.state.races.map(race => {
+      return (
+        <>
+          <p key={race.numberNeeded}>{race.positionName}</p>
+          {this.renderCandidates(race)}
+        </>
+      );
     });
 
     return (
@@ -139,7 +148,7 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
           {candidates}
-          {modals}
+          {this.renderModal()}
         </div>
       </div>
     );

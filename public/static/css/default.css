@@ -200,7 +200,7 @@ nav {
 /* Footer */
 footer {
   background-color: #333;
-  color: #ffffff;
+  color: #fff;
 }
 
 #footer-nav > li > a {
@@ -255,7 +255,7 @@ footer #footer-nav li {
   display: inline-block;
   list-style-type: none;
   line-height: 1;
-  border-left: solid 1px white;
+  border-left: solid 1px #fff;
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
@@ -274,22 +274,13 @@ th,
 .btn {
   background-color: #e60050;
   border: none;
-  color: white;
+  color: #fff;
 }
 
-.modal-content {
-  text-align: center;
-  max-height: calc(100vh - 210px);
-  overflow-y: auto;
-}
 
-.modal-body img {
-  height: 50%;
-  width: 50%;
-}
 
 .divider {
-  background-image: linear-gradient(to right, #e60050, white);
+  background-image: linear-gradient(to right, #e60050, #fff);
   clear: both;
   height: 10px;
   margin: 5% 0;
@@ -308,8 +299,8 @@ th,
 .step-selection .navbar a {
   background-color: #e60050;
   border-radius: 25px;
-  border-right: 2px solid white;
-  color: white;
+  border-right: 2px solid #fff;
+  color: #fff;
 }
 
 .mcq-options {
@@ -319,7 +310,7 @@ th,
 
 .mcq-options legend {
   background-color: #e60050;
-  color: white;
+  color: #fff;
   font-size: 1rem;
   margin: auto;
   padding: 1%;
@@ -329,4 +320,54 @@ th,
 .mcq-options div {
   display: inline-block;
   padding: 3%;
+}
+
+/* Modal Styling */
+
+.modal-content {
+  background-color: #f4f4f4;
+  padding: 10px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.5);
+  animation-name: modalAction;
+  animation-duration: 0.5s;
+  font-size: 1.5em;
+}
+
+.modal-body img {
+  height: 50%;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
+.modalTitles {
+  color: #e60050;
+}
+
+.modalScroll {
+  height: 350px;
+  overflow-y: auto;
+}
+
+.addCanBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  height: 50px;
+}
+
+.nonScroll {
+    overflow-y: initial !important;
+}
+
+@keyframes modalAction {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

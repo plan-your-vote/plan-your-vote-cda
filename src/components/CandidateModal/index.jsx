@@ -1,7 +1,7 @@
 import React from 'react';
 import { CMS_BASE_URL } from 'constants/baseURL';
 
-const CandidateModal = ({ candidate }) => {
+const CandidateModal = ({ candidate, selectFunction }) => {
   const getDesiredDetail = key => {
     let desiredDetail;
     candidate.details.map(detail => {
@@ -45,11 +45,11 @@ const CandidateModal = ({ candidate }) => {
 
         if (contactHandle === '?hl=en' || contactHandle === '') {
           contactHandle = splitURL[splitURL.length - 2];
-        }  
+        }
 
         contactMethod += `@${contactHandle}`;
         contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
-      } 
+      }
 
       if (found.contactMethod === 'Twitter') {
         let splitURL = found.contactValue.split('/');
@@ -59,9 +59,10 @@ const CandidateModal = ({ candidate }) => {
       }
 
       if (found.contactMethod === 'Email') {
-        
         contactMethod += found.contactValue;
-        contactMethod = <a href={`mailto: ${contactMethod}`}> {contactMethod}</a>;
+        contactMethod = (
+          <a href={`mailto: ${contactMethod}`}> {contactMethod}</a>
+        );
       }
 
       if (
@@ -71,18 +72,18 @@ const CandidateModal = ({ candidate }) => {
         found.contactMethod === 'Other'
       ) {
         contactMethod += found.contactValue;
-        let splitURL = contactMethod.split('')
+        let splitURL = contactMethod.split('');
         if (
           splitURL[0] !== 'h' ||
           splitURL[1] !== 't' ||
           splitURL[2] !== 't' ||
-          splitURL[3] !== 'p' 
+          splitURL[3] !== 'p'
         ) {
           contactMethod = `https://${contactMethod}`;
         }
-        
+
         contactMethod = <a href={contactMethod}> {contactMethod}</a>;
-      }  
+      }
 
       if (found.contactMethod === 'Phone') {
         contactMethod += found.contactValue;
@@ -92,9 +93,9 @@ const CandidateModal = ({ candidate }) => {
     }
 
     return (
-      <p key={key}>
-        {key}: {contactMethod}
-      </p>
+      <div key={key}>
+        <span className='modalTitles'>{key}:</span> {contactMethod}
+      </div>
     );
   });
 
@@ -107,65 +108,86 @@ const CandidateModal = ({ candidate }) => {
       aria-labelledby={`candidate-${candidate.candidateId}-modal-label`}
       aria-hidden='true'
     >
-      <div className='modal-dialog modal-dialog-centered' role='document'>
+      <div
+        className='modal-dialog modal-lg modal-dialog-centered'
+        role='document'
+      >
         <div className='modal-content'>
-          <div className='modal-header'>
-            <h5
-              className='modal-title'
-              id={`candidate-${candidate.candidateId}-modal-label`}
-            >
-              {candidate.name}
-              <br />
-              {candidate.organizationName}
-            </h5>
-            <button
-              type='button'
-              className='close'
-              data-dismiss='modal'
-              aria-label='Close'
-            >
-              <span aria-hidden='true'>&times;</span>
-            </button>
+          <div className='nonScroll'>
+            <div className='modal-header'>
+              <h3
+                className='modal-title'
+                id={`candidate-${candidate.candidateId}-modal-label`}
+              >
+                {candidate.name}
+                <br />
+              </h3>
+              <h4 className='card-subtitle mb-2 text-muted'>
+                {candidate.organizationName}
+              </h4>
+              <button
+                type='button'
+                className='close'
+                data-dismiss='modal'
+                aria-label='Close'
+              >
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
           </div>
           <div className='modal-body'>
-            <img
-              src={`${CMS_BASE_URL}/${candidate.picture}`}
-              className='card-img-top'
-              alt={candidate.name}
-            />
+            <div className='nonScroll'>
+              <img
+                src={`${CMS_BASE_URL}/${candidate.picture}`}
+                className='card-img-top'
+                alt={candidate.name}
+              />
+              <button
+                type='button'
+                onClick={e => selectFunction(candidate)}
+                className='btn btn-primary addCanBtn'
+              >
+                SELECT
+              </button>
+            </div>
             <br />
-            Top 3 Priorities:
             <br />
-            1. {displayPriority(getDesiredDetail('Priority 1'))}
-            <br />
-            2. {displayPriority(getDesiredDetail('Priority 2'))}
-            <br />
-            3. {displayPriority(getDesiredDetail('Priority 3'))}
-            <br />
-            Platform: <br />
-            {displayPriority(getDesiredDetail('Platform'))}
-            <br />
-            Biography: <br /> {displayPriority(getDesiredDetail('Biography'))}
-            <br />
-            {displayContact}
-          </div>
-          <div className='modal-footer'>
-            {/* <button
-                      className='btn btn-primary'
-                      onClick={e => this.selectBtn(candidate.candidate)}
-                    >
-                      Select
-                    </button> */}
-            <button
-              type='button'
-              className='btn btn-secondary'
-              data-dismiss='modal'
-            >
-              Close
-            </button>
-            <button type='button' className='btn btn-primary'>
-              Save changes
-            </button>
+            <div className='modalScroll'>
+              <span className='modalTitles'>Top 3 Priorities:</span>
+              <br />
+              1. {displayPriority(getDesiredDetail('Priority 1'))}
+              <br />
+              2. {displayPriority(getDesiredDetail('Priority 2'))}
+              <br />
+              3. {displayPriority(getDesiredDetail('Priority 3'))}
+              <br />
+              <br />
+              <span className='modalTitles'>Platform:</span>
+              <br />
+              {displayPriority(getDesiredDetail('Platform'))}
+              <br />
+              <br />
+              <span className='modalTitles'>Biography:</span> <br />{' '}
+              {displayPriority(getDesiredDetail('Biography'))}
+              <br />
+              <br />
+              {displayContact}
+            </div>
+            <div className='modal-footer'>
+              {/* <button
+                        className='btn btn-primary'
+                        onClick={e => this.selectBtn(candidate.candidate)}
+                      >
+                        Select
+                      </button> */}
+              <button
+                type='button'
+                className='btn btn-secondary'
+                data-dismiss='modal'
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>

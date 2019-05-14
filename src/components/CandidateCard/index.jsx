@@ -2,9 +2,8 @@ import React from 'react';
 import { CMS_BASE_URL } from 'constants/baseURL';
 import './style.css';
 
-const CandidateCard = ({ candidate, displayModal, candidatePostion }) => {
-  if (candidatePostion === candidate.positionName) {
-    return (
+const CandidateCard = ({ candidate, displayModal }) => {
+  return (
     <div className='col-sm-3'>
       <div
         className='card'
@@ -26,10 +25,6 @@ const CandidateCard = ({ candidate, displayModal, candidatePostion }) => {
       </div>
     </div>
   );
-  } 
-  
 };
-
-
 
 export default CandidateCard;
