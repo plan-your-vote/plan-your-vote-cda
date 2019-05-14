@@ -15,3 +15,4 @@
 ## Security
 
 - [How to use Mapbox securely](https://docs.mapbox.com/help/troubleshooting/how-to-use-mapbox-securely/)
+- [Access Tokens](https://account.mapbox.com/access-tokens/)

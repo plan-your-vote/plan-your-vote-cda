@@ -1,3 +1,7 @@
+a {
+  color: #0072ee;
+}
+
 /* Home page */
 .intro h1 {
   font-size: 3em;
@@ -87,9 +91,9 @@
 }
 
 .card:hover {
-  box-shadow : 0 0 40px #D30D80;
-	color: #3a7999;
-  background: rgba(0,0,0,0);
+  box-shadow: 0 0 40px #d30d80;
+  color: #3a7999;
+  background: rgba(0, 0, 0, 0);
   transform: scale(1.1, 1.1);
 }
 
@@ -136,10 +140,10 @@
   top: 0;
   padding: 0 0.25em 0.5em 0.25em;
   background-color: #fff;
-  color: #E60050;
+  color: #e60050;
   border-radius: 20px;
-  border-color: #E60050;
-  border: 3px solid #E60050;
+  border-color: #e60050;
+  border: 3px solid #e60050;
   font-weight: bold;
   text-align: center;
   vertical-align: top;
@@ -167,10 +171,10 @@
 
 .to-election-site span {
   background-color: #fff;
-  color: #E60050;
+  color: #e60050;
   border-radius: 20px;
-  border-color: #E60050;
-  border: 3px solid #E60050;
+  border-color: #e60050;
+  border: 3px solid #e60050;
   font-weight: bold;
   text-align: center;
   width: 24px;
@@ -181,10 +185,11 @@
 /* Navbar */
 nav {
   background-image: linear-gradient(
-     135deg,
-   rgba(230,0,81,1) 0%, 
-   rgba(207,18,141,1) 33%, 
-   rgba(255,255,255,1) 66%);
+    135deg,
+    rgba(230, 0, 81, 1) 0%,
+    rgba(207, 18, 141, 1) 33%,
+    rgba(255, 255, 255, 1) 66%
+  );
   font-weight: bold;
 }
 
@@ -195,7 +200,11 @@ nav {
 /* Footer */
 footer {
   background-color: #333;
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+#footer-nav > li > a {
+  color: #fff;
 }
 
 @media (min-width: 768px) {
@@ -257,7 +266,7 @@ h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
   color: #e60050;
 }
 
@@ -278,7 +287,6 @@ th,
   height: 50%;
   width: 50%;
 }
-
 
 .divider {
   background-image: linear-gradient(to right, #e60050, white);
