@@ -36,8 +36,8 @@ class Map extends Component {
         wheelchairInfo: '',
         email: '',
         phone: '',
-        latitude: 49.26131589,
-        longitude: -123.1139357
+        latitude: 0,
+        longitude: 0
       }
     ],
     locations: []
@@ -155,7 +155,9 @@ class Map extends Component {
       .setLngLat([pollingPlace.longitude, pollingPlace.latitude])
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<strong>${pollingPlace.name}</strong><p>${pollingPlace.address}</p>`
+          `<strong>${pollingPlace.pollingPlaceName}</strong><p>${
+            pollingPlace.address
+          }</p>`
         )
       )
       .addTo(this._map);
