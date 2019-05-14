@@ -62,6 +62,7 @@ class Candidates extends Component {
   };
 
   selectBtn = data => {
+    // console.log(data);
     const temp = {
       candidateId: data.candidateId,
       name: data.name,
@@ -99,7 +100,6 @@ class Candidates extends Component {
 
     return race.candidates.map(candidate => {
       if (!candidate) {
-        console.log(candidate);
         return null;
       }
 
@@ -113,6 +113,20 @@ class Candidates extends Component {
     });
   };
 
+  renderModal = () => {
+    return this.state.races.map(race => {
+      return race.candidates.map(candidate => {
+        return (
+          <CandidateModal
+            key={candidate.candidateId}
+            candidate={candidate}
+            selectFunction={this.selectBtn}
+          />
+        );
+      });
+    });
+  };
+
   render() {
     const { candidatesHeader } = this.state;
 
@@ -120,18 +134,9 @@ class Candidates extends Component {
       return (
         <>
           <p key={race.numberNeeded}>{race.positionName}</p>
-          
           {this.renderCandidates(race)}
         </>
       );
-    });
-
-    const modals = this.state.races.map(race => {
-      return race.candidates.map(candidate => {
-        return (
-          <CandidateModal key={candidate.candidateId} candidate={candidate} />
-        );
-      });
     });
 
     return (
@@ -143,7 +148,7 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
           {candidates}
-          {modals}
+          {this.renderModal()}
         </div>
       </div>
     );

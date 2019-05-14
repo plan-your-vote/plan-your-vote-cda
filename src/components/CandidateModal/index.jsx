@@ -1,7 +1,7 @@
 import React from 'react';
 import { CMS_BASE_URL } from 'constants/baseURL';
 
-const CandidateModal = ({ candidate }) => {
+const CandidateModal = ({ candidate, selectFunction }) => {
   const getDesiredDetail = key => {
     let desiredDetail;
     candidate.details.map(detail => {
@@ -121,10 +121,10 @@ const CandidateModal = ({ candidate }) => {
               >
                 {candidate.name}
                 <br />
-                <h4 className='card-subtitle mb-2 text-muted'>
-                  {candidate.organizationName}
-                </h4>
               </h3>
+              <h4 className='card-subtitle mb-2 text-muted'>
+                {candidate.organizationName}
+              </h4>
               <button
                 type='button'
                 className='close'
@@ -142,7 +142,11 @@ const CandidateModal = ({ candidate }) => {
                 className='card-img-top'
                 alt={candidate.name}
               />
-              <button type='button' className='btn btn-primary addCanBtn'>
+              <button
+                type='button'
+                onClick={e => selectFunction(candidate)}
+                className='btn btn-primary addCanBtn'
+              >
                 SELECT
               </button>
             </div>
