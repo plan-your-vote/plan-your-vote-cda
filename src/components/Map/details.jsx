@@ -1,48 +1,39 @@
 import React from 'react';
 
 const Details = ({ pollingPlace }) => {
+  const listElement = (iconClassName, content) => {
+    if (!content) {
+      return null;
+    }
+
+    if (content === true) {
+      content = 'Advance Only';
+    }
+
+    return (
+      <li>
+        <span className='fa-li'>
+          <i className={iconClassName} />
+        </span>
+        {content}
+      </li>
+    );
+  };
+
   return (
     <div>
-      <span className='lead'>{pollingPlace.pollingPlaceName}</span>
-      <span className='lead'>{pollingPlace.pollingStationName}</span>
-      <p>{pollingPlace.address}</p>
-      <p>{pollingPlace.advanceOnly}</p>
-      <p>{pollingPlace.localArea}</p>
-      <p>{(pollingPlace.distance / 1000).toFixed(2)} km away</p>
+      <p className='lead'>{pollingPlace.pollingPlaceName}</p>
+      <p>{pollingPlace.pollingStationName}</p>
       <ul className='fa-ul'>
-        <li>
-          <span className='fa-li'>
-            <i className='fab fa-accessible-icon' />
-          </span>
-          Wheelchair Access:
-          {pollingPlace.wheelchairInfo}
-        </li>
-        <li>
-          <span className='fa-li'>
-            <i className='fas fa-parking' />
-          </span>
-          Parking:
-          {pollingPlace.parkingInfo}
-        </li>
-        <li>
-          <span className='fa-li'>
-            <i className='fas fa-toilet' />
-          </span>
-          Washrooms:
-          {pollingPlace.washroomInfo}
-        </li>
-        <li>
-          <span className='fa-li'>
-            <i className='fas fa-phone' />
-          </span>
-          {pollingPlace.phone}
-        </li>
-        <li>
-          <span className='fa-li'>
-            <i className='fas fa-envelope' />
-          </span>
-          {pollingPlace.email}
-        </li>
+        {listElement(
+          'fas fa-map-marker-alt',
+          `${pollingPlace.address}, ${pollingPlace.localArea}`
+        )}
+        {listElement(
+          'fas fa-route',
+          `${(pollingPlace.distance / 1000).toFixed(2)} km away`
+        )}
+        {listElement('far fa-check-circle', pollingPlace.advanceOnly)}
         <li>
           <span className='fa-li'>
             <i className='far fa-clock' />
@@ -54,6 +45,11 @@ const Details = ({ pollingPlace }) => {
             <li>May 14: 09:00AM - 06:00PM</li>
           </ul>
         </li>
+
+        {listElement('fab fa-accessible-icon', pollingPlace.wheelchairInfo)}
+        {listElement('fas fa-parking', pollingPlace.parkingInfo)}
+        {listElement('fas fa-phone', pollingPlace.phone)}
+        {listElement('fas fa-envelope', pollingPlace.email)}
       </ul>
     </div>
   );
