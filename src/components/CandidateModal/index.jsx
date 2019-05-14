@@ -120,7 +120,9 @@ const CandidateModal = ({ candidate }) => {
             >
               {candidate.name}
               <br />
-              <h4>{candidate.organizationName}</h4>
+              <h4 className='card-subtitle mb-2 text-muted'>
+                {candidate.organizationName}
+              </h4>
             </h3>
             <button
               type='button'
@@ -150,9 +152,11 @@ const CandidateModal = ({ candidate }) => {
             <br />
             3. {displayPriority(getDesiredDetail('Priority 3'))}
             <br />
+            <br />
             <span className='modalTitles'>Platform:</span>
             <br />
             {displayPriority(getDesiredDetail('Platform'))}
+            <br />
             <br />
             <span className='modalTitles'>Biography:</span> <br />{' '}
             {displayPriority(getDesiredDetail('Biography'))}
@@ -161,7 +165,7 @@ const CandidateModal = ({ candidate }) => {
             {displayContact}
           </div>
           <div className='modal-footer'>
-             {/* <button
+            {/* <button
                       className='btn btn-primary'
                       onClick={e => this.selectBtn(candidate.candidate)}
                     >

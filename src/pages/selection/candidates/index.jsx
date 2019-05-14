@@ -116,18 +116,6 @@ class Candidates extends Component {
   render() {
     const { candidatesHeader } = this.state;
 
-    // const candidates = this.state.races.map(race => {
-    //   return race.candidates.map(candidate => {
-    //     return (
-    //       <CandidateCard
-    //         key={candidate.candidateId}
-    //         candidate={candidate}
-    //         displayModal={this.displayModal}
-    //       />
-    //     );
-    //   });
-    // });
-
     const candidates = this.state.races.map(race => {
       return (
         <>
