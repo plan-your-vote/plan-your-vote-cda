@@ -45,11 +45,11 @@ const CandidateModal = ({ candidate }) => {
 
         if (contactHandle === '?hl=en' || contactHandle === '') {
           contactHandle = splitURL[splitURL.length - 2];
-        }  
+        }
 
         contactMethod += `@${contactHandle}`;
         contactMethod = <a href={found.contactValue}> {contactMethod}</a>;
-      } 
+      }
 
       if (found.contactMethod === 'Twitter') {
         let splitURL = found.contactValue.split('/');
@@ -59,9 +59,10 @@ const CandidateModal = ({ candidate }) => {
       }
 
       if (found.contactMethod === 'Email') {
-        
         contactMethod += found.contactValue;
-        contactMethod = <a href={`mailto: ${contactMethod}`}> {contactMethod}</a>;
+        contactMethod = (
+          <a href={`mailto: ${contactMethod}`}> {contactMethod}</a>
+        );
       }
 
       if (
@@ -71,18 +72,18 @@ const CandidateModal = ({ candidate }) => {
         found.contactMethod === 'Other'
       ) {
         contactMethod += found.contactValue;
-        let splitURL = contactMethod.split('')
+        let splitURL = contactMethod.split('');
         if (
           splitURL[0] !== 'h' ||
           splitURL[1] !== 't' ||
           splitURL[2] !== 't' ||
-          splitURL[3] !== 'p' 
+          splitURL[3] !== 'p'
         ) {
           contactMethod = `https://${contactMethod}`;
         }
-        
+
         contactMethod = <a href={contactMethod}> {contactMethod}</a>;
-      }  
+      }
 
       if (found.contactMethod === 'Phone') {
         contactMethod += found.contactValue;
@@ -92,9 +93,9 @@ const CandidateModal = ({ candidate }) => {
     }
 
     return (
-      <p key={key}>
-        {key}: {contactMethod}
-      </p>
+      <div key={key}>
+        <span className='modalTitles'>{key}:</span> {contactMethod}
+      </div>
     );
   });
 
@@ -107,17 +108,20 @@ const CandidateModal = ({ candidate }) => {
       aria-labelledby={`candidate-${candidate.candidateId}-modal-label`}
       aria-hidden='true'
     >
-      <div className='modal-dialog modal-dialog-centered' role='document'>
+      <div
+        className='modal-dialog modal-lg modal-dialog-centered'
+        role='document'
+      >
         <div className='modal-content'>
           <div className='modal-header'>
-            <h5
+            <h3
               className='modal-title'
               id={`candidate-${candidate.candidateId}-modal-label`}
             >
               {candidate.name}
               <br />
-              {candidate.organizationName}
-            </h5>
+              <h4>{candidate.organizationName}</h4>
+            </h3>
             <button
               type='button'
               className='close'
@@ -133,8 +137,12 @@ const CandidateModal = ({ candidate }) => {
               className='card-img-top'
               alt={candidate.name}
             />
+            <button type='button' className='btn btn-primary addCanBtn'>
+              SELECT
+            </button>
             <br />
-            Top 3 Priorities:
+            <br />
+            <span className='modalTitles'>Top 3 Priorities:</span>
             <br />
             1. {displayPriority(getDesiredDetail('Priority 1'))}
             <br />
@@ -142,10 +150,13 @@ const CandidateModal = ({ candidate }) => {
             <br />
             3. {displayPriority(getDesiredDetail('Priority 3'))}
             <br />
-            Platform: <br />
+            <span className='modalTitles'>Platform:</span>
+            <br />
             {displayPriority(getDesiredDetail('Platform'))}
             <br />
-            Biography: <br /> {displayPriority(getDesiredDetail('Biography'))}
+            <span className='modalTitles'>Biography:</span> <br />{' '}
+            {displayPriority(getDesiredDetail('Biography'))}
+            <br />
             <br />
             {displayContact}
           </div>
