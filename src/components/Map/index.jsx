@@ -6,7 +6,6 @@ import './locations.css';
 import Mapbox from './map';
 
 class Map extends Component {
-  _map;
   _isMounted = false;
 
   state = {
