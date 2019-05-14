@@ -35,7 +35,7 @@ class Map extends Component {
       }
     ],
     locations: [],
-    markers: []
+    
   };
 
   componentDidMount() {
@@ -146,7 +146,7 @@ class Map extends Component {
   };
 
   addMarker = pollingPlace => {
-    const marker = new mapboxgl.Marker()
+    new mapboxgl.Marker()
       .setLngLat([pollingPlace.longitude, pollingPlace.latitude])
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
@@ -154,12 +154,6 @@ class Map extends Component {
         )
       )
       .addTo(this._map);
-
-    if (this._isMounted) {
-      this.setState({
-        markers: [...this.state.markers, marker]
-      });
-    }
   };
 
   render() {
