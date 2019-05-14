@@ -19,23 +19,28 @@ class Map extends Component {
     },
     pollingPlaces: [
       {
-        additionalInfo: '',
         address: '',
-        election: null,
-        electionId: 0,
-        generalAccessInfo: null,
-        latitude: 0,
-        longitude: 0,
-        name: '',
-        parkingInfo: null,
+        advanceOnly: false,
+        email: '',
+        latitude: 49.26131589,
+        localArea: '',
+        longitude: -123.1139357,
+        parkingInfo: '',
+        phone: '',
+        pollingPlaceDates: [
+          {
+            startTime: '',
+            endTime: '',
+            pollingDate: ''
+          }
+        ],
         pollingPlaceId: 0,
-        washroomInfo: null,
-        wheelchairInfo: null,
-        distance: 0
+        pollingPlaceName: '',
+        pollingStationName: '',
+        wheelchairInfo: ''
       }
     ],
-    locations: [],
-    
+    locations: []
   };
 
   componentDidMount() {
