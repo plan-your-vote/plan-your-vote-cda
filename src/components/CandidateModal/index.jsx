@@ -121,10 +121,13 @@ const CandidateModal = ({ candidate, selectFunction }) => {
               >
                 {candidate.name}
                 <br />
+                <span className='card-subtitle mb-2 text-muted'>
+                  {candidate.organizationName}
+                </span>
               </h3>
-              <h4 className='card-subtitle mb-2 text-muted'>
-                {candidate.organizationName}
-              </h4>
+              <br />
+              
+
               <button
                 type='button'
                 className='close'

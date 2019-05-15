@@ -277,6 +277,10 @@ th,
   color: #fff;
 }
 
+.candidateTitle{
+  text-transform: capitalize;
+}
+
 
 
 .divider {
