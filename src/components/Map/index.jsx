@@ -1,203 +1,84 @@
 import React, { Component } from 'react';
-import pyvMap from 'apis/pyvMap';
-import pyv from 'apis/pyv';
-import Details from './details';
+import mapboxgl from 'mapbox-gl';
+import { MAPBOX_PUBLIC } from 'constants/mapbox';
 import './locations.css';
-import Mapbox from './map';
+
+mapboxgl.accessToken = MAPBOX_PUBLIC;
 
 class Map extends Component {
+  _map;
   _isMounted = false;
-  _setDistance = false;
-
-  state = {
-    user: {
-      latitude: 0,
-      longitude: 0
-    },
-    pollingPlaces: [
-      {
-        pollingPlaceId: 0,
-        address: null,
-        pollingPlaceName: null,
-        pollingStationName: null,
-        advanceOnly: false,
-        localArea: null,
-        pollingPlaceDates: [
-          {
-            startTime: null,
-            endTime: null,
-            pollingDate: null
-          }
-        ],
-        parkingInfo: null,
-        wheelchairInfo: null,
-        email: null,
-        phone: null,
-        latitude: 0,
-        longitude: 0
-      }
-    ]
-  };
+  _markers = [];
 
   componentDidMount() {
     this._isMounted = true;
-    this.getUserLocation();
-    this.loadPollingPlaces().then(() => {
-      this.sortPollingPlacesByDistance();
-    });
-    this.loadDistance();
+    this.init();
+    this.flyToClickedLocation();
+    this.setMapCenter();
+    this.renderMarkers();
   }
 
   componentDidUpdate() {
-    if (!this._setDistance) {
-      this.loadDistance();
-    }
+    this.setMapCenter();
+    this.renderMarkers();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        if (this._isMounted) {
-          this.setState({
-            user: {
-              latitude,
-              longitude
-            }
-          });
-        }
-      });
-    } else {
-      console.warn('Geolocation is not supported by this browser.');
-    }
-  };
-
-  loadPollingPlaces = async () => {
-    await pyv.get('/api/PollingPlaces').then(response => {
-      if (this._isMounted) {
-        this.setState({
-          pollingPlaces: response.data.pollingPlaces
-        });
-      }
+  init = () => {
+    this._map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [0, 0],
+      zoom: 13
     });
   };
 
-  loadDistance = async () => {
-    const { latitude, longitude } = this.state.user;
-    if (latitude === 0 && longitude === 0) {
+  flyToClickedLocation = () => {
+    this._map.on('click', e => {
+      this._map.flyTo({ center: e.lngLat, speed: 0.25 });
+    });
+  };
+
+  renderMarkers = () => {
+    this.clearAllMarkers();
+    this.props.pollingPlaces.map(pollingPlace => {
+      return this.addMarker(pollingPlace);
+    });
+  };
+
+  clearAllMarkers = () => {
+    this._markers.map(marker => {
+      return marker.remove();
+    });
+  };
+
+  setMapCenter = () => {
+    if (!this.props.user) {
       return;
     }
-
-    await pyvMap.get(`/api/map/${longitude},${latitude}`).then(response => {
-      this.mapDistance(response.data);
-    });
+    const { latitude, longitude } = this.props.user;
+    this._map.setCenter([longitude, latitude]);
   };
 
-  mapDistance = distances => {
-    if (
-      !distances ||
-      this.state.pollingPlaces.length === 0 ||
-      distances.length === 0
-    ) {
-      return;
-    }
-
-    const result = [];
-
-    distances.map(distance => {
-      const place = this.state.pollingPlaces.find(pollingPlace => {
-        return pollingPlace.pollingPlaceId === distance.pollingPlaceID;
-      });
-
-      if (place) {
-        place['distance'] = distance.distance;
-        result.push(place);
-      }
-
-      return null;
-    });
-
-    if (this._isMounted) {
-      this.setState({
-        pollingPlaces: result
-      });
-      this._setDistance = true;
-    }
-  };
-
-  sortPollingPlacesByDistance = () => {
-    const stations = this.state.pollingPlaces;
-
-    if (stations[0].latitude === 0 && stations[0].longitude === 0) {
-      return;
-    }
-
-    stations.sort((a, b) => {
-      return a.distance - b.distance;
-    });
-
-    if (this._isMounted) {
-      this.setState({
-        pollingPlaces: stations
-      });
-    }
+  addMarker = pollingPlace => {
+    const marker = new mapboxgl.Marker()
+      .setLngLat([pollingPlace.longitude, pollingPlace.latitude])
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }).setHTML(
+          `<strong>${pollingPlace.pollingPlaceName}</strong><p>${
+            pollingPlace.address
+          }</p>`
+        )
+      )
+      .addTo(this._map);
+    this._markers.push(marker);
   };
 
   render() {
-    const details = this.state.pollingPlaces.map(pollingPlace => {
-      return (
-        <li className='list-group-item' key={pollingPlace.pollingPlaceId}>
-          <Details pollingPlace={pollingPlace} />
-        </li>
-      );
-    });
-
-    return (
-      <>
-        <div className='col-md-6'>
-          <div className='input-group mb-3'>
-            <div className='input-group-prepend'>
-              <label className='input-group-text' htmlFor='votingdate'>
-                <i className='far fa-calendar-check' />
-              </label>
-            </div>
-            <select className='custom-select form-control-sm' id='votingdate'>
-              <option value='May 12, 2019'>May 12, 2019</option>
-              <option value='May 13, 2019'>May 13, 2019</option>
-              <option value='May 14, 2019'>May 14, 2019</option>
-              <option value='May 15, 2019'>May 15, 2019</option>
-            </select>
-          </div>
-          <div className='input-group mb-3'>
-            <div className='input-group-prepend'>
-              <span className='input-group-text'>
-                <i className='fas fa-map-marker-alt' />
-              </span>
-            </div>
-            <input
-              type='text'
-              name='location'
-              className='form-control'
-              placeholder='123 Awesome st'
-              aria-label='Your Location'
-            />
-          </div>
-          <Mapbox
-            pollingPlaces={this.state.pollingPlaces}
-            user={this.state.user}
-          />
-        </div>
-        <div className='col-md-6'>
-          <ul className='list-group list-group-flush' id='station-list'>
-            {details}
-          </ul>
-        </div>
-      </>
-    );
+    return <div id='map' />;
   }
 }
 
