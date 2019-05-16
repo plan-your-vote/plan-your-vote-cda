@@ -17,22 +17,22 @@ class Map extends Component {
     pollingPlaces: [
       {
         pollingPlaceId: 0,
-        address: '',
-        pollingPlaceName: '',
-        pollingStationName: '',
+        address: null,
+        pollingPlaceName: null,
+        pollingStationName: null,
         advanceOnly: false,
-        localArea: '',
+        localArea: null,
         pollingPlaceDates: [
           {
-            startTime: '',
-            endTime: '',
-            pollingDate: ''
+            startTime: null,
+            endTime: null,
+            pollingDate: null
           }
         ],
-        parkingInfo: '',
-        wheelchairInfo: '',
-        email: '',
-        phone: '',
+        parkingInfo: null,
+        wheelchairInfo: null,
+        email: null,
+        phone: null,
         latitude: 0,
         longitude: 0
       }
