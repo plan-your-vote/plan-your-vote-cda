@@ -1,6 +1,15 @@
 import React from 'react';
 import './index.css';
 
+const socialIcon = (id, className) => {
+  return (
+    <li id={id} className='fa-stack'>
+      <i className='fas fa-circle fa-stack-2x' />
+      <i className={`fab ${className} fa-stack-1x fa-inverse`} />
+    </li>
+  );
+};
+
 const Footer = ({ logo }) => {
   return (
     <footer>
@@ -24,18 +33,9 @@ const Footer = ({ logo }) => {
           </div>
           <div className='col-md-6'>
             <ul id='footer-share'>
-              <li id='twitter' className='fa-stack'>
-                <i className='fas fa-circle fa-stack-2x' />
-                <i className='fab fa-twitter fa-stack-1x fa-inverse' />
-              </li>
-              <li id='facebook' className='fa-stack'>
-                <i className='fas fa-circle fa-stack-2x' />
-                <i className='fab fa-facebook-f fa-stack-1x fa-inverse' />
-              </li>
-              <li id='linkedin' className='fa-stack'>
-                <i className='fas fa-circle fa-stack-2x' />
-                <i className='fab fa-linkedin-in fa-stack-1x fa-inverse' />
-              </li>
+              {socialIcon('twitter', 'fa-twitter')}
+              {socialIcon('facebook', 'fa-facebook-f')}
+              {socialIcon('linkedin', 'fa-linkedin-in')}
             </ul>
             <select
               aria-label='Change language to: '

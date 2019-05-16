@@ -27,6 +27,14 @@ class Home extends Component {
     );
   };
 
+  disclaimer = content => {
+    return (
+      <p className='note' role='alert'>
+        {content}
+      </p>
+    );
+  };
+
   render() {
     return (
       <div className='container'>
@@ -118,19 +126,17 @@ class Home extends Component {
                   />
                   It's private and confidential
                 </p>
-                <p className='note' role='alert'>
-                  This election tool is only intended to help you plan your
-                  vote. By using it, you are not actually casting a vote. You
-                  still need to go to the voting location on election day to
-                  vote in person.
-                </p>
-                <p className='note' role='alert'>
-                  The views expressed in the candidates' profiles are the views
-                  of the candidates, and they are not endorsed by the City of
-                  Vancouver. The profiles are reproduced verbatim as submitted
-                  by the candidates and the content has not been altered in any
-                  way by the City.
-                </p>
+                {this
+                  .disclaimer(`This election tool is only intended to help you plan your
+                  vote. By using it, you are not actually casting a vote.
+                  You still need to go to the voting location on election
+                  day to vote in person.`)}
+                {this
+                  .disclaimer(`The views expressed in the candidates' profiles are the
+                  views of the candidates, and they are not endorsed by the
+                  City of Vancouver. The profiles are reproduced verbatim as
+                  submitted by the candidates and the content has not been
+                  altered in any way by the City.`)}
 
                 <p className='to-election-site' role='alert'>
                   For details on voter registration, identification, and more,

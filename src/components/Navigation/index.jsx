@@ -3,16 +3,27 @@ import { Link } from 'react-router-dom';
 
 import * as routes from 'constants/routes';
 
+const navItem = (text, link, ariaLabel) => {
+  return (
+    <li className='nav-item'>
+      <Link to={link} aria-label={ariaLabel} className='nav-link text-dark'>
+        {text}
+      </Link>
+    </li>
+  );
+};
+
 const Navigation = ({ logo }) => {
   return (
     <nav className='navbar navbar-expand-md navbar-light border-bottom bg-white shadow-sm mb-4'>
-      <div className="container">
+      <div className='container'>
         <Link to={routes.HOME}>
           <img
-            className="navbar-brand"
+            className='navbar-brand'
             id='nav-logo'
             src={logo.value}
-            alt={logo.description} />
+            alt={logo.description}
+          />
         </Link>
         <button
           className='navbar-toggler'
@@ -25,25 +36,17 @@ const Navigation = ({ logo }) => {
         >
           <span className='navbar-toggler-icon' />
         </button>
-        <div className='collapse navbar-collapse d-md-inline-flex flex-md-row-reverse' id='navbarCollapse'>
+        <div
+          className='collapse navbar-collapse d-md-inline-flex flex-md-row-reverse'
+          id='navbarCollapse'
+        >
           <ul className='navbar-nav flex-grow'>
-            <li className='nav-item active'>
-              <Link
-                to={routes.HOME}
-                aria-label='Home: Link to main page.'
-                className="nav-link text-dark">
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to={routes.SELECTION}
-                aria-label='Start Voting: link to step 1 of planning your vote. Reminder: This is a planning application, actual voting must be done in person on election day.'
-                className="nav-link text-dark"
-              >
-                Start Planning
-              </Link>
-            </li>
+            {navItem('Home', routes.HOME, 'Home: Link to main page.')}
+            {navItem(
+              'Start Planning',
+              routes.SELECTION,
+              'Start Voting: link to step 1 of planning your vote. Reminder: This is a planning application, actual voting must be done in person on election day.'
+            )}
           </ul>
         </div>
       </div>
