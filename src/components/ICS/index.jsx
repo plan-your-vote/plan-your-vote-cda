@@ -2,7 +2,7 @@ import React from 'react';
 
 const dateSelector = dates => {
   const options = dates.map(date => {
-    return <option aria-describedby='info'>{date}</option>;
+    return <option key={date} aria-describedby='info'>{date}</option>;
   });
 
   return <select id='dateSelector'>{options}</select>;
