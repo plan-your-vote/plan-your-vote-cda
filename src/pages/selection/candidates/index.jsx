@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
 import CandidateCard from 'components/CandidateCard';
 import CandidateModal from 'components/CandidateModal';
+import CandidateSection from 'components/CandidateSectionHeader';
 import pyv from 'apis/pyv';
 
 class Candidates extends Component {
@@ -62,7 +63,6 @@ class Candidates extends Component {
   };
 
   selectBtn = data => {
-    // console.log(data);
     const temp = {
       candidateId: data.candidateId,
       name: data.name,
@@ -130,14 +130,32 @@ class Candidates extends Component {
   render() {
     const { candidatesHeader } = this.state;
 
-    const candidates = this.state.races.map(race => {
+    const canPositionList = [
+      'Mayor',
+      'Councillor',
+      'School trustee',
+      'Park Board commissioner'
+    ];
+
+    const candidates = (this.state.races.length === 0) ? null : canPositionList.map(can => {
+      let found = this.state.races.find(pos => pos.positionName === can);
       return (
         <>
+          <br />
           <div className='row'>
             <div className='col-12'>
-              <h2 key={race.numberNeeded}>{race.positionName}</h2>
+              <h2 key={found.numberNeeded}>
+                <span className='candidateTitle'>
+                  {found.positionName}
+                </span>{' '}
+              </h2>
+              <CandidateSection
+                key={found.positionName}
+                candidatePosition={found.positionName}
+              />
             </div>
-            {this.renderCandidates(race)}
+
+            {this.renderCandidates(found)}
           </div>
         </>
       );
