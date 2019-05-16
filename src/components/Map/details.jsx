@@ -29,10 +29,12 @@ const Details = ({ pollingPlace }) => {
           'fas fa-map-marker-alt',
           `${pollingPlace.address}, ${pollingPlace.localArea}`
         )}
-        {listElement(
-          'fas fa-route',
-          `${(pollingPlace.distance / 1000).toFixed(2)} km away`
-        )}
+        {!isNaN(pollingPlace.distance)
+          ? listElement(
+              'fas fa-route',
+              `${(pollingPlace.distance / 1000).toFixed(2)} km away`
+            )
+          : null}
         {listElement('far fa-check-circle', pollingPlace.advanceOnly)}
         <li>
           <span className='fa-li'>

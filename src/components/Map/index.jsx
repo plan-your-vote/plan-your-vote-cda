@@ -7,6 +7,7 @@ import Mapbox from './map';
 
 class Map extends Component {
   _isMounted = false;
+  _setDistance = false;
 
   state = {
     user: {
@@ -35,8 +36,7 @@ class Map extends Component {
         latitude: 0,
         longitude: 0
       }
-    ],
-    locations: []
+    ]
   };
 
   componentDidMount() {
@@ -45,10 +45,13 @@ class Map extends Component {
     this.loadPollingPlaces().then(() => {
       this.sortPollingPlacesByDistance();
     });
+    this.loadDistance();
   }
 
   componentDidUpdate() {
-    this.loadDistance();
+    if (!this._setDistance) {
+      this.loadDistance();
+    }
   }
 
   componentWillUnmount() {
@@ -90,12 +93,40 @@ class Map extends Component {
     }
 
     await pyvMap.get(`/api/map/${longitude},${latitude}`).then(response => {
-      if (this._isMounted) {
-        this.setState({
-          locations: response.data
-        });
-      }
+      this.mapDistance(response.data);
     });
+  };
+
+  mapDistance = distances => {
+    if (
+      !distances ||
+      this.state.pollingPlaces.length === 0 ||
+      distances.length === 0
+    ) {
+      return;
+    }
+
+    const result = [];
+
+    distances.map(distance => {
+      const place = this.state.pollingPlaces.find(pollingPlace => {
+        return pollingPlace.pollingPlaceId === distance.pollingPlaceID;
+      });
+
+      if (place) {
+        place['distance'] = distance.distance;
+        result.push(place);
+      }
+
+      return null;
+    });
+
+    if (this._isMounted) {
+      this.setState({
+        pollingPlaces: result
+      });
+      this._setDistance = true;
+    }
   };
 
   sortPollingPlacesByDistance = () => {
