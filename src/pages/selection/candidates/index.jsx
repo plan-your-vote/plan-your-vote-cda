@@ -137,29 +137,27 @@ class Candidates extends Component {
       'Park Board commissioner'
     ];
 
-    const candidates = (this.state.races.length === 0) ? null : canPositionList.map(can => {
-      let found = this.state.races.find(pos => pos.positionName === can);
-      return (
-        <>
-          <br />
-          <div className='row'>
-            <div className='col-12'>
-              <h2 key={found.numberNeeded}>
-                <span className='candidateTitle'>
-                  {found.positionName}
-                </span>{' '}
-              </h2>
-              <CandidateSection
-                key={found.positionName}
-                candidatePosition={found.positionName}
-              />
-            </div>
+    const candidates =
+      this.state.races.length === 0
+        ? null
+        : canPositionList.map(can => {
+            let found = this.state.races.find(pos => pos.positionName === can);
+            return (
+              <div className='row' key={found.positionName}>
+                <div className='col-12'>
+                  <h2 key={found.numberNeeded}>
+                    <span className='candidateTitle'>{found.positionName}</span>
+                  </h2>
+                  <CandidateSection
+                    key={found.positionName}
+                    candidatePosition={found.positionName}
+                  />
+                </div>
 
-            {this.renderCandidates(found)}
-          </div>
-        </>
-      );
-    });
+                {this.renderCandidates(found)}
+              </div>
+            );
+          });
 
     return (
       <div className='container'>
