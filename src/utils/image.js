@@ -1,1 +1,0 @@
-export const IMAGE_BASE = 'https://dpyvweb.azurewebsites.net';

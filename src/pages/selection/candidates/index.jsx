@@ -1,28 +1,44 @@
 import React, { Component } from 'react';
 import SectionHeader from 'components/SectionHeader';
-import pyv from 'utils/api/pyv';
-import { IMAGE_BASE } from 'utils/image';
+import CandidateCard from 'components/CandidateCard';
+import CandidateModal from 'components/CandidateModal';
+import pyv from 'apis/pyv';
 
 class Candidates extends Component {
   _isMounted = false;
+
   state = {
     races: [],
     candidatesHeader: {
       pageTitle: '',
       pageDescription: ''
     },
-    selectedCandidates: []
+    selectedCandidates: [],
+    currentCard: {
+      candidateId: '',
+      name: '',
+      picture: '',
+      contacts: [
+        {
+          contactMethod: '',
+          contactValue: ''
+        }
+      ],
+      details: [
+        {
+          title: '',
+          text: '',
+          format: ''
+        }
+      ]
+    }
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(data => {
       if (this._isMounted) {
-        const {
-          pageTitle,
-          pageDescription,
-          pageNumber
-        } = data.votingPage;
+        const { pageTitle, pageDescription, pageNumber } = data.votingPage;
 
         this.setState({
           races: data.races,
@@ -35,15 +51,18 @@ class Candidates extends Component {
       }
     });
   }
+
   componentWillUnmount() {
     this._isMounted = false;
   }
+
   loadCandidatesApi = async () => {
     const response = await pyv.get('/api/races');
     return response.data;
   };
 
   selectBtn = data => {
+    // console.log(data);
     const temp = {
       candidateId: data.candidateId,
       name: data.name,
@@ -55,7 +74,6 @@ class Candidates extends Component {
       candidateRaces: data.candidateRaces,
       contacts: data.contacts
     };
-    
 
     this.state.selectedCandidates.push(temp);
 
@@ -65,40 +83,61 @@ class Candidates extends Component {
     );
   };
 
-  handleModal = data => {
+  displayModal = candidate => {
+    if (this._isMounted) {
+      this.setState({
+        currentCard: candidate
+      });
+    } else {
+      console.error('unable to set state');
+    }
+  };
 
-  }
+  renderCandidates = race => {
+    if (!race) {
+      return null;
+    }
+
+    return race.candidates.map(candidate => {
+      if (!candidate) {
+        return null;
+      }
+
+      return (
+        <CandidateCard
+          key={candidate.candidateId}
+          candidate={candidate}
+          displayModal={this.displayModal}
+        />
+      );
+    });
+  };
+
+  renderModal = () => {
+    return this.state.races.map(race => {
+      return race.candidates.map(candidate => {
+        return (
+          <CandidateModal
+            key={candidate.candidateId}
+            candidate={candidate}
+            selectFunction={this.selectBtn}
+          />
+        );
+      });
+    });
+  };
 
   render() {
     const { candidatesHeader } = this.state;
-    const cardStyle = {
-      maxWidth: '540px'
-    };
 
-    let candidates = this.state.races.map(rData => {
-      return rData.candidates.map(cData => {
-        return (
-        <div className='col-sm-3' key={cData.candidate.candidateId}>
-          <div className='card' style={cardStyle}>
-            <img
-              src={`${IMAGE_BASE}/${cData.candidate.picture}`}
-              className='card-img-top'
-              alt={cData.candidate.name}
-            />
-            <div className='card-body'>
-              <h5 className='card-title'>{cData.candidate.name}</h5>
-              <button
-                className='btn btn-primary'
-                onClick={e => this.selectBtn(cData.candidate)}
-              >
-                Select
-              </button>
-            </div>
-          </div>
-        </div>
+    const candidates = this.state.races.map(race => {
+      return (
+        <>
+          <p key={race.numberNeeded}>{race.positionName}</p>
+          {this.renderCandidates(race)}
+        </>
       );
-      })
-    })
+    });
 
     return (
       <div className='container'>
@@ -109,6 +148,7 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
           {candidates}
+          {this.renderModal()}
         </div>
 
         

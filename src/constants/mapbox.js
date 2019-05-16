@@ -1,0 +1,2 @@
+export const MAPBOX_PUBLIC =
+  'pk.eyJ1IjoiYW15aG9uZzA1MDIiLCJhIjoiY2p2bXFpYWRoMWc3aDQ4bDY1ajl2ZzNyNCJ9.d_-XogO5GVDHpM2eAV3M2w';

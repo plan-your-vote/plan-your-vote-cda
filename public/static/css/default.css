@@ -1,3 +1,7 @@
+a {
+  color: #0072ee;
+}
+
 /* Home page */
 .intro h1 {
   font-size: 3em;
@@ -81,6 +85,18 @@
   text-align: center;
 }
 
+.card {
+  cursor: pointer;
+  border: none;
+}
+
+.card:hover {
+  box-shadow: 0 0 40px #d30d80;
+  color: #3a7999;
+  background: rgba(0, 0, 0, 0);
+  transform: scale(1.1, 1.1);
+}
+
 .intro-right span {
   display: none;
   position: absolute;
@@ -124,10 +140,10 @@
   top: 0;
   padding: 0 0.25em 0.5em 0.25em;
   background-color: #fff;
-  color: #E60050;
+  color: #e60050;
   border-radius: 20px;
-  border-color: #E60050;
-  border: 3px solid #E60050;
+  border-color: #e60050;
+  border: 3px solid #e60050;
   font-weight: bold;
   text-align: center;
   vertical-align: top;
@@ -155,10 +171,10 @@
 
 .to-election-site span {
   background-color: #fff;
-  color: #E60050;
+  color: #e60050;
   border-radius: 20px;
-  border-color: #E60050;
-  border: 3px solid #E60050;
+  border-color: #e60050;
+  border: 3px solid #e60050;
   font-weight: bold;
   text-align: center;
   width: 24px;
@@ -169,10 +185,11 @@
 /* Navbar */
 nav {
   background-image: linear-gradient(
-     135deg,
-   rgba(230,0,81,1) 0%, 
-   rgba(207,18,141,1) 33%, 
-   rgba(255,255,255,1) 66%);
+    135deg,
+    rgba(230, 0, 81, 1) 0%,
+    rgba(207, 18, 141, 1) 33%,
+    rgba(255, 255, 255, 1) 66%
+  );
   font-weight: bold;
 }
 
@@ -183,7 +200,11 @@ nav {
 /* Footer */
 footer {
   background-color: #333;
-  color: #FFFFFF;
+  color: #fff;
+}
+
+#footer-nav > li > a {
+  color: #fff;
 }
 
 @media (min-width: 768px) {
@@ -234,7 +255,7 @@ footer #footer-nav li {
   display: inline-block;
   list-style-type: none;
   line-height: 1;
-  border-left: solid 1px white;
+  border-left: solid 1px #fff;
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
@@ -245,7 +266,7 @@ h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
   color: #e60050;
 }
 
@@ -253,11 +274,13 @@ th,
 .btn {
   background-color: #e60050;
   border: none;
-  color: white;
+  color: #fff;
 }
 
+
+
 .divider {
-  background-image: linear-gradient(to right, #e60050, white);
+  background-image: linear-gradient(to right, #e60050, #fff);
   clear: both;
   height: 10px;
   margin: 5% 0;
@@ -276,8 +299,8 @@ th,
 .step-selection .navbar a {
   background-color: #e60050;
   border-radius: 25px;
-  border-right: 2px solid white;
-  color: white;
+  border-right: 2px solid #fff;
+  color: #fff;
 }
 
 .mcq-options {
@@ -287,7 +310,7 @@ th,
 
 .mcq-options legend {
   background-color: #e60050;
-  color: white;
+  color: #fff;
   font-size: 1rem;
   margin: auto;
   padding: 1%;
@@ -297,4 +320,54 @@ th,
 .mcq-options div {
   display: inline-block;
   padding: 3%;
+}
+
+/* Modal Styling */
+
+.modal-content {
+  background-color: #f4f4f4;
+  padding: 10px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.5);
+  animation-name: modalAction;
+  animation-duration: 0.5s;
+  font-size: 1.5em;
+}
+
+.modal-body img {
+  height: 50%;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
+.modalTitles {
+  color: #e60050;
+}
+
+.modalScroll {
+  height: 350px;
+  overflow-y: auto;
+}
+
+.addCanBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  height: 50px;
+}
+
+.nonScroll {
+    overflow-y: initial !important;
+}
+
+@keyframes modalAction {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

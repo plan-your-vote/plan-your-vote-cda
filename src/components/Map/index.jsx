@@ -1,151 +1,126 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
-
-import { MAPBOX } from 'credentials.js';
-import pyv from 'utils/api/pyv';
-import mapboxDistance from 'utils/api/mapboxDistance';
+import pyvMap from 'apis/pyvMap';
+import pyv from 'apis/pyv';
 import Details from './details';
-
-mapboxgl.accessToken = MAPBOX;
+import './locations.css';
+import Mapbox from './map';
 
 class Map extends Component {
-  _map;
   _isMounted = false;
 
   state = {
-    map: {
-      latitude: 49.2608838,
-      longitude: -123.1139269,
-      zoom: 13
+    user: {
+      latitude: 0,
+      longitude: 0
     },
-    pollingStations: [
+    pollingPlaces: [
       {
-        additionalInfo: '',
+        pollingPlaceId: 0,
         address: '',
-        election: null,
-        electionId: 1,
-        generalAccessInfo: null,
+        pollingPlaceName: '',
+        pollingStationName: '',
+        advanceOnly: false,
+        localArea: '',
+        pollingPlaceDates: [
+          {
+            startTime: '',
+            endTime: '',
+            pollingDate: ''
+          }
+        ],
+        parkingInfo: '',
+        wheelchairInfo: '',
+        email: '',
+        phone: '',
         latitude: 0,
-        longitude: 0,
-        name: '',
-        parkingInfo: null,
-        pollingStationId: 0,
-        washroomInfo: null,
-        wheelchairInfo: null
+        longitude: 0
       }
     ],
-    markers: []
+    locations: []
   };
 
   componentDidMount() {
     this._isMounted = true;
-    const { longitude, latitude, zoom } = this.state.map;
-
-    this._map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [longitude, latitude],
-      zoom
-    });
-    this.liveGetCenter();
-    this.loadApiData().then(() => {
-      this.renderMarkers();
-    });
-
     this.getUserLocation();
+    this.loadPollingPlaces().then(() => {
+      this.sortPollingPlacesByDistance();
+    });
+  }
+
+  componentDidUpdate() {
+    this.loadDistance();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  loadApiData = async () => {
-    await pyv.get('/api/PollingStations').then(response => {
-      if (this._isMounted) {
-        this.setState({
-          pollingStations: response.data.pollingStations
-        });
-      }
-    });
-  };
-
-  renderMarkers = () => {
-    this.state.pollingStations.map(pollingStation => {
-      return this.addMarker(pollingStation);
-    });
-  };
-
-  liveGetCenter = () => {
-    this._map.on('move', () => {
-      const { lng, lat } = this._map.getCenter();
-
-      if (this._isMounted) {
-        this.setState({
-          map: {
-            longitude: lng.toFixed(7),
-            latitude: lat.toFixed(7),
-            zoom: this._map.getZoom().toFixed(2)
-          }
-        });
-      }
-    });
-  };
-
-  addMarker = pollingStation => {
-    const marker = new mapboxgl.Marker()
-      .setLngLat([pollingStation.longitude, pollingStation.latitude])
-      .setPopup(
-        new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<strong>${pollingStation.name}</strong><p>${
-            pollingStation.address
-          }</p>`
-        )
-      )
-      .addTo(this._map);
-
-    const currentMarkers = this.state.markers;
-    currentMarkers.push(marker);
-
-    if (this._isMounted) {
-      this.setState({
-        markers: currentMarkers
-      });
-    }
-
-    this._map.on('click', e => {
-      this._map.flyTo({ center: e.lngLat, speed: 0.25 });
-    });
-  };
-
   getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        this.getDistance(latitude, longitude);
+        if (this._isMounted) {
+          this.setState({
+            user: {
+              latitude,
+              longitude
+            }
+          });
+        }
       });
     } else {
       console.warn('Geolocation is not supported by this browser.');
     }
   };
 
-  getDistance = async (latitude, longitude) => {
-    const result = await mapboxDistance.get(
-      `-123.11,49.26;${longitude},${latitude}`,
-      {
-        params: {
-          access_token: MAPBOX
-        }
+  loadPollingPlaces = async () => {
+    await pyv.get('/api/PollingPlaces').then(response => {
+      if (this._isMounted) {
+        this.setState({
+          pollingPlaces: response.data.pollingPlaces
+        });
       }
-    );
+    });
+  };
 
-    console.log(result.data.routes);
+  loadDistance = async () => {
+    const { latitude, longitude } = this.state.user;
+    if (latitude === 0 && longitude === 0) {
+      return;
+    }
+
+    await pyvMap.get(`/api/map/${longitude},${latitude}`).then(response => {
+      if (this._isMounted) {
+        this.setState({
+          locations: response.data
+        });
+      }
+    });
+  };
+
+  sortPollingPlacesByDistance = () => {
+    const stations = this.state.pollingPlaces;
+
+    if (stations[0].latitude === 0 && stations[0].longitude === 0) {
+      return;
+    }
+
+    stations.sort((a, b) => {
+      return a.distance - b.distance;
+    });
+
+    if (this._isMounted) {
+      this.setState({
+        pollingPlaces: stations
+      });
+    }
   };
 
   render() {
-    const details = this.state.pollingStations.map(pollingStation => {
+    const details = this.state.pollingPlaces.map(pollingPlace => {
       return (
-        <li className='list-group-item' key={pollingStation.pollingStationId}>
-          <Details pollingStation={pollingStation} distance={0.42} />
+        <li className='list-group-item' key={pollingPlace.pollingPlaceId}>
+          <Details pollingPlace={pollingPlace} />
         </li>
       );
     });
@@ -153,20 +128,42 @@ class Map extends Component {
     return (
       <>
         <div className='col-md-6'>
-          <i className='far fa-calendar-check' />
-          <select name='schedule'>
-            <option value='May 12, 2019'>May 12, 2019</option>
-            <option value='May 13, 2019'>May 13, 2019</option>
-            <option value='May 14, 2019'>May 14, 2019</option>
-            <option value='May 15, 2019'>May 15, 2019</option>
-          </select>
-          <br />
-          <i className='fas fa-map-marker-alt' />
-          <input name='location' type='text' />
-          <div id='map' style={{ width: '100%', height: '500px' }} />
+          <div className='input-group mb-3'>
+            <div className='input-group-prepend'>
+              <label className='input-group-text' htmlFor='votingdate'>
+                <i className='far fa-calendar-check' />
+              </label>
+            </div>
+            <select className='custom-select form-control-sm' id='votingdate'>
+              <option value='May 12, 2019'>May 12, 2019</option>
+              <option value='May 13, 2019'>May 13, 2019</option>
+              <option value='May 14, 2019'>May 14, 2019</option>
+              <option value='May 15, 2019'>May 15, 2019</option>
+            </select>
+          </div>
+          <div className='input-group mb-3'>
+            <div className='input-group-prepend'>
+              <span className='input-group-text'>
+                <i className='fas fa-map-marker-alt' />
+              </span>
+            </div>
+            <input
+              type='text'
+              name='location'
+              className='form-control'
+              placeholder='123 Awesome st'
+              aria-label='Your Location'
+            />
+          </div>
+          <Mapbox
+            pollingPlaces={this.state.pollingPlaces}
+            user={this.state.user}
+          />
         </div>
         <div className='col-md-6'>
-          <ul className='list-group list-group-flush'>{details}</ul>
+          <ul className='list-group list-group-flush' id='station-list'>
+            {details}
+          </ul>
         </div>
       </>
     );
