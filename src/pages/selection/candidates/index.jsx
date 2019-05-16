@@ -133,8 +133,12 @@ class Candidates extends Component {
     const candidates = this.state.races.map(race => {
       return (
         <>
-          <p key={race.numberNeeded}>{race.positionName}</p>
-          {this.renderCandidates(race)}
+          <div className='row'>
+            <div className='col-12'>
+              <h2 key={race.numberNeeded}>{race.positionName}</h2>
+            </div>
+            {this.renderCandidates(race)}
+          </div>
         </>
       );
     });
@@ -147,11 +151,9 @@ class Candidates extends Component {
             level='2'
             description={candidatesHeader.pageDescription}
           />
-          {candidates}
-          {this.renderModal()}
         </div>
-
-        
+        {candidates}
+        {this.renderModal()}
       </div>
     );
   }
