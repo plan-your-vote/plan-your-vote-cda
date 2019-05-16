@@ -7,16 +7,15 @@ const CandidateModal = ({ candidate, selectFunction }) => {
     candidate.details.map(detail => {
       if (detail.title === key) {
         desiredDetail = detail;
-        return '';
       }
-      return '';
+      return null;
     });
     return desiredDetail;
   };
 
   const displayPriority = priority => {
     if (!priority) {
-      return '';
+      return null;
     }
     return priority.text;
   };
@@ -126,7 +125,6 @@ const CandidateModal = ({ candidate, selectFunction }) => {
                 </span>
               </h3>
               <br />
-              
 
               <button
                 type='button'
