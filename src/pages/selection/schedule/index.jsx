@@ -37,7 +37,10 @@ class Schedule extends Component {
         latitude: 0,
         longitude: 0
       }
-    ]
+    ],
+    userInput: {
+      text: ''
+    }
   };
 
   componentDidMount() {
@@ -128,6 +131,11 @@ class Schedule extends Component {
     }
   };
 
+  handleUserInput = event => {
+    this.setState({ userInput: { text: event.target.value } });
+    console.log(this.state.userInput.text);
+  };
+
   render() {
     const details = this.state.pollingPlaces.map(pollingPlace => {
       return (
@@ -174,6 +182,8 @@ class Schedule extends Component {
                 className='form-control'
                 placeholder='123 Awesome st'
                 aria-label='Your Location'
+                value={this.state.userInput.text}
+                onChange={this.handleUserInput}
               />
             </div>
             <Map
