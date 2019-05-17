@@ -187,9 +187,12 @@ class Candidates extends Component {
         </div>
         {candidates}
         {this.renderModal()}
-          <Link to={routes.CAPITAL} className='nav-link nav-item'>
-            Capital
-          </Link>
+        <br />
+        <Link to={routes.CAPITAL} className='btn btn-primary  nextBtn'>
+          NEXT
+        </Link>
+        <br />
+        <br />
       </div>
     );
   }

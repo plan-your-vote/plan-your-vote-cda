@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import MultipleChoiceQuestion from 'components/MultipleChoiceQuestion';
 import SectionHeader from 'components/SectionHeader';
 import pyv from 'apis/pyv';
+import { Link } from 'react-router-dom';
+import * as routes from 'constants/routes';
+
 
 class Capital extends Component {
   _isMounted = false;
@@ -64,6 +67,15 @@ class Capital extends Component {
           </div>
         </div>
         <div className='row mb-4'>{mcQ}</div>
+        <br />
+        <Link to={routes.CANDIDATES} className='btn btn-primary  backBtn'>
+          BACK
+        </Link>
+        <Link to={routes.SCHEDULE} className='btn btn-primary  nextBtn'>
+          NEXT
+        </Link>
+        <br />
+        <br />
       </div>
     );
   }
