@@ -1,11 +1,39 @@
 import React from 'react';
 
 const CandidatesTally = ({ candidateJSON }) => {
-    let totalMayor = 0;
-    let totalCouncillour = 0;
-    let totalTrustees = 0;
-    let totalComissioners = 0;
+  let totalMayor = 0;
+  let totalCouncillor = 0;
+  let totalTrustees = 0;
+  let totalComissioners = 0;
 
+//   if (candidateJSON.length === 0) {
+//       return null;
+//   } else {
+//       console.log(candidateJSON.length);
+//   }
+    
+
+//   candidateJSON.length === 0 ? null : console.log(candidateJSON.length);
+
+    if (candidateJSON.length === 0) {
+        return null;
+    } else {
+        console.log(candidateJSON)
+    }
+  
+
+
+  for (let i = 0; i < candidateJSON.length; i++) {
+    if (candidateJSON.candidatePosition === 'Mayor') {
+      totalMayor += 1;
+    } else if (candidateJSON.candidatePosition === 'Councillor') {
+      totalCouncillor += 1;
+    } else if (candidateJSON.candidatePosition === 'School trustee') {
+      totalMayor += 1;
+    } else if (candidateJSON.candidatePosition === 'Park Board commissioner') {
+      totalComissioners += 1;
+    }
+  }
 
   return (
     <div className='table-responsive table-container'>
@@ -18,7 +46,7 @@ const CandidatesTally = ({ candidateJSON }) => {
           </tr>
           <tr>
             <th>Councillour:</th>
-            <th>{totalCouncillour}</th>
+            <th>{totalCouncillor}</th>
           </tr>
           <tr>
             <th>School Trustee:</th>
