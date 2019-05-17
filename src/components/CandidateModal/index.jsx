@@ -1,7 +1,12 @@
 import React from 'react';
 import { CMS_BASE_URL } from 'constants/baseURL';
 
-const CandidateModal = ({ candidate, selectFunction, selectedCandidates }) => {
+const CandidateModal = ({
+  position,
+  candidate,
+  selectFunction,
+  selectedCandidates
+}) => {
   const getDesiredDetail = key => {
     let desiredDetail;
     candidate.details.map(detail => {
@@ -146,7 +151,7 @@ const CandidateModal = ({ candidate, selectFunction, selectedCandidates }) => {
               />
               <button
                 type='button'
-                onClick={selectFunction(candidate)}
+                onClick={selectFunction(position, candidate)}
                 className='btn btn-primary addCanBtn'
               >
                 {selectedCandidates.length === 0

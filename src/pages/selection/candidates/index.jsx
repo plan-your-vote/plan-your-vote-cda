@@ -6,7 +6,7 @@ import CandidateSection from 'components/CandidateSectionHeader';
 import pyv from 'apis/pyv';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
-import CandidatesCount from 'components/TotalCandidates'
+import CandidatesCount from 'components/TotalCandidates';
 
 class Candidates extends Component {
   _isMounted = false;
@@ -65,24 +65,28 @@ class Candidates extends Component {
     return response.data;
   };
 
-  selectBtn = data => event => {
+  selectBtn = (position, candidate) => event => {
     const { selectedCandidates } = this.state;
     const newCandidates = selectedCandidates.slice(0);
-    const found = selectedCandidates.findIndex(cand => cand.candidateId === data.candidateId);
+    const found = selectedCandidates.findIndex(
+      cand => cand.candidateId === candidate.candidateId
+    );
 
     if (found > -1) {
       newCandidates.splice(found, 1);
     } else {
+      console.warn(position);
+
       const temp = {
-        candidateId: data.candidateId,
-        name: data.name,
-        electionId: data.electionId,
-        election: data.election,
-        details: data.details,
-        organizationId: data.organizationId,
-        organization: data.organization,
-        candidateRaces: data.candidateRaces,
-        contacts: data.contacts
+        candidateId: candidate.candidateId,
+        name: candidate.name,
+        electionId: candidate.electionId,
+        election: candidate.election,
+        details: candidate.details,
+        organizationId: candidate.organizationId,
+        organization: candidate.organization,
+        candidateRaces: candidate.candidateRaces,
+        contacts: candidate.contacts
       };
 
       newCandidates.push(temp);
@@ -136,6 +140,7 @@ class Candidates extends Component {
         return (
           <CandidateModal
             key={candidate.candidateId}
+            position={race.positionName}
             candidate={candidate}
             selectFunction={this.selectBtn}
             selectedCandidates={selectedCandidates}
@@ -147,7 +152,7 @@ class Candidates extends Component {
 
   render() {
     const { candidatesHeader } = this.state;
-    const {selectedCandidates} = this.state;
+    const { selectedCandidates } = this.state;
 
     const canPositionList = [
       'Mayor',
