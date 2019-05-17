@@ -6,31 +6,30 @@ const CandidatesTally = ({ candidateJSON }) => {
   let totalTrustees = 0;
   let totalComissioners = 0;
 
-//   if (candidateJSON.length === 0) {
-//       return null;
-//   } else {
-//       console.log(candidateJSON.length);
-//   }
-    
+  //   if (candidateJSON.length === 0) {
+  //       return null;
+  //   } else {
+  //       console.log(candidateJSON.length);
+  //   }
 
-//   candidateJSON.length === 0 ? null : console.log(candidateJSON.length);
+  //   candidateJSON.length === 0 ? null : console.log(candidateJSON.length);
 
-    if (candidateJSON.length === 0) {
-        return null;
-    } else {
-        console.log(candidateJSON)
-    }
-  
-
+  if (candidateJSON.length === 0) {
+    return null;
+  } else {
+    console.log(candidateJSON);
+  }
 
   for (let i = 0; i < candidateJSON.length; i++) {
-    if (candidateJSON.candidatePosition === 'Mayor') {
+    if (candidateJSON[i].candidatePosition === 'Mayor') {
       totalMayor += 1;
-    } else if (candidateJSON.candidatePosition === 'Councillor') {
+    } else if (candidateJSON[i].candidatePosition === 'Councillor') {
       totalCouncillor += 1;
-    } else if (candidateJSON.candidatePosition === 'School trustee') {
-      totalMayor += 1;
-    } else if (candidateJSON.candidatePosition === 'Park Board commissioner') {
+    } else if (candidateJSON[i].candidatePosition === 'School trustee') {
+      totalTrustees += 1;
+    } else if (
+      candidateJSON[i].candidatePosition === 'Park Board commissioner'
+    ) {
       totalComissioners += 1;
     }
   }
