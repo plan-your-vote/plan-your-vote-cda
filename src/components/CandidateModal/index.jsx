@@ -1,7 +1,12 @@
 import React from 'react';
 import { CMS_BASE_URL } from 'constants/baseURL';
 
-const CandidateModal = ({ candidate, selectFunction }) => {
+const CandidateModal = ({
+  position,
+  candidate,
+  selectFunction,
+  selectedCandidates
+}) => {
   const getDesiredDetail = key => {
     let desiredDetail;
     candidate.details.map(detail => {
@@ -145,10 +150,16 @@ const CandidateModal = ({ candidate, selectFunction }) => {
               />
               <button
                 type='button'
-                onClick={e => selectFunction(candidate)}
+                onClick={selectFunction(position, candidate)}
                 className='btn btn-primary addCanBtn'
               >
-                SELECT
+                {selectedCandidates.length === 0
+                  ? 'ADD'
+                  : selectedCandidates.findIndex(
+                      cand => cand.candidateId === candidate.candidateId
+                    ) >= 0
+                  ? 'REMOVE'
+                  : 'ADD'}
               </button>
             </div>
             <br />
@@ -175,12 +186,6 @@ const CandidateModal = ({ candidate, selectFunction }) => {
               {displayContact}
             </div>
             <div className='modal-footer'>
-              {/* <button
-                        className='btn btn-primary'
-                        onClick={e => this.selectBtn(candidate.candidate)}
-                      >
-                        Select
-                      </button> */}
               <button
                 type='button'
                 className='btn btn-secondary'

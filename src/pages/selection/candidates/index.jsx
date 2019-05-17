@@ -4,6 +4,9 @@ import CandidateCard from 'components/CandidateCard';
 import CandidateModal from 'components/CandidateModal';
 import CandidateSection from 'components/CandidateSectionHeader';
 import pyv from 'apis/pyv';
+import { Link } from 'react-router-dom';
+import * as routes from 'constants/routes';
+import CandidatesCount from 'components/TotalCandidates';
 
 class Candidates extends Component {
   _isMounted = false;
@@ -62,25 +65,39 @@ class Candidates extends Component {
     return response.data;
   };
 
-  selectBtn = data => {
-    const temp = {
-      candidateId: data.candidateId,
-      name: data.name,
-      electionId: data.electionId,
-      election: data.election,
-      details: data.details,
-      organizationId: data.organizationId,
-      organization: data.organization,
-      candidateRaces: data.candidateRaces,
-      contacts: data.contacts
-    };
-
-    this.state.selectedCandidates.push(temp);
-
-    localStorage.setItem(
-      'selectedCandidateRaces',
-      JSON.stringify(this.state.selectedCandidates)
+  selectBtn = (position, candidate) => event => {
+    const { selectedCandidates } = this.state;
+    const newCandidates = selectedCandidates.slice(0);
+    const found = selectedCandidates.findIndex(
+      cand => cand.candidateId === candidate.candidateId
     );
+
+    if (found > -1) {
+      newCandidates.splice(found, 1);
+    } else {
+      console.warn(position);
+
+      const temp = {
+        candidateId: candidate.candidateId,
+        name: candidate.name,
+        candidatePosition: position,
+        details: candidate.details,
+        organizationId: candidate.organizationName,
+        contacts: candidate.contacts
+      };
+
+      newCandidates.push(temp);
+    }
+
+    this.setState({ selectedCandidates: newCandidates }, () => {
+      if (found > -1) {
+        sessionStorage.removeItem('selectedCandidateRaces');
+      }
+      sessionStorage.setItem(
+        'selectedCandidateRaces',
+        JSON.stringify(newCandidates)
+      );
+    });
   };
 
   displayModal = candidate => {
@@ -114,13 +131,16 @@ class Candidates extends Component {
   };
 
   renderModal = () => {
+    const { selectedCandidates } = this.state;
     return this.state.races.map(race => {
       return race.candidates.map(candidate => {
         return (
           <CandidateModal
             key={candidate.candidateId}
+            position={race.positionName}
             candidate={candidate}
             selectFunction={this.selectBtn}
+            selectedCandidates={selectedCandidates}
           />
         );
       });
@@ -129,6 +149,7 @@ class Candidates extends Component {
 
   render() {
     const { candidatesHeader } = this.state;
+    const { selectedCandidates } = this.state;
 
     const canPositionList = [
       'Mayor',
@@ -161,6 +182,7 @@ class Candidates extends Component {
 
     return (
       <div className='container'>
+        <CandidatesCount candidateJSON={selectedCandidates} />
         <div className='row'>
           <SectionHeader
             title={candidatesHeader.pageTitle}
@@ -170,6 +192,12 @@ class Candidates extends Component {
         </div>
         {candidates}
         {this.renderModal()}
+        <br />
+        <Link to={routes.CAPITAL} className='btn btn-primary  nextBtn'>
+          NEXT
+        </Link>
+        <br />
+        <br />
       </div>
     );
   }
