@@ -6,6 +6,7 @@ import CandidateSection from 'components/CandidateSectionHeader';
 import pyv from 'apis/pyv';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
+import CandidatesCount from 'components/TotalCandidates'
 
 class Candidates extends Component {
   _isMounted = false;
@@ -146,6 +147,7 @@ class Candidates extends Component {
 
   render() {
     const { candidatesHeader } = this.state;
+    const {selectedCandidates} = this.state;
 
     const canPositionList = [
       'Mayor',
@@ -178,6 +180,7 @@ class Candidates extends Component {
 
     return (
       <div className='container'>
+        <CandidatesCount candidateJSON={selectedCandidates} />
         <div className='row'>
           <SectionHeader
             title={candidatesHeader.pageTitle}
