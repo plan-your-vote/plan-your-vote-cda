@@ -328,11 +328,12 @@ th,
 
 .backBtn {
   background-color: rgb(230, 0, 80);
-    color: rgb(255, 255, 255);
-    border-radius: 25px;
-    border-right: 2px solid rgb(255, 255, 255);
-    font-size: 1.5em;
-    display: inline-block;
+  color: rgb(255, 255, 255);
+  border-radius: 25px;
+  border-right: 2px solid rgb(255, 255, 255);
+  font-size: 1.5em;
+  display: inline-block;
+  font-family: Helvetica;
 }
 
 .nextBtn {

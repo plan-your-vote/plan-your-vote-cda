@@ -5,6 +5,8 @@ import pyv from 'apis/pyv';
 import SectionHeader from 'components/SectionHeader';
 import dummyHeader from 'constants/dummyData/pages.json';
 import Details from 'components/Map/Details';
+import { Link } from 'react-router-dom';
+import * as routes from 'constants/routes';
 
 class Schedule extends Component {
   _isMounted = false;
@@ -163,7 +165,10 @@ class Schedule extends Component {
                   <i className='far fa-calendar-check' />
                 </label>
               </div>
-              <select className='custom-select form-control-sm' id='votingdate'>
+              <select
+                className='custom-select form-control-sm'
+                id='votingdate'
+              >
                 <option value='May 12, 2019'>May 12, 2019</option>
                 <option value='May 13, 2019'>May 13, 2019</option>
                 <option value='May 14, 2019'>May 14, 2019</option>
@@ -197,6 +202,12 @@ class Schedule extends Component {
             </ul>
           </div>
         </div>
+        <Link to={routes.CAPITAL} className='btn btn-secondary  backBtn'>
+          BACK
+        </Link>
+        <Link to={routes.REVIEW} className='btn btn-secondary  nextBtn'>
+          NEXT
+        </Link>
       </div>
     );
   }

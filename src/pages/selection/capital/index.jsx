@@ -68,10 +68,10 @@ class Capital extends Component {
         </div>
         <div className='row mb-4'>{mcQ}</div>
         <br />
-        <Link to={routes.CANDIDATES} className='btn btn-primary  backBtn'>
+        <Link to={routes.CANDIDATES} className='btn btn-secondary backBtn'>
           BACK
         </Link>
-        <Link to={routes.SCHEDULE} className='btn btn-primary  nextBtn'>
+        <Link to={routes.SCHEDULE} className='btn btn-secondary  nextBtn'>
           NEXT
         </Link>
         <br />
