@@ -8,14 +8,14 @@ import dummyHeader from 'constants/dummyData/pages.json';
 
 class Schedule extends Component {
   _isMounted = false;
-  _setDistance = false;
+  _isDistanceFixed = false;
 
   state = {
     user: {
       latitude: 0,
       longitude: 0
     },
-    pollingPlaces: [
+    allPollingPlaces: [
       {
         pollingPlaceId: 0,
         address: null,
@@ -37,7 +37,8 @@ class Schedule extends Component {
         latitude: 0,
         longitude: 0
       }
-    ]
+    ],
+    closePollingPlaces: []
   };
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class Schedule extends Component {
   }
 
   componentDidUpdate() {
-    if (!this._setDistance) {
+    if (!this._isDistanceFixed) {
       this.loadDistance();
     }
   }
@@ -72,7 +73,7 @@ class Schedule extends Component {
     await pyv.get('/api/PollingPlaces').then(response => {
       if (this._isMounted) {
         this.setState({
-          pollingPlaces: response.data.pollingPlaces
+          allPollingPlaces: response.data.pollingPlaces
         });
       }
     });
@@ -92,7 +93,7 @@ class Schedule extends Component {
   mapDistance = distances => {
     if (
       !distances ||
-      this.state.pollingPlaces.length === 0 ||
+      this.state.allPollingPlaces.length === 0 ||
       distances.length === 0
     ) {
       return;
@@ -101,7 +102,7 @@ class Schedule extends Component {
     const result = [];
 
     distances.map(distance => {
-      const place = this.state.pollingPlaces.find(pollingPlace => {
+      const place = this.state.allPollingPlaces.find(pollingPlace => {
         return pollingPlace.pollingPlaceId === distance.pollingPlaceID;
       });
 
@@ -115,14 +116,15 @@ class Schedule extends Component {
 
     if (this._isMounted) {
       this.setState({
-        pollingPlaces: result
+        closePollingPlaces: result
       });
-      this._setDistance = true;
+      this._isDistanceFixed = true;
     }
   };
 
   setUserCoordinates = (latitude, longitude) => {
     if (this._isMounted) {
+      this._isDistanceFixed = false;
       this.setState({
         user: {
           latitude,
@@ -133,7 +135,7 @@ class Schedule extends Component {
   };
 
   render() {
-    const details = this.state.pollingPlaces.map(pollingPlace => {
+    const details = this.state.closePollingPlaces.map(pollingPlace => {
       return (
         <li className='list-group-item' key={pollingPlace.pollingPlaceId}>
           <Details pollingPlace={pollingPlace} />
@@ -167,9 +169,10 @@ class Schedule extends Component {
               </select>
             </div>
             <Map
-              pollingPlaces={this.state.pollingPlaces}
+              pollingPlaces={this.state.closePollingPlaces}
               user={this.state.user}
               setUserCoordinates={this.setUserCoordinates}
+              _isDistanceFixed={this._isDistanceFixed}
             />
           </div>
           <div className='col-md-6'>

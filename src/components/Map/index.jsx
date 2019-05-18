@@ -73,7 +73,7 @@ class Map extends Component {
   };
 
   setMapCenter = () => {
-    if (!this.props.user) {
+    if (!this.props.user || this.props._isDistanceFixed) {
       return;
     }
     const { latitude, longitude } = this.props.user;
