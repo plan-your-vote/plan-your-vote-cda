@@ -13,7 +13,8 @@ class Capital extends Component {
       pageTitle: '',
       pageDescription: ''
     },
-    ballotIssues: []
+    ballotIssues: [],
+    selectedAnswers: []
   };
 
   componentDidMount() {
@@ -42,6 +43,42 @@ class Capital extends Component {
     return data;
   };
 
+  radioBtn = (ballotIssueID, answer) => event => {
+    const {selectedAnswers} = this.state;
+    const copySA = selectedAnswers.slice(0);
+    const found = selectedAnswers.findIndex(
+      ballotIssue => ballotIssue.ballotIssueID === ballotIssueID
+    );
+
+    // console.log(found);
+
+    if (found > -1) {
+      const temp = {
+        ballotIssueID: ballotIssueID,
+        ballotIssueAnswer: answer
+      };
+
+      copySA.splice(found, 1, temp);
+    } else {
+      const temp = {
+        ballotIssueID: ballotIssueID,
+        ballotIssueAnswer: answer
+      };
+
+      copySA.push(temp);
+    }
+    
+    this.setState({selectedAnswers: copySA}, () => {
+      if (found > -1) {
+        sessionStorage.removeItem('capitalAnswers');
+      }
+      sessionStorage.setItem(
+        'capitalAnswers',
+        JSON.stringify(copySA)
+      )
+    })
+  }
+
   render() {
     const mcQ = this.state.ballotIssues.map(mcQuestions => {
       return (
@@ -51,6 +88,7 @@ class Capital extends Component {
           description={mcQuestions.description}
           name={mcQuestions.ballotIssueId}
           values={mcQuestions.ballotIssueOptions}
+          radioFunction={this.radioBtn}
         />
       );
     });
