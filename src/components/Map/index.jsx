@@ -45,7 +45,7 @@ class Map extends Component {
     this._geocoder.on('result', e => {
       const latitude = e.result.geometry.coordinates[1];
       const longitude = e.result.geometry.coordinates[0];
-      this.props.setUserInput(latitude, longitude);
+      this.props.setUserCoordinates(latitude, longitude);
     });
 
     document

@@ -42,7 +42,7 @@ class Schedule extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.getUserLocation();
+    this.initializeUserCoordinates();
     this.loadPollingPlaces();
     this.loadDistance();
   }
@@ -57,18 +57,11 @@ class Schedule extends Component {
     this._isMounted = false;
   }
 
-  getUserLocation = () => {
+  initializeUserCoordinates = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        if (this._isMounted) {
-          this.setState({
-            user: {
-              latitude,
-              longitude
-            }
-          });
-        }
+        this.setUserCoordinates(latitude, longitude);
       });
     } else {
       console.warn('Geolocation is not supported by this browser.');
@@ -128,7 +121,7 @@ class Schedule extends Component {
     }
   };
 
-  setUserInput = (latitude, longitude) => {
+  setUserCoordinates = (latitude, longitude) => {
     if (this._isMounted) {
       this.setState({
         user: {
@@ -176,7 +169,7 @@ class Schedule extends Component {
             <Map
               pollingPlaces={this.state.pollingPlaces}
               user={this.state.user}
-              setUserInput={this.setUserInput}
+              setUserCoordinates={this.setUserCoordinates}
             />
           </div>
           <div className='col-md-6'>
