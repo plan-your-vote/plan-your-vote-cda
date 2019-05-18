@@ -37,10 +37,7 @@ class Schedule extends Component {
         latitude: 0,
         longitude: 0
       }
-    ],
-    userInput: {
-      text: ''
-    }
+    ]
   };
 
   componentDidMount() {
@@ -142,11 +139,6 @@ class Schedule extends Component {
     }
   };
 
-  handleUserInput = event => {
-    this.setState({ userInput: { text: event.target.value } });
-    console.log(this.state.userInput.text);
-  };
-
   render() {
     const details = this.state.pollingPlaces.map(pollingPlace => {
       return (
@@ -166,7 +158,7 @@ class Schedule extends Component {
               level='2'
               description={dummyHeader[2].description}
             />
-          </div>{' '}
+          </div>
           <div className='col-md-6'>
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
@@ -180,22 +172,6 @@ class Schedule extends Component {
                 <option value='May 14, 2019'>May 14, 2019</option>
                 <option value='May 15, 2019'>May 15, 2019</option>
               </select>
-            </div>
-            <div className='input-group mb-3'>
-              <div className='input-group-prepend'>
-                <span className='input-group-text'>
-                  <i className='fas fa-map-marker-alt' />
-                </span>
-              </div>
-              <input
-                type='text'
-                name='location'
-                className='form-control'
-                placeholder='123 Awesome st'
-                aria-label='Your Location'
-                value={this.state.userInput.text}
-                onChange={this.handleUserInput}
-              />
             </div>
             <Map
               pollingPlaces={this.state.pollingPlaces}
