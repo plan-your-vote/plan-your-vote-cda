@@ -42,6 +42,12 @@ class Map extends Component {
       mapboxgl: mapboxgl
     });
 
+    this._geocoder.on('result', e => {
+      const latitude = e.result.geometry.coordinates[1];
+      const longitude = e.result.geometry.coordinates[0];
+      this.props.setUserInput(latitude, longitude);
+    });
+
     document
       .getElementById('geocoder')
       .appendChild(this._geocoder.onAdd(this._map));

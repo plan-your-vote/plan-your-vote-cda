@@ -131,6 +131,17 @@ class Schedule extends Component {
     }
   };
 
+  setUserInput = (latitude, longitude) => {
+    if (this._isMounted) {
+      this.setState({
+        user: {
+          latitude,
+          longitude
+        }
+      });
+    }
+  };
+
   handleUserInput = event => {
     this.setState({ userInput: { text: event.target.value } });
     console.log(this.state.userInput.text);
@@ -189,6 +200,7 @@ class Schedule extends Component {
             <Map
               pollingPlaces={this.state.pollingPlaces}
               user={this.state.user}
+              setUserInput={this.setUserInput}
             />
           </div>
           <div className='col-md-6'>
