@@ -17,14 +17,16 @@ class App extends Component {
     themeName: null,
     images: [
       {
-        id: 'Logo',
+        id: '',
+        placement: 'Logo',
         type: '',
         value: '',
         description: '',
         format: ''
       },
       {
-        id: 'Footer Logo',
+        id: '',
+        placement: 'Footer Logo',
         type: '',
         value: '',
         description: '',
@@ -44,6 +46,7 @@ class App extends Component {
     await fetch(`${CMS_BASE_URL}/api/theme`)
       .then(res => res.json())
       .then(result => {
+        console.log(result);
         this.setState({
           themeName: result.selectedTheme.themeName,
           images: result.images
@@ -75,7 +78,7 @@ class App extends Component {
         <Router>
           <Navigation
             logo={this.state.images.find(image => {
-              return image.id === 'Logo';
+              return image.placement === 'Logo';
             })}
           />
           <Switch>
@@ -85,7 +88,7 @@ class App extends Component {
           </Switch>
           <Footer
             logo={this.state.images.find(image => {
-              return image.id === 'Footer Logo';
+              return image.placement === 'Footer Logo';
             })}
           />
         </Router>
