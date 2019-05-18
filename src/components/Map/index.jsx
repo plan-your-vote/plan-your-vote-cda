@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { MAPBOX_PUBLIC } from 'constants/mapbox';
 import './locations.css';
 
@@ -7,6 +8,7 @@ mapboxgl.accessToken = MAPBOX_PUBLIC;
 
 class Map extends Component {
   _map;
+  _geocoder;
   _isMounted = false;
   _markers = [];
 
@@ -34,6 +36,15 @@ class Map extends Component {
       center: [0, 0],
       zoom: 13
     });
+
+    this._geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+    });
+
+    document
+      .getElementById('geocoder')
+      .appendChild(this._geocoder.onAdd(this._map));
   };
 
   flyToClickedLocation = () => {
@@ -78,7 +89,12 @@ class Map extends Component {
   };
 
   render() {
-    return <div id='map' />;
+    return (
+      <>
+        <div id='geocoder' />
+        <div id='map' />
+      </>
+    );
   }
 }
 

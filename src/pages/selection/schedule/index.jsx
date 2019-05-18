@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Map from 'components/Map';
 import pyvMap from 'apis/pyvMap';
 import pyv from 'apis/pyv';
+import Map from 'components/Map';
 import SectionHeader from 'components/SectionHeader';
-import dummyHeader from 'constants/dummyData/pages.json';
 import Details from 'components/Map/Details';
+import dummyHeader from 'constants/dummyData/pages.json';
 
 class Schedule extends Component {
   _isMounted = false;
