@@ -40,6 +40,10 @@ class Schedule extends Component {
         longitude: 0
       }
     ],
+    page: {
+      title: null,
+      description: null
+    },
     closePollingPlaces: []
   };
 
@@ -75,6 +79,10 @@ class Schedule extends Component {
     await pyv.get('/api/PollingPlaces').then(response => {
       if (this._isMounted) {
         this.setState({
+          page: {
+            title: response.data.votingPage.pageTitle,
+            description: response.data.votingPage.pageDescription
+          },
           allPollingPlaces: response.data.pollingPlaces
         });
       }
@@ -150,10 +158,9 @@ class Schedule extends Component {
         <div className='row'>
           <div className='col-12'>
             <SectionHeader
-              title={dummyHeader[2].title}
-              subtitle={dummyHeader[2].subtitle}
+              title={this.state.page.title}
               level='2'
-              description={dummyHeader[2].description}
+              description={this.state.page.description}
             />
           </div>
           <div className='col-md-6'>
