@@ -46,7 +46,6 @@ class App extends Component {
     await fetch(`${CMS_BASE_URL}/api/theme`)
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         this.setState({
           themeName: result.selectedTheme.themeName,
           images: result.images
