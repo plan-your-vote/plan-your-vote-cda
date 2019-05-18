@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import MultipleChoiceQuestion from 'components/MultipleChoiceQuestion';
 import SectionHeader from 'components/SectionHeader';
 import pyv from 'apis/pyv';
+import { Link } from 'react-router-dom';
+import * as routes from 'constants/routes';
+
 
 class Capital extends Component {
   _isMounted = false;
@@ -10,7 +13,8 @@ class Capital extends Component {
       pageTitle: '',
       pageDescription: ''
     },
-    ballotIssues: []
+    ballotIssues: [],
+    selectedAnswers: []
   };
 
   componentDidMount() {
@@ -39,6 +43,42 @@ class Capital extends Component {
     return data;
   };
 
+  radioBtn = (ballotIssueID, answer) => event => {
+    const {selectedAnswers} = this.state;
+    const copySA = selectedAnswers.slice(0);
+    const found = selectedAnswers.findIndex(
+      ballotIssue => ballotIssue.ballotIssueID === ballotIssueID
+    );
+
+    // console.log(found);
+
+    if (found > -1) {
+      const temp = {
+        ballotIssueID: ballotIssueID,
+        ballotIssueAnswer: answer
+      };
+
+      copySA.splice(found, 1, temp);
+    } else {
+      const temp = {
+        ballotIssueID: ballotIssueID,
+        ballotIssueAnswer: answer
+      };
+
+      copySA.push(temp);
+    }
+    
+    this.setState({selectedAnswers: copySA}, () => {
+      if (found > -1) {
+        sessionStorage.removeItem('capitalAnswers');
+      }
+      sessionStorage.setItem(
+        'capitalAnswers',
+        JSON.stringify(copySA)
+      )
+    })
+  }
+
   render() {
     const mcQ = this.state.ballotIssues.map(mcQuestions => {
       return (
@@ -48,6 +88,7 @@ class Capital extends Component {
           description={mcQuestions.description}
           name={mcQuestions.ballotIssueId}
           values={mcQuestions.ballotIssueOptions}
+          radioFunction={this.radioBtn}
         />
       );
     });
@@ -64,6 +105,15 @@ class Capital extends Component {
           </div>
         </div>
         <div className='row mb-4'>{mcQ}</div>
+        <br />
+        <Link to={routes.CANDIDATES} className='btn btn-secondary backBtn'>
+          BACK
+        </Link>
+        <Link to={routes.SCHEDULE} className='btn btn-secondary  nextBtn'>
+          NEXT
+        </Link>
+        <br />
+        <br />
       </div>
     );
   }

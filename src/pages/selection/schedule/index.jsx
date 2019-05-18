@@ -5,6 +5,8 @@ import Map from 'components/Map';
 import SectionHeader from 'components/SectionHeader';
 import Details from 'components/Map/Details';
 import dummyHeader from 'constants/dummyData/pages.json';
+import { Link } from 'react-router-dom';
+import * as routes from 'constants/routes';
 
 class Schedule extends Component {
   _isMounted = false;
@@ -181,6 +183,12 @@ class Schedule extends Component {
             </ul>
           </div>
         </div>
+        <Link to={routes.CAPITAL} className='btn btn-secondary backBtn'>
+          BACK
+        </Link>
+        <Link to={routes.REVIEW} className='btn btn-secondary nextBtn'>
+          NEXT
+        </Link>
       </div>
     );
   }
