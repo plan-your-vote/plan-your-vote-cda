@@ -6,20 +6,6 @@ const CandidatesTally = ({ candidateJSON }) => {
   let totalTrustees = 0;
   let totalComissioners = 0;
 
-  //   if (candidateJSON.length === 0) {
-  //       return null;
-  //   } else {
-  //       console.log(candidateJSON.length);
-  //   }
-
-  //   candidateJSON.length === 0 ? null : console.log(candidateJSON.length);
-
-  if (candidateJSON.length === 0) {
-    return null;
-  } else {
-    console.log(candidateJSON);
-  }
-
   for (let i = 0; i < candidateJSON.length; i++) {
     if (candidateJSON[i].candidatePosition === 'Mayor') {
       totalMayor += 1;

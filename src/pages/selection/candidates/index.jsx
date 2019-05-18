@@ -75,8 +75,6 @@ class Candidates extends Component {
     if (found > -1) {
       newCandidates.splice(found, 1);
     } else {
-      console.warn(position);
-
       const temp = {
         candidateId: candidate.candidateId,
         name: candidate.name,
