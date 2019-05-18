@@ -172,6 +172,7 @@ class Candidates extends Component {
                   <CandidateSection
                     key={found.positionName}
                     candidatePosition={found.positionName}
+                    races={this.state.races}
                   />
                 </div>
 
@@ -193,7 +194,7 @@ class Candidates extends Component {
         {candidates}
         {this.renderModal()}
         <br />
-        <Link to={routes.CAPITAL} className='btn btn-primary  nextBtn'>
+        <Link to={routes.CAPITAL} className='btn btn-secondary  nextBtn'>
           NEXT
         </Link>
         <br />
