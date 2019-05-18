@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import Map from 'components/Map';
 import pyvMap from 'apis/pyvMap';
 import pyv from 'apis/pyv';
+import Map from 'components/Map';
 import SectionHeader from 'components/SectionHeader';
 import Details from 'components/Map/Details';
+import dummyHeader from 'constants/dummyData/pages.json';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
 
 class Schedule extends Component {
   _isMounted = false;
-  _setDistance = false;
+  _isDistanceFixed = false;
 
   state = {
     user: {
       latitude: 0,
       longitude: 0
     },
-    pollingPlaces: [
+    allPollingPlaces: [
       {
         pollingPlaceId: 0,
         address: null,
@@ -39,24 +40,22 @@ class Schedule extends Component {
         longitude: 0
       }
     ],
-    userInput: {
-      text: ''
-    },
     page: {
       title: null,
       description: null
-    }
+    },
+    closePollingPlaces: []
   };
 
   componentDidMount() {
     this._isMounted = true;
-    this.getUserLocation();
+    this.initializeUserCoordinates();
     this.loadPollingPlaces();
     this.loadDistance();
   }
 
   componentDidUpdate() {
-    if (!this._setDistance) {
+    if (!this._isDistanceFixed) {
       this.loadDistance();
     }
   }
@@ -65,18 +64,11 @@ class Schedule extends Component {
     this._isMounted = false;
   }
 
-  getUserLocation = () => {
+  initializeUserCoordinates = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        if (this._isMounted) {
-          this.setState({
-            user: {
-              latitude,
-              longitude
-            }
-          });
-        }
+        this.setUserCoordinates(latitude, longitude);
       });
     } else {
       console.warn('Geolocation is not supported by this browser.');
@@ -87,11 +79,11 @@ class Schedule extends Component {
     await pyv.get('/api/PollingPlaces').then(response => {
       if (this._isMounted) {
         this.setState({
-          pollingPlaces: response.data.pollingPlaces,
           page: {
             title: response.data.votingPage.pageTitle,
             description: response.data.votingPage.pageDescription
           }
+          allPollingPlaces: response.data.pollingPlaces
         });
       }
     });
@@ -111,7 +103,7 @@ class Schedule extends Component {
   mapDistance = distances => {
     if (
       !distances ||
-      this.state.pollingPlaces.length === 0 ||
+      this.state.allPollingPlaces.length === 0 ||
       distances.length === 0
     ) {
       return;
@@ -120,7 +112,7 @@ class Schedule extends Component {
     const result = [];
 
     distances.map(distance => {
-      const place = this.state.pollingPlaces.find(pollingPlace => {
+      const place = this.state.allPollingPlaces.find(pollingPlace => {
         return pollingPlace.pollingPlaceId === distance.pollingPlaceID;
       });
 
@@ -134,19 +126,26 @@ class Schedule extends Component {
 
     if (this._isMounted) {
       this.setState({
-        pollingPlaces: result
+        closePollingPlaces: result
       });
-      this._setDistance = true;
+      this._isDistanceFixed = true;
     }
   };
 
-  handleUserInput = event => {
-    this.setState({ userInput: { text: event.target.value } });
-    console.log(this.state.userInput.text);
+  setUserCoordinates = (latitude, longitude) => {
+    if (this._isMounted) {
+      this._isDistanceFixed = false;
+      this.setState({
+        user: {
+          latitude,
+          longitude
+        }
+      });
+    }
   };
 
   render() {
-    const details = this.state.pollingPlaces.map(pollingPlace => {
+    const details = this.state.closePollingPlaces.map(pollingPlace => {
       return (
         <li className='list-group-item' key={pollingPlace.pollingPlaceId}>
           <Details pollingPlace={pollingPlace} />
@@ -163,7 +162,7 @@ class Schedule extends Component {
               level='2'
               description={this.state.page.description}
             />
-          </div>{' '}
+          </div>
           <div className='col-md-6'>
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
@@ -178,25 +177,11 @@ class Schedule extends Component {
                 <option value='May 15, 2019'>May 15, 2019</option>
               </select>
             </div>
-            <div className='input-group mb-3'>
-              <div className='input-group-prepend'>
-                <span className='input-group-text'>
-                  <i className='fas fa-map-marker-alt' />
-                </span>
-              </div>
-              <input
-                type='text'
-                name='location'
-                className='form-control'
-                placeholder='123 Awesome st'
-                aria-label='Your Location'
-                value={this.state.userInput.text}
-                onChange={this.handleUserInput}
-              />
-            </div>
             <Map
-              pollingPlaces={this.state.pollingPlaces}
+              pollingPlaces={this.state.closePollingPlaces}
               user={this.state.user}
+              setUserCoordinates={this.setUserCoordinates}
+              _isDistanceFixed={this._isDistanceFixed}
             />
           </div>
           <div className='col-md-6'>
@@ -205,10 +190,10 @@ class Schedule extends Component {
             </ul>
           </div>
         </div>
-        <Link to={routes.CAPITAL} className='btn btn-secondary  backBtn'>
+        <Link to={routes.CAPITAL} className='btn btn-secondary backBtn'>
           BACK
         </Link>
-        <Link to={routes.REVIEW} className='btn btn-secondary  nextBtn'>
+        <Link to={routes.REVIEW} className='btn btn-secondary nextBtn'>
           NEXT
         </Link>
       </div>

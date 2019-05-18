@@ -7,3 +7,18 @@
   height: 70vh;
   overflow-y: auto;
 }
+
+.mapboxgl-ctrl-geocoder {
+  max-width: 100%;
+  width: 100%;
+}
+
+#geocoder {
+  margin-bottom: 1.2em;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl {
+  box-shadow: none;
+}
