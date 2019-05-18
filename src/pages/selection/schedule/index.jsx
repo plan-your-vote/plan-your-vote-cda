@@ -82,7 +82,7 @@ class Schedule extends Component {
           page: {
             title: response.data.votingPage.pageTitle,
             description: response.data.votingPage.pageDescription
-          }
+          },
           allPollingPlaces: response.data.pollingPlaces
         });
       }
