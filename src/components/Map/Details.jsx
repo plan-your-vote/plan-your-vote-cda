@@ -57,7 +57,7 @@ const Details = ({ pollingPlace }) => {
   const pollingDates = (pollingDates = []) => {
     return pollingDates.map(pollingDate => {
       return (
-        <li>
+        <li key={JSON.stringify(pollingDate)}>
           {new Date(pollingDate.pollingDate).toLocaleString(undefined, {
             month: 'long',
             day: 'numeric'
@@ -71,7 +71,6 @@ const Details = ({ pollingPlace }) => {
 
   const parseTime = (startTime, endTime) => {
     if (!startTime || !endTime) {
-      console.log('null!');
       return null;
     }
 
