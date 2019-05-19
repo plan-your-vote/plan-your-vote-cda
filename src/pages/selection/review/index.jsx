@@ -6,12 +6,13 @@ import dummyHeader from 'constants/dummyData/pages.json';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
 import pyv from 'apis/pyv';
-import CandidateCard from 'components/CandidateCard';
+import CandidateCard from 'components/CandidateReviewCard';
 import MultipleChoiceQuestion from 'components/reviewQuestions';
 
 class Review extends Component {
   state = {
-    ballotIssues: []
+    ballotIssues: [],
+    candidatesSelected: []
   };
 
   componentDidMount() {
@@ -19,7 +20,8 @@ class Review extends Component {
     this.loadApiData().then(data => {
       if (this._isMounted) {
         this.setState({
-          ballotIssues: data.ballotIssues
+          ballotIssues: data.ballotIssues,
+          candidatesSelected: JSON.parse(sessionStorage.getItem('selectedCandidateRaces'))
         });
       }
     });
@@ -36,24 +38,47 @@ class Review extends Component {
   };
 
   renderCandidates = race => {
-    let selectCandidates = JSON.parse(
-      sessionStorage.getItem('selectedCandidateRaces')
-    );
+    let {candidatesSelected} = this.state
 
-    return selectCandidates.map(candidate => {
+    return candidatesSelected.map(candidate => {
       if (!candidate) {
         return null;
       }
 
       if (candidate.candidatePosition === race) {
         return (
-          <CandidateCard key={candidate.candidateId} candidate={candidate} />
+          <CandidateCard key={candidate.candidateId} candidate={candidate} remove={this.removeFunc} />
         );
       } else {
         return null;
       }
     });
   };
+
+  removeFunc = candidate =>{
+    const {candidatesSelected} = this.state
+    
+    let storageCopy = candidatesSelected.slice(0);
+    const found = candidatesSelected.findIndex(cand => cand.candidateId === candidate.candidateId);
+
+    if (found > -1) {
+      storageCopy.splice(found,1);
+    } else {
+      console.error('Candidate Not Found!?')
+    }
+
+    this.setState({
+      candidatesSelected: storageCopy
+    }, () => {
+      if(found > -1) {
+        sessionStorage.removeItem('selectedCandidateRaces');
+      }
+      sessionStorage.setItem(
+        'selectedCandidateRaces',
+        JSON.stringify(storageCopy)
+      );
+    })
+  }
 
   candidateCount = positionName => {
     let storage = JSON.parse(sessionStorage.getItem('selectedCandidateRaces'));
