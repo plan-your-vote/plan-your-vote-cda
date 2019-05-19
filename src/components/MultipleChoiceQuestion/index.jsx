@@ -13,7 +13,7 @@ const MultipleChoiceQuestion = ({
         <input
           type='radio'
           name={name}
-          onChange={radioFunction(name,item.issueOptionInfo)}
+          onChange={radioFunction(name,item.issueOptionInfo, title, description)}
           value={item.issueOptionInfo}
         />
         {item.issueOptionInfo}

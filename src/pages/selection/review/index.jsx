@@ -1,34 +1,146 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Email from 'components/Email';
 import ICS from 'components/ICS';
 import SectionHeader from 'components/SectionHeader';
 import dummyHeader from 'constants/dummyData/pages.json';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
+import pyv from 'apis/pyv';
+import CandidateCard from 'components/CandidateCard';
+import MultipleChoiceQuestion from 'components/reviewQuestions';
 
-const Review = () => {
-  return (
-    <div className='container'>
-      <div className='row'>
-        <SectionHeader
-          title={dummyHeader[3].title}
-          subtitle={dummyHeader[3].subtitle}
-          level='2'
-          description={dummyHeader[3].description}
+class Review extends Component {
+  state = {
+    ballotIssues: []
+  };
+
+  componentDidMount() {
+    this._isMounted = true;
+    this.loadApiData().then(data => {
+      if (this._isMounted) {
+        this.setState({
+          ballotIssues: data.ballotIssues
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  loadApiData = async () => {
+    const response = await pyv.get('/api/ballotissues');
+    const data = response.data;
+    return data;
+  };
+
+  renderCandidates = race => {
+    let selectCandidates = JSON.parse(
+      sessionStorage.getItem('selectedCandidateRaces')
+    );
+
+    return selectCandidates.map(candidate => {
+      if (!candidate) {
+        return null;
+      }
+
+      if (candidate.candidatePosition === race) {
+        return (
+          <CandidateCard key={candidate.candidateId} candidate={candidate} />
+        );
+      } else {
+        return null;
+      }
+    });
+  };
+
+  candidateCount = positionName => {
+    let storage = JSON.parse(sessionStorage.getItem('selectedCandidateRaces'));
+    let count = 0;
+
+    for (let i = 0; i < storage.length; i++) {
+      if (storage[i].candidatePosition === positionName) {
+        count += 1;
+      }
+    }
+    return count;
+  };
+
+  render() {
+    var test = JSON.parse(sessionStorage.getItem('capitalAnswers'));
+
+    const mcQ = test.map(mcQuestions => {
+      return (
+        <MultipleChoiceQuestion
+          key={mcQuestions.ballotIssueId}
+          title={mcQuestions.ballotIssueTitle}
+          description={mcQuestions.ballotIssueDescription}
+          id={mcQuestions.ballotIssueID}
+          answer={mcQuestions.ballotIssueAnswer}
         />
-      </div>
-      <div className='row'>
-        <div className='col-md-6' />
-        <div className='col-md-6'>
-          <Email />
-          <ICS />
+      );
+    });
+
+    return (
+      <div className='container'>
+        <div className='row'>
+          <SectionHeader
+            title={dummyHeader[3].title}
+            subtitle={dummyHeader[3].subtitle}
+            level='2'
+            description={dummyHeader[3].description}
+          />
         </div>
+        <br />
+        <div className='row reviewHeaderTitle'>
+          <h3 className='card-subtitle mb-2 text-muted'>
+            YOUR CANDIDATES IN BALLOT ORDER:
+          </h3>
+          <hr />
+        </div>
+        <div className='row'>
+          <h4>MAYOR {this.candidateCount('Mayor')} of 1:</h4>
+        </div>
+        <div className='row'>{this.renderCandidates('Mayor')}</div>
+        <div className='row'>
+          <h4>COUNCILLOR {this.candidateCount('Councillor')} of 10:</h4>
+        </div>
+        <div className='row'>{this.renderCandidates('Councillor')}</div>
+        <div className='row'>
+          <h4>
+            SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:
+          </h4>
+        </div>
+        <div className='row'>{this.renderCandidates('School trustee')}</div>
+        <div className='row'>
+          <h4>
+            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of 7:
+          </h4>
+        </div>
+        <div className='row'>
+          {this.renderCandidates('Park Board commissioner')}
+        </div>
+        <div className='row reviewHeaderTitle'>
+          <h3 className='card-subtitle mb-2 text-muted'>
+            YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
+          </h3>
+        </div>
+        <div className='row mb-4'>{mcQ}</div>
+        <div className='row' />
+        <div className='row'>
+          <div className='col-md-6' />
+          <div className='col-md-6'>
+            <Email />
+            <ICS />
+          </div>
+        </div>
+        <Link to={routes.SCHEDULE} className='btn btn-secondary  backBtn'>
+          BACK
+        </Link>
       </div>
-      <Link to={routes.SCHEDULE} className='btn btn-secondary  backBtn'>
-        BACK
-      </Link>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Review;
