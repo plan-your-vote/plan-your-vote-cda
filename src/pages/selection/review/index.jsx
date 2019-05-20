@@ -17,17 +17,15 @@ class Review extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.loadApiData().then(data => {
+    this.loadApiData().then(response => {
       if (this._isMounted) {
         this.setState({
-          ballotIssues: data[0].ballotIssues,
+          ballotIssues: response.ballotIssues.ballotIssues,
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
-          pollDetails: JSON.parse(
-            sessionStorage.getItem('pollingPlace')
-          ),
-          pageTitle: data[1][3].stepTitle
+          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace')),
+          pageTitle: response.steps[3].stepTitle
         });
       }
     });
@@ -38,9 +36,15 @@ class Review extends Component {
   }
 
   loadApiData = async () => {
-    const response = await pyv.get('/api/ballotissues');
-    const response2 = await pyv.get('/api/steps');
-    const data = [response.data, response2.data];
+    const ballotIssues = await pyv.get('/api/ballotissues');
+    const steps = await pyv.get('/api/steps');
+    const races = await pyv.get('/api/races');
+
+    const data = {
+      ballotIssues: ballotIssues.data,
+      steps: steps.data,
+      races: races.data
+    };
 
     return data;
   };
@@ -157,15 +161,13 @@ class Review extends Component {
         </div>
         <div className='row'>{this.renderCandidates('Councillor')}</div>
         <div className='row'>
-          <h4>
-            SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:
-          </h4>
+          <h4>SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:</h4>
         </div>
         <div className='row'>{this.renderCandidates('School trustee')}</div>
         <div className='row'>
           <h4>
-            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')}{' '}
-            of 7:
+            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of
+            7:
           </h4>
         </div>
         <br />
@@ -179,11 +181,9 @@ class Review extends Component {
         </div>
         <div className='row mb-4'>{mcQ}</div>
         <div className='row'>
-          <h3 className='card-subtitle mb-2 text-muted'>
-            VOTING DAY DETAILS
-          </h3>
+          <h3 className='card-subtitle mb-2 text-muted'>VOTING DAY DETAILS</h3>
         </div>
-        <div className = 'pollSection'>
+        <div className='pollSection'>
           <ReviewVoteCard pollDetails={this.state.pollDetails} />
         </div>
         <div className='row' />
