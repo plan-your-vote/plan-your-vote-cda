@@ -248,13 +248,7 @@ class Candidates extends Component {
             positions={positionsSummary}
           />
         </div>
-        <div className='row'>
-          <SectionHeader
-            title={candidatesHeader.stepTitle}
-            level='2'
-            description={candidatesHeader.stepDescription}
-          />
-        </div>
+
         <select
           className='custom-select mb-3'
           onChange={this.sortCandidates}
@@ -264,6 +258,11 @@ class Candidates extends Component {
           <option value='asc'>A to Z</option>
           <option value='desc'>Z to A</option>
         </select>
+        <SectionHeader
+          title={candidatesHeader.stepTitle}
+          level='2'
+          description={candidatesHeader.stepDescription}
+        />
         {candidates}
         {this.renderModal()}
         <br />
