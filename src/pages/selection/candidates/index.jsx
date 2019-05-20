@@ -78,9 +78,10 @@ class Candidates extends Component {
       const temp = {
         candidateId: candidate.candidateId,
         name: candidate.name,
+        picture: candidate.picture,
         candidatePosition: position,
         details: candidate.details,
-        organizationId: candidate.organizationName,
+        organizationName: candidate.organizationName,
         contacts: candidate.contacts
       };
 

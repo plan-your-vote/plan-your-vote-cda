@@ -5,7 +5,6 @@ import pyv from 'apis/pyv';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
 
-
 class Capital extends Component {
   _isMounted = false;
   state = {
@@ -43,41 +42,40 @@ class Capital extends Component {
     return data;
   };
 
-  radioBtn = (ballotIssueID, answer) => event => {
-    const {selectedAnswers} = this.state;
+  radioBtn = (ballotIssueID, answer, title, description) => event => {
+    const { selectedAnswers } = this.state;
     const copySA = selectedAnswers.slice(0);
     const found = selectedAnswers.findIndex(
       ballotIssue => ballotIssue.ballotIssueID === ballotIssueID
     );
 
-    // console.log(found);
-
     if (found > -1) {
       const temp = {
         ballotIssueID: ballotIssueID,
-        ballotIssueAnswer: answer
+        ballotIssueAnswer: answer,
+        ballotIssueTitle: title,
+        ballotIssueDescription: description
       };
 
       copySA.splice(found, 1, temp);
     } else {
       const temp = {
         ballotIssueID: ballotIssueID,
-        ballotIssueAnswer: answer
+        ballotIssueAnswer: answer,
+        ballotIssueTitle: title,
+        ballotIssueDescription: description
       };
 
       copySA.push(temp);
     }
-    
-    this.setState({selectedAnswers: copySA}, () => {
+
+    this.setState({ selectedAnswers: copySA }, () => {
       if (found > -1) {
         sessionStorage.removeItem('capitalAnswers');
       }
-      sessionStorage.setItem(
-        'capitalAnswers',
-        JSON.stringify(copySA)
-      )
-    })
-  }
+      sessionStorage.setItem('capitalAnswers', JSON.stringify(copySA));
+    });
+  };
 
   render() {
     const mcQ = this.state.ballotIssues.map(mcQuestions => {
@@ -106,7 +104,7 @@ class Capital extends Component {
         </div>
         <div className='row mb-4'>{mcQ}</div>
         <br />
-        <Link to={routes.CANDIDATES} className='btn btn-secondary backBtn'>
+        <Link to={routes.CANDIDATES} className='btn btn-secondary  backBtn'>
           BACK
         </Link>
         <Link to={routes.SCHEDULE} className='btn btn-secondary  nextBtn'>

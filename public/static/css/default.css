@@ -345,6 +345,11 @@ th,
     font-size: 1.5em;
 }
 
+/* Review Page Styling */
+.reviewAnswers {
+  font-weight: bold;
+}
+
 /* Modal Styling */
 
 .modal-content {

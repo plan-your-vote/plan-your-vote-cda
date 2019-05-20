@@ -3,7 +3,6 @@ import React from 'react';
 const CandidateSectionHeader = ({ candidatePosition, races }) => {
   let instructions;
   let heading;
-  console.log(races)
 
   switch (candidatePosition) {
     case 'Mayor':
