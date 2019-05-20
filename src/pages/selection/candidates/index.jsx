@@ -35,7 +35,8 @@ class Candidates extends Component {
           format: ''
         }
       ]
-    }
+    },
+    sortOption: ''
   };
 
   componentDidMount() {
@@ -146,6 +147,58 @@ class Candidates extends Component {
     });
   };
 
+  sortCandidates = e => {
+    if (this._isMounted) {
+      this.setState({
+        sortOption: e.target.value
+      });
+    }
+
+    let races = this.state.races;
+
+    if (e.target.value === 'ballot-order') {
+      for (const race of races) {
+        race.candidates.sort((a, b) => {
+          return a.ballotOrder - b.ballotOrder;
+        });
+      }
+    } else if (e.target.value === 'asc') {
+      for (const race of races) {
+        race.candidates.sort(this.sortByNameAsc);
+      }
+    } else if (e.target.value === 'desc') {
+      for (const race of races) {
+        race.candidates.sort(this.sortByNameDesc);
+      }
+    }
+
+    if (this._isMounted) {
+      this.setState({
+        races
+      });
+    }
+  };
+
+  sortByNameAsc = (a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  };
+
+  sortByNameDesc = (a, b) => {
+    if (a.name < b.name) {
+      return 1;
+    }
+    if (a.name > b.name) {
+      return -1;
+    }
+    return 0;
+  };
+
   render() {
     const { candidatesHeader } = this.state;
     const { selectedCandidates } = this.state;
@@ -190,6 +243,11 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
         </div>
+        <select onChange={this.sortCandidates} value={this.state.sortOption}>
+          <option value='ballot-order'>Ballot Order</option>
+          <option value='asc'>A to Z</option>
+          <option value='desc'>Z to A</option>
+        </select>
         {candidates}
         {this.renderModal()}
         <br />
