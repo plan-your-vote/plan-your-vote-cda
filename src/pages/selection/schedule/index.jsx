@@ -6,7 +6,6 @@ import SectionHeader from 'components/SectionHeader';
 import Details from 'components/Map/Details';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
-import CandidateCard from 'components/CandidateReviewCard';
 
 class Schedule extends Component {
   _isMounted = false;
@@ -86,42 +85,26 @@ class Schedule extends Component {
     // console.log(data)
     // console.log(selectedStation)
 
+    const temp = {
+      pollingPlaceId: data.pollingPlaceId,
+      pollingPlaceName: data.pollingPlaceName,
+      address: data.address,
+      pollingStationName: data.pollingStationName,
+      parkingInfo: data.parkingInfo,
+      wheelchairInfo: data.wheelchairInfo,
+      advanceOnly: data.advanceOnly,
+      localArea: data.localArea,
+      phone: data.phone,
+      email: data.email,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      pollingPlaceDates: data.pollingPlaceDates
+    };
+
     if (selectedStation.length !== 0) {
       selectedStationCopy.splice(found, 1);
-      const temp = {
-        pollingPlaceId: data.pollingPlaceId,
-        pollingPlaceName: data.pollingPlaceName,
-        address: data.address,
-        pollingStationName: data.pollingStationName,
-        parkingInfo: data.parkingInfo,
-        wheelchairInfo: data.wheelchairInfo,
-        advanceOnly: data.advanceOnly,
-        localArea: data.localArea,
-        phone: data.phone,
-        email: data.email,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        pollingPlaceDates: data.pollingPlaceDates
-      };
-
       selectedStationCopy.push(temp);
     } else {
-      const temp = {
-        pollingPlaceId: data.pollingPlaceId,
-        pollingPlaceName: data.pollingPlaceName,
-        address: data.address,
-        pollingStationName: data.pollingStationName,
-        parkingInfo: data.parkingInfo,
-        wheelchairInfo: data.wheelchairInfo,
-        advanceOnly: data.advanceOnly,
-        localArea: data.localArea,
-        phone: data.phone,
-        email: data.email,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        pollingPlaceDates: data.pollingPlaceDates
-      };
-
       selectedStationCopy.push(temp)
     }
 
