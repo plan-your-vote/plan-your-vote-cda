@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CandidatesTally = ({ candidateJSON }) => {
+const CandidatesTally = ({ candidateJSON, positions }) => {
   let totalMayor = 0;
   let totalCouncillor = 0;
   let totalTrustees = 0;
@@ -20,28 +20,20 @@ const CandidatesTally = ({ candidateJSON }) => {
     }
   }
 
+  const summary = positions.map(position => {
+    return (
+      <tr key={position.positionName}>
+        <th>{position.positionName}</th>
+        <th>of {position.numberNeeded}</th>
+      </tr>
+    );
+  });
+
   return (
     <div className='table-responsive table-container'>
       <table className='table'>
         <thead />
-        <tbody>
-          <tr>
-            <th>Mayor:</th>
-            <th>{totalMayor} of 1</th>
-          </tr>
-          <tr>
-            <th>Councillour:</th>
-            <th>{totalCouncillor} of 10</th>
-          </tr>
-          <tr>
-            <th>School Trustee:</th>
-            <th>{totalTrustees} of 9</th>
-          </tr>
-          <tr>
-            <th>Comissioners:</th>
-            <th>{totalComissioners} of 7</th>
-          </tr>
-        </tbody>
+        <tbody>{summary}</tbody>
       </table>
     </div>
   );

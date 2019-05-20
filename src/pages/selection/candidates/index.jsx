@@ -206,8 +206,8 @@ class Candidates extends Component {
 
     const positions = [];
     this.state.races.forEach(race => {
-      positions.push(race.positionName)
-    })
+      positions.push(race.positionName);
+    });
 
     const candidates =
       this.state.races.length === 0
@@ -232,10 +232,21 @@ class Candidates extends Component {
             );
           });
 
+    const positionsSummary = [];
+    this.state.races.forEach(race => {
+      positionsSummary.push({
+        positionName: race.positionName,
+        numberNeeded: race.numberNeeded
+      });
+    });
+
     return (
       <div className='container'>
         <div className='canTable'>
-          <CandidatesCount candidateJSON={selectedCandidates} />
+          <CandidatesCount
+            candidateJSON={selectedCandidates}
+            positions={positionsSummary}
+          />
         </div>
         <div className='row'>
           <SectionHeader
