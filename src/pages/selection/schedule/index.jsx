@@ -4,7 +4,6 @@ import pyv from 'apis/pyv';
 import Map from 'components/Map';
 import SectionHeader from 'components/SectionHeader';
 import Details from 'components/Map/Details';
-import dummyHeader from 'constants/dummyData/pages.json';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
 
@@ -40,6 +39,10 @@ class Schedule extends Component {
         longitude: 0
       }
     ],
+    page: {
+      title: null,
+      description: null
+    },
     closePollingPlaces: []
   };
 
@@ -75,6 +78,10 @@ class Schedule extends Component {
     await pyv.get('/api/PollingPlaces').then(response => {
       if (this._isMounted) {
         this.setState({
+          page: {
+            title: response.data.votingPage.pageTitle,
+            description: response.data.votingPage.pageDescription
+          },
           allPollingPlaces: response.data.pollingPlaces
         });
       }
@@ -150,26 +157,12 @@ class Schedule extends Component {
         <div className='row'>
           <div className='col-12'>
             <SectionHeader
-              title={dummyHeader[2].title}
-              subtitle={dummyHeader[2].subtitle}
+              title={this.state.page.title}
               level='2'
-              description={dummyHeader[2].description}
+              description={this.state.page.description}
             />
           </div>
           <div className='col-md-6'>
-            <div className='input-group mb-3'>
-              <div className='input-group-prepend'>
-                <label className='input-group-text' htmlFor='votingdate'>
-                  <i className='far fa-calendar-check' />
-                </label>
-              </div>
-              <select className='custom-select form-control-sm' id='votingdate'>
-                <option value='May 12, 2019'>May 12, 2019</option>
-                <option value='May 13, 2019'>May 13, 2019</option>
-                <option value='May 14, 2019'>May 14, 2019</option>
-                <option value='May 15, 2019'>May 15, 2019</option>
-              </select>
-            </div>
             <Map
               pollingPlaces={this.state.closePollingPlaces}
               user={this.state.user}

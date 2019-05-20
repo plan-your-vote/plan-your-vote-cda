@@ -54,6 +54,35 @@ const Details = ({ pollingPlace }) => {
     );
   };
 
+  const pollingDates = (pollingDates = []) => {
+    return pollingDates.map(pollingDate => {
+      return (
+        <li key={JSON.stringify(pollingDate)}>
+          {new Date(pollingDate.pollingDate).toLocaleString(undefined, {
+            month: 'long',
+            day: 'numeric'
+          })}
+          {': '}
+          {parseTime(pollingDate.startTime, pollingDate.endTime)}
+        </li>
+      );
+    });
+  };
+
+  const parseTime = (startTime, endTime) => {
+    if (!startTime || !endTime) {
+      return null;
+    }
+
+    return `${new Date(startTime).toLocaleString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit'
+    })} - ${new Date(endTime).toLocaleString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit'
+    })}`;
+  };
+
   return (
     <div>
       {title(pollingPlace.pollingPlaceName, pollingPlace.pollingStationName)}
@@ -71,11 +100,7 @@ const Details = ({ pollingPlace }) => {
             <i className='far fa-clock' />
           </span>
           Voting Hours:
-          <ul>
-            <li>May 12: 08:30AM - 05:00PM</li>
-            <li>May 13: 10:00AM - 02:00PM</li>
-            <li>May 14: 09:00AM - 06:00PM</li>
-          </ul>
+          <ul>{pollingDates(pollingPlace.pollingPlaceDates)}</ul>
         </li>
         {listElement('fab fa-accessible-icon', pollingPlace.wheelchairInfo)}
         {listElement('fas fa-parking', pollingPlace.parkingInfo)}
