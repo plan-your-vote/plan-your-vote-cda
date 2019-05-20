@@ -109,7 +109,13 @@ const Details = ({ pollingPlace, selectFunction, selectedStation }) => {
       </ul>
       <br />
       <button onClick={selectFunction(pollingPlace)}>
-        {selectedStation.length === 0 ? 'SELECT': selectedStation.findIndex(station=> station.pollingPlaceId === pollingPlace.pollingPlaceId) >=0 ? 'REMOVE' : 'SELECT'}
+        {selectedStation.length === 0
+          ? 'SELECT'
+          : selectedStation.findIndex(
+              station => station.pollingPlaceId === pollingPlace.pollingPlaceId
+            ) >= 0
+          ? 'REMOVE'
+          : 'SELECT'}
       </button>
     </div>
   );
