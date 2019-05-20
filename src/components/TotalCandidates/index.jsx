@@ -1,30 +1,24 @@
 import React from 'react';
 
 const CandidatesTally = ({ candidateJSON, positions }) => {
-  let totalMayor = 0;
-  let totalCouncillor = 0;
-  let totalTrustees = 0;
-  let totalComissioners = 0;
+  positions.forEach(position => {
+    position.count = 0;
+  });
 
-  for (let i = 0; i < candidateJSON.length; i++) {
-    if (candidateJSON[i].candidatePosition === 'Mayor') {
-      totalMayor += 1;
-    } else if (candidateJSON[i].candidatePosition === 'Councillor') {
-      totalCouncillor += 1;
-    } else if (candidateJSON[i].candidatePosition === 'School trustee') {
-      totalTrustees += 1;
-    } else if (
-      candidateJSON[i].candidatePosition === 'Park Board commissioner'
-    ) {
-      totalComissioners += 1;
-    }
-  }
+  candidateJSON.forEach(candidate => {
+    const position = positions.find(position => {
+      return position.positionName === candidate.candidatePosition;
+    });
+    position.count++;
+  });
 
   const summary = positions.map(position => {
     return (
       <tr key={position.positionName}>
         <th>{position.positionName}</th>
-        <th>of {position.numberNeeded}</th>
+        <th>
+          {position.count} of {position.numberNeeded}
+        </th>
       </tr>
     );
   });
