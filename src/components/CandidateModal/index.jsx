@@ -129,8 +129,6 @@ const CandidateModal = ({
                   {candidate.organizationName}
                 </span>
               </h3>
-              <br />
-
               <button
                 type='button'
                 className='close'
@@ -162,27 +160,16 @@ const CandidateModal = ({
                   : 'ADD'}
               </button>
             </div>
-            <br />
-            <br />
             <div className='modalScroll'>
-              <span className='modalTitles'>Top 3 Priorities:</span>
+              <span className='modalTitles'>Top 3 Priorities</span>
               <br />
-              1. {displayPriority(getDesiredDetail('Priority 1'))}
-              <br />
-              2. {displayPriority(getDesiredDetail('Priority 2'))}
-              <br />
-              3. {displayPriority(getDesiredDetail('Priority 3'))}
-              <br />
-              <br />
-              <span className='modalTitles'>Platform:</span>
-              <br />
+              <p>1. {displayPriority(getDesiredDetail('Priority 1'))}</p>
+              <p>2. {displayPriority(getDesiredDetail('Priority 2'))}</p>
+              <p>3. {displayPriority(getDesiredDetail('Priority 3'))}</p>
+              <p className='modalTitles'>Platform</p>
               {displayPriority(getDesiredDetail('Platform'))}
-              <br />
-              <br />
-              <span className='modalTitles'>Biography:</span> <br />{' '}
+              <p className='modalTitles'>Biography</p>
               {displayPriority(getDesiredDetail('Biography'))}
-              <br />
-              <br />
               {displayContact}
             </div>
             <div className='modal-footer'>
