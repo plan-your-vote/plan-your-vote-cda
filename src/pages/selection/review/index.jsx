@@ -10,9 +10,9 @@ import MultipleChoiceQuestion from 'components/reviewQuestions';
 
 class Review extends Component {
   state = {
+    pageTitle: '',
     ballotIssues: [],
-    candidatesSelected: [],
-    pageTitle: ''
+    candidatesSelected: []
   };
 
   componentDidMount() {
@@ -69,9 +69,9 @@ class Review extends Component {
             remove={this.removeFunc}
           />
         );
-      } else {
-        return null;
       }
+
+      return null;
     });
   };
 
@@ -183,10 +183,11 @@ class Review extends Component {
         <div className='row'>
           <h3 className='card-subtitle mb-2 text-muted'>VOTING DAY DETAILS</h3>
         </div>
-        <div className='pollSection'>
-          <ReviewVoteCard pollDetails={this.state.pollDetails} />
+        <div className='row'>
+          <div className='pollSection'>
+            <ReviewVoteCard pollDetails={this.state.pollDetails} />
+          </div>
         </div>
-        <div className='row' />
         <div className='row'>
           <div className='col-md-6' />
           <div className='col-md-6'>
