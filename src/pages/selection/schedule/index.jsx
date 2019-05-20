@@ -12,6 +12,7 @@ class Schedule extends Component {
   _isDistanceFixed = false;
 
   state = {
+    selectedStation: [],
     user: {
       latitude: 0,
       longitude: 0
@@ -72,6 +73,47 @@ class Schedule extends Component {
     } else {
       console.warn('Geolocation is not supported by this browser.');
     }
+  };
+
+  selectStation = data => event => {
+    const { selectedStation } = this.state;
+    const selectedStationCopy = selectedStation.slice(0);
+
+    const found = selectedStation.findIndex(
+      station => station.pollingPlaceId === data.pollingPlaceID
+    );
+    // console.log(data)
+    // console.log(selectedStation)
+
+    const temp = {
+      pollingPlaceId: data.pollingPlaceId,
+      pollingPlaceName: data.pollingPlaceName,
+      address: data.address,
+      pollingStationName: data.pollingStationName,
+      parkingInfo: data.parkingInfo,
+      wheelchairInfo: data.wheelchairInfo,
+      advanceOnly: data.advanceOnly,
+      localArea: data.localArea,
+      phone: data.phone,
+      email: data.email,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      pollingPlaceDates: data.pollingPlaceDates
+    };
+
+    if (selectedStation.length !== 0) {
+      selectedStationCopy.splice(found, 1);
+      selectedStationCopy.push(temp);
+    } else {
+      selectedStationCopy.push(temp)
+    }
+
+    this.setState({selectedStation: selectedStationCopy}, () => {
+      if (found > -1) {
+        sessionStorage.removeItem('pollingPlace')
+      }
+      sessionStorage.setItem('pollingPlace', JSON.stringify(selectedStationCopy))
+    })
   };
 
   loadPollingPlaces = async () => {
@@ -147,7 +189,11 @@ class Schedule extends Component {
     const details = this.state.closePollingPlaces.map(pollingPlace => {
       return (
         <li className='list-group-item' key={pollingPlace.pollingPlaceId}>
-          <Details pollingPlace={pollingPlace} />
+          <Details
+            pollingPlace={pollingPlace}
+            selectFunction={this.selectStation}
+            selectedStation={this.state.selectedStation}
+          />
         </li>
       );
     });
