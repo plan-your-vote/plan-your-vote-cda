@@ -9,28 +9,34 @@ const MultipleChoiceQuestion = ({
 }) => {
   const sentence = () => {
     let question;
+    console.log(id);
 
-    switch (id) {
-      case 1:
-        question = <>to borrowing $100,353,000</>;
-        break;
-    case 2:
-        question = <>to borrowing $99,557,000</>;
-        break;
-    case 3:
-        question = <>to borrowing $100,090,000</>;
-        break;
-      default:
-        question = <>Unanswered</>
-    }
+    // switch (id) {
+    //   case 1:
+    //     question = <>to borrowing $100,353,000</>;
+    //     break;
+    //   case 2:
+    //     question = <>to borrowing $99,557,000</>;
+    //     break;
+    //   case 3:
+    //     question = <>to borrowing $100,090,000</>;
+    //     break;
+    //   default:
+    //     question = <>Unanswered</>;
+    // }
 
-    return question
+    return question;
   };
   return (
     <div className='col-md-12 mt-5 qSection'>
       <h5>{title}</h5>
       <p>
-        <span className='reviewAnswers'>{answer}</span> {sentence()}
+        <span className='reviewAnswers'>
+          {description}: <br />
+          <br />
+          <span className='reviewYesNo'>{answer}</span>{' '}
+        </span>{' '}
+        {sentence()}
       </p>
     </div>
   );

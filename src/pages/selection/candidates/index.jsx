@@ -14,8 +14,8 @@ class Candidates extends Component {
   state = {
     races: [],
     candidatesHeader: {
-      pageTitle: '',
-      pageDescription: ''
+      stepTitle: '',
+      stepDescription: ''
     },
     selectedCandidates: [],
     currentCard: {
@@ -40,16 +40,21 @@ class Candidates extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.loadCandidatesApi().then(data => {
+    this.loadCandidatesApi().then(response => {
       if (this._isMounted) {
-        const { pageTitle, pageDescription, pageNumber } = data.votingPage;
+        const {
+          stepTitle,
+          stepDescription,
+          stepNumber
+        } = response.step;
 
+        console.log(response.races)
         this.setState({
-          races: data.races,
+          races: response.races.races,
           candidatesHeader: {
-            pageTitle: pageTitle,
-            pageDescription: pageDescription,
-            pageNum: pageNumber
+            stepTitle,
+            stepDescription,
+            stepNumber
           }
         });
       }
@@ -61,8 +66,10 @@ class Candidates extends Component {
   }
 
   loadCandidatesApi = async () => {
-    const response = await pyv.get('/api/races');
-    return response.data;
+    const races = await pyv.get('/api/races');
+    const step = await pyv.get('/api/steps/1');
+    const data = {races: races.data, step: step.data}
+    return data;
   };
 
   selectBtn = (position, candidate) => event => {
@@ -187,9 +194,9 @@ class Candidates extends Component {
         </div>
         <div className='row'>
           <SectionHeader
-            title={candidatesHeader.pageTitle}
+            title={candidatesHeader.stepTitle}
             level='2'
-            description={candidatesHeader.pageDescription}
+            description={candidatesHeader.stepDescription}
           />
         </div>
         {candidates}

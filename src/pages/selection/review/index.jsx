@@ -127,8 +127,9 @@ class Review extends Component {
     const mcQ = test.map(mcQuestions => {
       return (
         <MultipleChoiceQuestion
-          key={mcQuestions.ballotIssueId}
+          key={mcQuestions.ballotIssueID}
           title={mcQuestions.ballotIssueTitle}
+          id={mcQuestions.ballotIssueID}
           description={mcQuestions.ballotIssueDescription}
           answer={mcQuestions.ballotIssueAnswer}
         />
