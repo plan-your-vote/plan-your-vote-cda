@@ -125,12 +125,12 @@ class Review extends Component {
     return count;
   };
 
-  render() {
+  mcQ = () => {
     const test = sessionStorage.getItem('capitalAnswers')
       ? JSON.parse(sessionStorage.getItem('capitalAnswers'))
       : [];
 
-    const mcQ = test.map(mcQuestions => {
+    test.map(mcQuestions => {
       return (
         <MultipleChoiceQuestion
           key={mcQuestions.ballotIssueID}
@@ -141,22 +141,24 @@ class Review extends Component {
         />
       );
     });
+  };
 
-    const candidatesSummary = (positionName, numberNeeded) => {
-      return (
-        <>
-          <div className='row'>
-            <h4>
-              {`${positionName} ${this.candidateCount(
-                positionName
-              )} of ${numberNeeded}`}
-            </h4>
-          </div>
-          <div className='row'>{this.renderCandidates('Councillor')}</div>
-        </>
-      );
-    };
+  candidatesSummary = (positionName, numberNeeded) => {
+    return (
+      <>
+        <div className='row'>
+          <h4>
+            {`${positionName} ${this.candidateCount(
+              positionName
+            )} of ${numberNeeded}`}
+          </h4>
+        </div>
+        <div className='row'>{this.renderCandidates('Councillor')}</div>
+      </>
+    );
+  };
 
+  render() {
     return (
       <div className='container'>
         <div className='row'>
@@ -172,16 +174,16 @@ class Review extends Component {
             YOUR CANDIDATES IN BALLOT ORDER:
           </h3>
         </div>
-        {candidatesSummary('Mayer', 1)}
-        {candidatesSummary('Councillor', 10)}
-        {candidatesSummary('School trustee', 9)}
-        {candidatesSummary('Park Board commissioner', 5)}
+        {this.candidatesSummary('Mayer', 1)}
+        {this.candidatesSummary('Councillor', 10)}
+        {this.candidatesSummary('School trustee', 9)}
+        {this.candidatesSummary('Park Board commissioner', 5)}
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
           </h3>
         </div>
-        <div className='row mb-4'>{mcQ}</div>
+        <div className='row mb-4'>{this.mcQ()}</div>
         <div className='row'>
           <h3 className='card-subtitle mb-2 text-muted'>VOTING DAY DETAILS</h3>
         </div>
