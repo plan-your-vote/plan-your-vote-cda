@@ -11,6 +11,7 @@ import MultipleChoiceQuestion from 'components/reviewQuestions';
 class Review extends Component {
   state = {
     pageTitle: '',
+    pageDescription: null,
     ballotIssues: [],
     candidatesSelected: []
   };
@@ -20,12 +21,13 @@ class Review extends Component {
     this.loadApiData().then(response => {
       if (this._isMounted) {
         this.setState({
+          pageTitle: response.step.stepTitle,
+          pageDescription: response.step.stepDescription,
           ballotIssues: response.ballotIssues.ballotIssues,
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
-          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace')),
-          pageTitle: response.steps[3].stepTitle
+          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace'))
         });
       }
     });
@@ -42,7 +44,7 @@ class Review extends Component {
 
     const data = {
       ballotIssues: ballotIssues.data,
-      steps: steps.data,
+      step: steps.data[3],
       races: races.data
     };
 
@@ -145,7 +147,9 @@ class Review extends Component {
         <>
           <div className='row'>
             <h4>
-              {`${positionName} ${this.candidateCount(positionName)} of ${numberNeeded}`}
+              {`${positionName} ${this.candidateCount(
+                positionName
+              )} of ${numberNeeded}`}
             </h4>
           </div>
           <div className='row'>{this.renderCandidates('Councillor')}</div>
@@ -156,14 +160,17 @@ class Review extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <h2>{this.state.pageTitle}</h2>
+          <div className='col-12'>
+            <h2>{this.state.pageTitle}</h2>
+          </div>
+          <div className='col-12'>
+            <p>{this.state.pageDescription}</p>
+          </div>
         </div>
-        <br />
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR CANDIDATES IN BALLOT ORDER:
           </h3>
-          <br />
         </div>
         {candidatesSummary('Mayer', 1)}
         {candidatesSummary('Councillor', 10)}
