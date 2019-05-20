@@ -43,13 +43,7 @@ class Candidates extends Component {
     this._isMounted = true;
     this.loadCandidatesApi().then(response => {
       if (this._isMounted) {
-        const {
-          stepTitle,
-          stepDescription,
-          stepNumber
-        } = response.step;
-
-        console.log(response.races)
+        const { stepTitle, stepDescription, stepNumber } = response.step;
         this.setState({
           races: response.races.races,
           candidatesHeader: {
@@ -69,7 +63,7 @@ class Candidates extends Component {
   loadCandidatesApi = async () => {
     const races = await pyv.get('/api/races');
     const step = await pyv.get('/api/steps/1');
-    const data = {races: races.data, step: step.data}
+    const data = { races: races.data, step: step.data };
     return data;
   };
 
@@ -210,17 +204,15 @@ class Candidates extends Component {
     const { candidatesHeader } = this.state;
     const { selectedCandidates } = this.state;
 
-    const canPositionList = [
-      'Mayor',
-      'Councillor',
-      'School trustee',
-      'Park Board commissioner'
-    ];
+    const positions = [];
+    this.state.races.forEach(race => {
+      positions.push(race.positionName)
+    })
 
     const candidates =
       this.state.races.length === 0
         ? null
-        : canPositionList.map(can => {
+        : positions.map(can => {
             let found = this.state.races.find(pos => pos.positionName === can);
             return (
               <div className='row' key={found.positionName}>
