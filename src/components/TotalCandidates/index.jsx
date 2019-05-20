@@ -27,19 +27,19 @@ const CandidatesTally = ({ candidateJSON }) => {
         <tbody>
           <tr>
             <th>Mayor:</th>
-            <th>{totalMayor}</th>
+            <th>{totalMayor} of 1</th>
           </tr>
           <tr>
             <th>Councillour:</th>
-            <th>{totalCouncillor}</th>
+            <th>{totalCouncillor} of 10</th>
           </tr>
           <tr>
             <th>School Trustee:</th>
-            <th>{totalTrustees}</th>
+            <th>{totalTrustees} of 9</th>
           </tr>
           <tr>
             <th>Comissioners:</th>
-            <th>{totalComissioners}</th>
+            <th>{totalComissioners} of 7</th>
           </tr>
         </tbody>
       </table>

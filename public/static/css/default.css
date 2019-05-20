@@ -182,6 +182,10 @@ a {
   vertical-align: middle;
 }
 
+.table {
+  /* width: 400px; */
+}
+
 /* Navbar */
 nav {
   background-image: linear-gradient(
@@ -348,6 +352,19 @@ th,
 /* Review Page Styling */
 .reviewAnswers {
   font-weight: bold;
+}
+
+.qSection {
+  font-size: 1.2em;
+}
+
+.pollPoints {
+  font-weight: bold;
+  color: #e60050;
+}
+
+.pollSection {
+  font-size: 1.2em;
 }
 
 /* Modal Styling */

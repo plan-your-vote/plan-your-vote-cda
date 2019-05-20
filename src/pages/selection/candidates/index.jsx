@@ -182,7 +182,9 @@ class Candidates extends Component {
 
     return (
       <div className='container'>
-        <CandidatesCount candidateJSON={selectedCandidates} />
+        <div className='canTable'>
+          <CandidatesCount candidateJSON={selectedCandidates} />
+        </div>
         <div className='row'>
           <SectionHeader
             title={candidatesHeader.pageTitle}

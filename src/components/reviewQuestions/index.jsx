@@ -27,9 +27,8 @@ const MultipleChoiceQuestion = ({
     return question
   };
   return (
-    <div className='col-md-12 mt-5'>
+    <div className='col-md-12 mt-5 qSection'>
       <h5>{title}</h5>
-      {/* <p>{description}</p> */}
       <p>
         <span className='reviewAnswers'>{answer}</span> {sentence()}
       </p>

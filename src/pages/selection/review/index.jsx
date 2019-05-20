@@ -130,7 +130,6 @@ class Review extends Component {
           key={mcQuestions.ballotIssueId}
           title={mcQuestions.ballotIssueTitle}
           description={mcQuestions.ballotIssueDescription}
-          id={mcQuestions.ballotIssueID}
           answer={mcQuestions.ballotIssueAnswer}
         />
       );
@@ -157,16 +156,18 @@ class Review extends Component {
         </div>
         <div className='row'>{this.renderCandidates('Councillor')}</div>
         <div className='row'>
-          <h4>SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:</h4>
+          <h4>
+            SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:
+          </h4>
         </div>
         <div className='row'>{this.renderCandidates('School trustee')}</div>
         <div className='row'>
           <h4>
-            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of
-            7:
+            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')}{' '}
+            of 7:
           </h4>
         </div>
-        <br/>
+        <br />
         <div className='row'>
           {this.renderCandidates('Park Board commissioner')}
         </div>
@@ -175,14 +176,15 @@ class Review extends Component {
             YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
           </h3>
         </div>
-        <br />
         <div className='row mb-4'>{mcQ}</div>
         <div className='row'>
-          <h3 className='card-subtitle mb-2 text-muted'>VOTING DAY DETAILS</h3>
+          <h3 className='card-subtitle mb-2 text-muted'>
+            VOTING DAY DETAILS
+          </h3>
         </div>
-          <ReviewVoteCard
-            pollDetails={this.state.pollDetails}
-          />
+        <div className = 'pollSection'>
+          <ReviewVoteCard pollDetails={this.state.pollDetails} />
+        </div>
         <div className='row' />
         <div className='row'>
           <div className='col-md-6' />
