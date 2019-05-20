@@ -140,6 +140,19 @@ class Review extends Component {
       );
     });
 
+    const candidatesSummary = (positionName, numberNeeded) => {
+      return (
+        <>
+          <div className='row'>
+            <h4>
+              {`${positionName} ${this.candidateCount(positionName)} of ${numberNeeded}`}
+            </h4>
+          </div>
+          <div className='row'>{this.renderCandidates('Councillor')}</div>
+        </>
+      );
+    };
+
     return (
       <div className='container'>
         <div className='row'>
@@ -152,28 +165,10 @@ class Review extends Component {
           </h3>
           <br />
         </div>
-        <div className='row'>
-          <h4>MAYOR {this.candidateCount('Mayor')} of 1:</h4>
-        </div>
-        <div className='row'>{this.renderCandidates('Mayor')}</div>
-        <div className='row'>
-          <h4>COUNCILLOR {this.candidateCount('Councillor')} of 10:</h4>
-        </div>
-        <div className='row'>{this.renderCandidates('Councillor')}</div>
-        <div className='row'>
-          <h4>SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:</h4>
-        </div>
-        <div className='row'>{this.renderCandidates('School trustee')}</div>
-        <div className='row'>
-          <h4>
-            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of
-            7:
-          </h4>
-        </div>
-        <br />
-        <div className='row'>
-          {this.renderCandidates('Park Board commissioner')}
-        </div>
+        {candidatesSummary('Mayer', 1)}
+        {candidatesSummary('Councillor', 10)}
+        {candidatesSummary('School trustee', 9)}
+        {candidatesSummary('Park Board commissioner', 5)}
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
@@ -195,7 +190,7 @@ class Review extends Component {
             <ICS />
           </div>
         </div>
-        <Link to={routes.SCHEDULE} className='btn btn-secondary  backBtn'>
+        <Link to={routes.SCHEDULE} className='btn btn-secondary backBtn'>
           BACK
         </Link>
       </div>
