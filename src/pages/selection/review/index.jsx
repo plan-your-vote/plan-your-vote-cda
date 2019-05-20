@@ -21,7 +21,9 @@ class Review extends Component {
       if (this._isMounted) {
         this.setState({
           ballotIssues: data.ballotIssues,
-          candidatesSelected: JSON.parse(sessionStorage.getItem('selectedCandidateRaces'))
+          candidatesSelected: JSON.parse(
+            sessionStorage.getItem('selectedCandidateRaces')
+          )
         });
       }
     });
@@ -38,7 +40,11 @@ class Review extends Component {
   };
 
   renderCandidates = race => {
-    let {candidatesSelected} = this.state
+    let { candidatesSelected } = this.state;
+
+    if (!candidatesSelected) {
+      return;
+    }
 
     return candidatesSelected.map(candidate => {
       if (!candidate) {
@@ -47,7 +53,11 @@ class Review extends Component {
 
       if (candidate.candidatePosition === race) {
         return (
-          <CandidateCard key={candidate.candidateId} candidate={candidate} remove={this.removeFunc} />
+          <CandidateCard
+            key={candidate.candidateId}
+            candidate={candidate}
+            remove={this.removeFunc}
+          />
         );
       } else {
         return null;
@@ -55,33 +65,43 @@ class Review extends Component {
     });
   };
 
-  removeFunc = candidate =>{
-    const {candidatesSelected} = this.state
-    
+  removeFunc = candidate => {
+    const { candidatesSelected } = this.state;
+
     let storageCopy = candidatesSelected.slice(0);
-    const found = candidatesSelected.findIndex(cand => cand.candidateId === candidate.candidateId);
+    const found = candidatesSelected.findIndex(
+      cand => cand.candidateId === candidate.candidateId
+    );
 
     if (found > -1) {
-      storageCopy.splice(found,1);
+      storageCopy.splice(found, 1);
     } else {
-      console.error('Candidate Not Found!?')
+      console.error('Candidate Not Found!?');
     }
 
-    this.setState({
-      candidatesSelected: storageCopy
-    }, () => {
-      if(found > -1) {
-        sessionStorage.removeItem('selectedCandidateRaces');
+    this.setState(
+      {
+        candidatesSelected: storageCopy
+      },
+      () => {
+        if (found > -1) {
+          sessionStorage.removeItem('selectedCandidateRaces');
+        }
+        sessionStorage.setItem(
+          'selectedCandidateRaces',
+          JSON.stringify(storageCopy)
+        );
       }
-      sessionStorage.setItem(
-        'selectedCandidateRaces',
-        JSON.stringify(storageCopy)
-      );
-    })
-  }
+    );
+  };
 
   candidateCount = positionName => {
-    let storage = JSON.parse(sessionStorage.getItem('selectedCandidateRaces'));
+    const storage = JSON.parse(sessionStorage.getItem('selectedCandidateRaces'));
+
+    if (!storage) {
+      return;
+    }
+
     let count = 0;
 
     for (let i = 0; i < storage.length; i++) {
@@ -93,7 +113,9 @@ class Review extends Component {
   };
 
   render() {
-    var test = JSON.parse(sessionStorage.getItem('capitalAnswers'));
+    const test = sessionStorage.getItem('capitalAnswers')
+      ? JSON.parse(sessionStorage.getItem('capitalAnswers'))
+      : [];
 
     const mcQ = test.map(mcQuestions => {
       return (
@@ -133,14 +155,13 @@ class Review extends Component {
         </div>
         <div className='row'>{this.renderCandidates('Councillor')}</div>
         <div className='row'>
-          <h4>
-            SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:
-          </h4>
+          <h4>SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:</h4>
         </div>
         <div className='row'>{this.renderCandidates('School trustee')}</div>
         <div className='row'>
           <h4>
-            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of 7:
+            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of
+            7:
           </h4>
         </div>
         <div className='row'>
