@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import Email from 'components/Email';
 import ICS from 'components/ICS';
-import SectionHeader from 'components/SectionHeader';
-import dummyHeader from 'constants/dummyData/pages.json';
 import { Link } from 'react-router-dom';
 import * as routes from 'constants/routes';
 import pyv from 'apis/pyv';
 import CandidateCard from 'components/CandidateReviewCard';
+import ReviewVoteCard from 'components/ReviewVoteCard';
 import MultipleChoiceQuestion from 'components/reviewQuestions';
 
 class Review extends Component {
   state = {
     ballotIssues: [],
-    candidatesSelected: []
+    candidatesSelected: [],
+    pageTitle: ''
   };
 
   componentDidMount() {
@@ -20,10 +20,14 @@ class Review extends Component {
     this.loadApiData().then(data => {
       if (this._isMounted) {
         this.setState({
-          ballotIssues: data.ballotIssues,
+          ballotIssues: data[0].ballotIssues,
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
-          )
+          ),
+          pollDetails: JSON.parse(
+            sessionStorage.getItem('pollingPlace')
+          ),
+          pageTitle: data[1][3].stepTitle
         });
       }
     });
@@ -35,7 +39,9 @@ class Review extends Component {
 
   loadApiData = async () => {
     const response = await pyv.get('/api/ballotissues');
-    const data = response.data;
+    const response2 = await pyv.get('/api/steps');
+    const data = [response.data, response2.data];
+
     return data;
   };
 
@@ -96,13 +102,14 @@ class Review extends Component {
   };
 
   candidateCount = positionName => {
-    const storage = JSON.parse(sessionStorage.getItem('selectedCandidateRaces'));
+    const storage = JSON.parse(
+      sessionStorage.getItem('selectedCandidateRaces')
+    );
+    let count = 0;
 
     if (!storage) {
-      return;
+      return count;
     }
-
-    let count = 0;
 
     for (let i = 0; i < storage.length; i++) {
       if (storage[i].candidatePosition === positionName) {
@@ -132,19 +139,14 @@ class Review extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <SectionHeader
-            title={dummyHeader[3].title}
-            subtitle={dummyHeader[3].subtitle}
-            level='2'
-            description={dummyHeader[3].description}
-          />
+          <h2>{this.state.pageTitle}</h2>
         </div>
         <br />
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR CANDIDATES IN BALLOT ORDER:
           </h3>
-          <hr />
+          <br />
         </div>
         <div className='row'>
           <h4>MAYOR {this.candidateCount('Mayor')} of 1:</h4>
@@ -164,6 +166,7 @@ class Review extends Component {
             7:
           </h4>
         </div>
+        <br/>
         <div className='row'>
           {this.renderCandidates('Park Board commissioner')}
         </div>
@@ -172,7 +175,14 @@ class Review extends Component {
             YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
           </h3>
         </div>
+        <br />
         <div className='row mb-4'>{mcQ}</div>
+        <div className='row'>
+          <h3 className='card-subtitle mb-2 text-muted'>VOTING DAY DETAILS</h3>
+        </div>
+          <ReviewVoteCard
+            pollDetails={this.state.pollDetails}
+          />
         <div className='row' />
         <div className='row'>
           <div className='col-md-6' />
