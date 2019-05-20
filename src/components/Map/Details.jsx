@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Details = ({ pollingPlace }) => {
+const Details = ({ pollingPlace, selectFunction, selectedStation }) => {
   const title = (placeName, stationName) => {
     if (!placeName) {
       return null;
@@ -107,6 +107,10 @@ const Details = ({ pollingPlace }) => {
         {listElement('fas fa-phone', pollingPlace.phone)}
         {listElement('fas fa-envelope', pollingPlace.email)}
       </ul>
+      <br />
+      <button onClick={selectFunction(pollingPlace)}>
+        {selectedStation.length === 0 ? 'SELECT': selectedStation.findIndex(station=> station.pollingPlaceId === pollingPlace.pollingPlaceId) >=0 ? 'REMOVE' : 'SELECT'}
+      </button>
     </div>
   );
 };
