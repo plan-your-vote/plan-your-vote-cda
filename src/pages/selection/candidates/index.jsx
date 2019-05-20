@@ -243,7 +243,11 @@ class Candidates extends Component {
             description={candidatesHeader.pageDescription}
           />
         </div>
-        <select onChange={this.sortCandidates} value={this.state.sortOption}>
+        <select
+          className='custom-select mb-3'
+          onChange={this.sortCandidates}
+          value={this.state.sortOption}
+        >
           <option value='ballot-order'>Ballot Order</option>
           <option value='asc'>A to Z</option>
           <option value='desc'>Z to A</option>
