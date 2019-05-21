@@ -108,7 +108,7 @@ const Details = ({ pollingPlace, selectFunction, selectedStation }) => {
         {listElement('fas fa-envelope', pollingPlace.email)}
       </ul>
       <br />
-      <button onClick={selectFunction(pollingPlace)}>
+      <button className ='btn btn-info' onClick={selectFunction(pollingPlace)}>
         {selectedStation.length === 0
           ? 'SELECT'
           : selectedStation.findIndex(
