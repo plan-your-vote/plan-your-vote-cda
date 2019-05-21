@@ -6,7 +6,7 @@ import * as routes from 'constants/routes';
 import pyv from 'apis/pyv';
 import CandidateCard from 'components/CandidateReviewCard';
 import ReviewVoteCard from 'components/ReviewVoteCard';
-import MultipleChoiceQuestion from 'components/reviewQuestions';
+import ReviewQuestions from 'components/ReviewQuestions';
 
 class Review extends Component {
   state = {
@@ -140,19 +140,19 @@ class Review extends Component {
   };
 
   mcQ = () => {
-    const test = sessionStorage.getItem('capitalAnswers')
-      ? JSON.parse(sessionStorage.getItem('capitalAnswers'))
-      : [];
+    const test = JSON.parse(sessionStorage.getItem('capitalAnswers'));
+ 
+    // console.log(test)
 
     test.map(mcQuestions => {
       return (
-        <MultipleChoiceQuestion
-          key={mcQuestions.ballotIssueID}
-          title={mcQuestions.ballotIssueTitle}
-          id={mcQuestions.ballotIssueID}
-          description={mcQuestions.ballotIssueDescription}
-          answer={mcQuestions.ballotIssueAnswer}
-        />
+        console.log(mcQuestions.ballotIssueAnswer)
+        // <ReviewQuestions
+        //   // key={mcQuestions.ballotIssueID}
+        //   title={test.test}
+        //   // answer={mcQuestions.ballotIssueAnswer}
+        //   // description={mcQuestions.ballotIssueDescription}
+        // />
       );
     });
   };

@@ -1,45 +1,27 @@
 import React from 'react';
 
-const MultipleChoiceQuestion = ({
-  title,
-  description,
-  id,
-  radioFunction,
-  answer
-}) => {
+const ReviewQuestions = ({ title }) => {
+  if (!title) {
+    return null;
+  }
+    console.log(title);
+
+//   let location = pollDetails[0].address;
+//   let votingDay = '';
+
   const sentence = () => {
-    let question;
-    console.log(id);
-
-    // switch (id) {
-    //   case 1:
-    //     question = <>to borrowing $100,353,000</>;
-    //     break;
-    //   case 2:
-    //     question = <>to borrowing $99,557,000</>;
-    //     break;
-    //   case 3:
-    //     question = <>to borrowing $100,090,000</>;
-    //     break;
-    //   default:
-    //     question = <>Unanswered</>;
-    // }
-
-    return question;
+    console.log('hello')
   };
+
+//   votingDay = votingDay.substring(10, 0);
+
   return (
-    <div className='col-md-12 mt-5 qSection'>
-      <h5>{title}</h5>
+    <>
       <p>
-        <span className='reviewAnswers'>
-          {description}: <br />
-          <br />
-          <span className='reviewYesNo'>{answer}</span>{' '}
-        </span>{' '}
-        {sentence()}
+        <span className='pollPoints'>Voting Days:</span> {sentence()}
       </p>
-    </div>
+    </>
   );
 };
 
-export default MultipleChoiceQuestion;
+export default ReviewQuestions;
