@@ -3,51 +3,55 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A website for testing",
+    "tagline": "A website for documentation",
     "docs": {
-      "Accessibility": {
-        "title": "Accessibility"
+      "accessibility": {
+        "title": "Accessibility",
+        "sidebar_label": "Accessibility"
       },
       "adding-a-candidate": {
         "title": "Adding a Candidate",
         "sidebar_label": "Adding a Candidate"
       },
-      "adding-a-race": {
-        "title": "Adding a Race",
-        "sidebar_label": "Adding a Race"
+      "customizability": {
+        "title": "Customizability",
+        "sidebar_label": "Customizability"
       },
-      "create-a-new-website": {
-        "title": "Create a New Website",
-        "sidebar_label": "Create a New Website"
+      "db-config": {
+        "title": "How to configure your database",
+        "sidebar_label": "How to configure your database"
       },
-      "Customizability": {
-        "title": "Customizability"
+      "dockerization": {
+        "title": "Dockerization",
+        "sidebar_label": "Dockerization"
       },
-      "DBConfig": {
-        "title": "DBConfig"
+      "elections": {
+        "title": "Running Election vs. Managed Election",
+        "sidebar_label": "Running Election vs. Managed Election"
       },
-      "Dockerization": {
-        "title": "Dockerization"
+      "mapbox-implementation": {
+        "title": "Implementation",
+        "sidebar_label": "Implementation"
       },
-      "installation": {
-        "title": "Installation",
-        "sidebar_label": "Installation"
+      "mapbox-init": {
+        "title": "Initial Setup",
+        "sidebar_label": "Initial Setup"
       },
-      "Localization": {
-        "title": "Localization"
-      },
-      "map": {
-        "title": "map"
-      },
-      "PDF": {
-        "title": "PDF"
+      "pdf": {
+        "title": "[Deprecated, Angular] PDF Generator",
+        "sidebar_label": "[Deprecated, Angular] PDF Generator (Angular)"
       },
       "setting-up": {
         "title": "Setting Up",
         "sidebar_label": "Setting Up"
       },
+      "swagger": {
+        "title": "API Endpoints",
+        "sidebar_label": "API Endpoints"
+      },
       "unit-test": {
-        "title": "unit-test"
+        "title": "Unit Test",
+        "sidebar_label": "Unit Test"
       }
     },
     "links": {
@@ -56,9 +60,11 @@
       "Help": "Help"
     },
     "categories": {
-      "Getting Started": "Getting Started",
       "Guides": "Guides",
-      "Tutorial": "Tutorial"
+      "CMS": "CMS",
+      "Docs from Phase 1": "Docs from Phase 1",
+      "Tutorial": "Tutorial",
+      "Mapbox": "Mapbox"
     }
   },
   "pages-strings": {
