@@ -1,4 +1,8 @@
-# How to add accessibility
+---
+id: accessibility
+title: Accessibility
+sidebar_label: Accessibility
+---
 
 This document gives instructions on how to use ARIA attributes to ensure pages are accessible to those who are visually impaired.
 

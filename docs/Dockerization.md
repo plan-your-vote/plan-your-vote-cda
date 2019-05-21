@@ -1,4 +1,8 @@
-# Dockerization
+---
+id: dockerization
+title: Dockerization
+sidebar_label: Dockerization
+---
 
 This document helps you to set up Docker and run it on your local machine with only one console command.
 
@@ -46,7 +50,7 @@ services:
     image: microsoft/mssql-server-linux
     restart: always
     ports:
-      - "1433:1433"
+      - '1433:1433'
     environment:
       - SA_PASSWORD=Sql!Expre55
       - ACCEPT_EULA=Y
@@ -58,7 +62,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8888:80"
+      - '8888:80'
     restart: always
     environment:
       - DBHOST=db
@@ -98,7 +102,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8888:80"
+      - '8888:80'
     restart: always
     environment:
       - DBHOST=db

@@ -1,4 +1,8 @@
-# Customizability
+---
+id: customizability
+title: Customizability
+sidebar_label: Customizability
+---
 
 Customizability was intended to allow system administrators to select one of the predefined templates.
 

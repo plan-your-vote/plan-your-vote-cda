@@ -5,8 +5,9 @@
     "previous": "Previous",
     "tagline": "A website for testing",
     "docs": {
-      "Accessibility": {
-        "title": "Accessibility"
+      "accessibility": {
+        "title": "Accessibility",
+        "sidebar_label": "Accessibility"
       },
       "adding-a-candidate": {
         "title": "Adding a Candidate",
@@ -20,14 +21,17 @@
         "title": "Create a New Website",
         "sidebar_label": "Create a New Website"
       },
-      "Customizability": {
-        "title": "Customizability"
+      "customizability": {
+        "title": "Customizability",
+        "sidebar_label": "Customizability"
       },
-      "DBConfig": {
-        "title": "DBConfig"
+      "db-config": {
+        "title": "How to configure your database",
+        "sidebar_label": "How to configure your database"
       },
-      "Dockerization": {
-        "title": "Dockerization"
+      "dockerization": {
+        "title": "Dockerization",
+        "sidebar_label": "Dockerization"
       },
       "elections": {
         "title": "Running Election vs. Managed Election",
@@ -36,9 +40,6 @@
       "installation": {
         "title": "Installation",
         "sidebar_label": "Installation"
-      },
-      "Localization": {
-        "title": "Localization"
       },
       "map": {
         "title": "map"
@@ -71,6 +72,7 @@
       "Getting Started": "Getting Started",
       "Guides": "Guides",
       "CMS": "CMS",
+      "Docs from Phase 1": "Docs from Phase 1",
       "Tutorial": "Tutorial",
       "Mapbox": "Mapbox"
     }

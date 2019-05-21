@@ -1,4 +1,8 @@
-# How to configure your database
+---
+id: db-config
+title: How to configure your database
+sidebar_label: How to configure your database
+---
 
 This document gives instructions on how to change the database provider for Votingtool
 
