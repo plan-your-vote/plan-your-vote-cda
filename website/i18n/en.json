@@ -39,6 +39,10 @@
       "map": {
         "title": "map"
       },
+      "mapbox-init": {
+        "title": "Mapbox - Initial Setup",
+        "sidebar_label": "Mapbox - Initial Setup"
+      },
       "PDF": {
         "title": "PDF"
       },
@@ -58,7 +62,8 @@
     "categories": {
       "Getting Started": "Getting Started",
       "Guides": "Guides",
-      "Tutorial": "Tutorial"
+      "Tutorial": "Tutorial",
+      "Mapbox": "Mapbox"
     }
   },
   "pages-strings": {

@@ -4,6 +4,7 @@
     "Guides": ["adding-a-race", "adding-a-candidate"]
   },
   "tutorial": {
-    "Tutorial": ["setting-up", "create-a-new-website"]
+    "Tutorial": ["setting-up", "create-a-new-website"],
+    "Mapbox": ["mapbox-init"]
   }
 }
