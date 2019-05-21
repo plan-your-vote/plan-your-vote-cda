@@ -1,37 +1,52 @@
 import React from 'react';
 
-const CandidateSectionHeader = ({ pollDetails}) => {
-  
-  if(!pollDetails) {
+const CandidateSectionHeader = ({ pollDetails }) => {
+  if (!pollDetails) {
     return null;
   }
 
-  let location = pollDetails[0].address;
-  let votingDay = ''
+  const schedule = () => {
+    const { pollingPlaceDates } = pollDetails[0];
 
- 
+    return pollingPlaceDates.map(data => {
+      const { startTime, endTime, pollingDate } = data;
+      const date = formatDate(pollingDate);
+      return (
+        <p>{`${date}, ${formatTime(startTime)} - ${formatTime(endTime)}`}</p>
+      );
+    });
+  };
 
-  const sentence = () => {
-    for (let i =0; i < pollDetails[0].pollingPlaceDates.length; i++) {
-        votingDay += (pollDetails[0].pollingPlaceDates[i].pollingDate).substring(10,0) + ', '
+  const formatDate = date => {
+    if (!date) {
+      return 'N/A';
     }
 
-    if (votingDay === '') {
-        votingDay = 'N/A'
+    return new Date(date).toLocaleString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const formatTime = time => {
+    if (!time) {
+      return 'N/A';
     }
 
-    return votingDay
-  }
-  
-  votingDay = votingDay.substring(10,0)
+    return new Date(time).toLocaleString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
 
   return (
     <>
       <p>
-        <span className ='pollPoints'>Address:</span> {location}
+        <span className='pollPoints'>Address:</span> {pollDetails[0].address}
       </p>
-
-      <p><span className='pollPoints'>Voting Days:</span> {sentence()}</p>
+      <span className='pollPoints'>Voting Days:</span>
+      {schedule()}
     </>
   );
 };
