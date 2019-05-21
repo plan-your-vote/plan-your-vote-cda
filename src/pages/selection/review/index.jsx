@@ -167,7 +167,7 @@ class Review extends Component {
             )} of ${numberNeeded}`}
           </h4>
         </div>
-        <div className='col-12'>{this.renderCandidates('Councillor')}</div>
+        {this.renderCandidates(positionName)}
       </>
     );
   };
