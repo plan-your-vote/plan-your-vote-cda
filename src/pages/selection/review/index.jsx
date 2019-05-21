@@ -11,21 +11,26 @@ import MultipleChoiceQuestion from 'components/reviewQuestions';
 class Review extends Component {
   state = {
     pageTitle: '',
+    pageDescription: null,
     ballotIssues: [],
-    candidatesSelected: []
+    candidatesSelected: [],
+    racesSummary: []
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.loadApiData().then(response => {
+      const racesSummary = this.summarizeCandidates(response.races.races);
       if (this._isMounted) {
         this.setState({
+          pageTitle: response.step.stepTitle,
+          pageDescription: response.step.stepDescription,
           ballotIssues: response.ballotIssues.ballotIssues,
+          racesSummary,
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
-          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace')),
-          pageTitle: response.steps[3].stepTitle
+          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace'))
         });
       }
     });
@@ -42,11 +47,22 @@ class Review extends Component {
 
     const data = {
       ballotIssues: ballotIssues.data,
-      steps: steps.data,
+      step: steps.data[3],
       races: races.data
     };
 
     return data;
+  };
+
+  summarizeCandidates = (races = []) => {
+    const racesSummary = [];
+    races.forEach(race => {
+      racesSummary.push({
+        positionName: race.positionName,
+        numberNeeded: race.numberNeeded
+      });
+    });
+    return racesSummary;
   };
 
   renderCandidates = race => {
@@ -123,12 +139,12 @@ class Review extends Component {
     return count;
   };
 
-  render() {
+  mcQ = () => {
     const test = sessionStorage.getItem('capitalAnswers')
       ? JSON.parse(sessionStorage.getItem('capitalAnswers'))
       : [];
 
-    const mcQ = test.map(mcQuestions => {
+    test.map(mcQuestions => {
       return (
         <MultipleChoiceQuestion
           key={mcQuestions.ballotIssueID}
@@ -139,47 +155,52 @@ class Review extends Component {
         />
       );
     });
+  };
 
+  candidatesSummary = (positionName, numberNeeded) => {
+    return (
+      <>
+        <div className='col-12'>
+          <h4>
+            {`${positionName} ${this.candidateCount(
+              positionName
+            )} of ${numberNeeded}`}
+          </h4>
+        </div>
+        {this.renderCandidates(positionName)}
+      </>
+    );
+  };
+
+  render() {
     return (
       <div className='container'>
         <div className='row'>
-          <h2>{this.state.pageTitle}</h2>
+          <div className='col-12'>
+            <h2>{this.state.pageTitle}</h2>
+          </div>
+          <div className='col-12'>
+            <p>{this.state.pageDescription}</p>
+          </div>
         </div>
-        <br />
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR CANDIDATES IN BALLOT ORDER:
           </h3>
-          <br />
         </div>
-        <div className='row'>
-          <h4>MAYOR {this.candidateCount('Mayor')} of 1:</h4>
-        </div>
-        <div className='row'>{this.renderCandidates('Mayor')}</div>
-        <div className='row'>
-          <h4>COUNCILLOR {this.candidateCount('Councillor')} of 10:</h4>
-        </div>
-        <div className='row'>{this.renderCandidates('Councillor')}</div>
-        <div className='row'>
-          <h4>SCHOOL TRUSTEE {this.candidateCount('School trustee')} of 9:</h4>
-        </div>
-        <div className='row'>{this.renderCandidates('School trustee')}</div>
-        <div className='row'>
-          <h4>
-            SCHOOL TRUSTEE {this.candidateCount('Park Board commissioner')} of
-            7:
-          </h4>
-        </div>
-        <br />
-        <div className='row'>
-          {this.renderCandidates('Park Board commissioner')}
-        </div>
+        {this.state.racesSummary.map(race => {
+          return (
+            <div className='row' key={race.positionName}>
+              {this.candidatesSummary(race.positionName, race.numberNeeded)}
+            </div>
+          );
+        })}
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
           </h3>
         </div>
-        <div className='row mb-4'>{mcQ}</div>
+        <div className='row mb-4'>{this.mcQ()}</div>
         <div className='row'>
           <h3 className='card-subtitle mb-2 text-muted'>VOTING DAY DETAILS</h3>
         </div>
@@ -195,7 +216,7 @@ class Review extends Component {
             <ICS />
           </div>
         </div>
-        <Link to={routes.SCHEDULE} className='btn btn-secondary  backBtn'>
+        <Link to={routes.SCHEDULE} className='btn btn-secondary backBtn'>
           BACK
         </Link>
       </div>
