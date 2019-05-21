@@ -1,10 +1,12 @@
 import React from 'react';
 
 const ReviewQuestions = ({ title }) => {
+    
   if (!title) {
     return null;
   }
-    console.log(title);
+  console.log(title);
+//     console.log(title);
 
 //   let location = pollDetails[0].address;
 //   let votingDay = '';

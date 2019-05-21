@@ -144,17 +144,17 @@ class Review extends Component {
  
     // console.log(test)
 
-    test.map(mcQuestions => {
+    // test.map(mcQuestions => {
+      // console.log(mcQuestions.ballotIssueID)
       return (
-        console.log(mcQuestions.ballotIssueAnswer)
-        // <ReviewQuestions
-        //   // key={mcQuestions.ballotIssueID}
-        //   title={test.test}
-        //   // answer={mcQuestions.ballotIssueAnswer}
-        //   // description={mcQuestions.ballotIssueDescription}
-        // />
+        <ReviewQuestions
+          // key={mcQuestions.ballotIssueID}
+          title={test.ballotIssueID}
+          // answer={mcQuestions.ballotIssueAnswer}
+          // description={mcQuestions.ballotIssueDescription}
+        />
       );
-    });
+    // });
   };
 
   candidatesSummary = (positionName, numberNeeded) => {
