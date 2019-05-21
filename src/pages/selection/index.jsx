@@ -11,8 +11,13 @@ import Review from './review';
 
 const SelectionPage = () => {
   return (
-    <>
-      <Navigation />
+    <div className="container plan-step">
+      <div className="step-selection">
+        <Navigation />
+      </div>
+
+      <div className="divider"></div>
+      
       <Switch>
         <Route path={routes.CANDIDATES} component={() => <Candidates />} />
         <Route path={routes.CAPITAL} component={() => <Capital />} />
@@ -20,7 +25,7 @@ const SelectionPage = () => {
         <Route path={routes.REVIEW} component={() => <Review />} />
         <Route render={() => <Candidates />} />
       </Switch>
-    </>
+    </div>
   );
 };
 

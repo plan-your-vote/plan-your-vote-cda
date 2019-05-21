@@ -1,0 +1,74 @@
+/* Intro page */
+.intro {
+  margin-bottom: 2em;
+}
+
+.intro h1 {
+  border-bottom: none;
+  padding-left: 0;
+  width: 75%;
+}
+
+.intro-left {
+  margin-bottom: 3em;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.intro-center > p {
+    clear: both;
+}
+
+.reassurance {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.intro p.note {
+  margin: 0;
+  padding: 0 8%;
+}
+
+/* NavBar */
+#nav-logo {
+  height: 2em;
+  max-width: 50vw;
+}
+
+#navbar {
+  border-bottom: 0 !important;
+}
+
+nav {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  nav {
+    font-size: 16px;
+  }
+}
+
+/* Footer */
+
+@media (min-width: 768px) {
+  #footer-copyright,
+  #footer-nav {
+    margin-bottom: 0;
+  }
+}
+
+footer {
+  padding-bottom: 1.2em;
+}
+
+footer > .container {
+  padding-top: 2em;
+}
+
+footer #footer-nav {
+  padding-left: 0;
+}

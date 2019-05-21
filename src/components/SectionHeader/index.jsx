@@ -45,7 +45,7 @@ const SectionHeader = ({ title, subtitle, level, description }) => {
     <>
       {heading}
       {subheading}
-      <p>{description}</p>
+      <h4><span className='card-subtitle mb-2 text-muted'>{description}</span></h4>
     </>
   );
 };

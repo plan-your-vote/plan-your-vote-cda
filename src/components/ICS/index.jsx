@@ -1,28 +1,33 @@
 import React from 'react';
 
+const dateSelector = dates => {
+  const options = dates.map(date => {
+    return <option key={date} aria-describedby='info'>{date}</option>;
+  });
+
+  return <select id='dateSelector'>{options}</select>;
+};
+
 const ICS = () => {
   return (
-    <>
-      <label htmlFor='dateSelector' aria-label='format: year month day'>
+    <div>
+      <label
+        htmlFor='dateSelector'
+        aria-label='format: year month day'
+        className='col-form-label'
+        id='info'
+      >
         Date:
       </label>
-      <select id='dateSelector'>
-        <option aria-describedby='info'>2019-04-15</option>
-        <option aria-describedby='info'>2019-05-23</option>
-        <option aria-describedby='info'>2019-06-28</option>
-      </select>
-
-      <div title='Add to Calendar'>
-        Add to Calendar
-        <span className='start'>2019-06-28 08:00 AM</span>
-        <span className='end'>2019-06-28 03:00 PM</span>
-        <span className='timezone'>America/Vancouver</span>
-        <span className='title'>Canadian Federal Election 2020</span>
-        <span className='description'>
-          Elect members of the Legislative Assembly in Canada
-        </span>
-      </div>
-    </>
+      {dateSelector(['2019-04-15', '2019-05-23', '2019-06-28'])}
+      <div id='addtocalendar'>Add to Calendar</div>
+      <button
+        aria-label='Generating and downloading pdf summary of your plan. Remember to officially vote in person on election day.'
+        className='btn btn-secondary'
+      >
+        Generate Voting Plan PDF
+      </button>
+    </div>
   );
 };
 

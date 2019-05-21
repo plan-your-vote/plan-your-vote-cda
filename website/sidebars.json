@@ -1,0 +1,18 @@
+{
+  "docs": {
+    "Guides": ["adding-a-candidate"],
+    "CMS": ["swagger", "elections"],
+    "Docs from Phase 1": [
+      "accessibility",
+      "customizability",
+      "db-config",
+      "dockerization",
+      "pdf",
+      "unit-test"
+    ]
+  },
+  "tutorial": {
+    "Tutorial": ["setting-up"],
+    "Mapbox": ["mapbox-init", "mapbox-implementation"]
+  }
+}
