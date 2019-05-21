@@ -1,11 +1,17 @@
-# Map
+---
+id: mapbox-implementation
+title: Implementation
+sidebar_label: Implementation
+---
 
 ## Marker
 
 [mapbox-gl docs](https://docs.mapbox.com/mapbox-gl-js/api/#marker)
 
+### Suggestions
+
 - [Cluster](https://docs.mapbox.com/mapbox-gl-js/example/cluster/)
-  - Need to supply geojson data
+  - Need to supply GeoJSON data
   - `.addSource(id, source)`: [Sources](https://docs.mapbox.com/mapbox-gl-js/style-spec/#sources)
 
 ## Distance between the user and polling places

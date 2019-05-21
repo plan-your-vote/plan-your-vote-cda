@@ -32,13 +32,13 @@ const users = [
 
 const siteConfig = {
   title: PROJECT_NAME,
-  tagline: 'A website for testing', // TODO
+  tagline: 'A website for documentation', // TODO
   url: `https://${GITHUB_USERNAME}.github.io`,
   baseUrl: `/${GITHUB_REPO_NAME}/`,
   projectName: GITHUB_REPO_NAME,
   organizationName: GITHUB_USERNAME,
   headerLinks: [
-    { doc: 'installation', label: 'Docs' },
+    { doc: 'adding-a-candidate', label: 'Docs' },
     { doc: 'setting-up', label: 'Tutorial' },
     { page: 'help', label: 'Help' }
   ],

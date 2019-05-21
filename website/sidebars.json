@@ -1,12 +1,18 @@
 {
   "docs": {
-    "Getting Started": ["installation"],
-    "Guides": ["adding-a-race", "adding-a-candidate"],
+    "Guides": ["adding-a-candidate"],
     "CMS": ["swagger", "elections"],
-    "Docs from Phase 1": ["accessibility", "customizability", "db-config"]
+    "Docs from Phase 1": [
+      "accessibility",
+      "customizability",
+      "db-config",
+      "dockerization",
+      "pdf",
+      "unit-test"
+    ]
   },
   "tutorial": {
-    "Tutorial": ["setting-up", "create-a-new-website"],
-    "Mapbox": ["mapbox-init"]
+    "Tutorial": ["setting-up"],
+    "Mapbox": ["mapbox-init", "mapbox-implementation"]
   }
 }
