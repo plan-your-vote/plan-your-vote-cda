@@ -20,12 +20,13 @@ class Capital extends Component {
     this._isMounted = true;
     this.loadApiData().then(data => {
       if (this._isMounted) {
+        const { stepTitle, stepDescription, stepNumber } = data.step;
         this.setState({
-          ballotIssues: data.ballotIssues,
-
+          ballotIssues: data.ballotIssues.ballotIssues,
           header: {
-            pageTitle: data.votingPage.pageTitle,
-            pageDescription: data.votingPage.pageDescription
+            stepTitle,
+            stepDescription,
+            stepNumber
           }
         });
       }
@@ -38,7 +39,11 @@ class Capital extends Component {
 
   loadApiData = async () => {
     const response = await pyv.get('/api/ballotissues');
-    const data = response.data;
+    const step = await pyv.get('/api/steps/2');
+    const data = {
+      ballotIssues: response.data,
+      step: step.data
+    };
     return data;
   };
 
@@ -96,9 +101,9 @@ class Capital extends Component {
         <div className='row'>
           <div className='col-md-12'>
             <SectionHeader
-              title={this.state.header.pageTitle}
+              title={this.state.header.stepTitle}
               level='2'
-              description={this.state.header.pageDescription}
+              description={this.state.header.stepDescription}
             />
           </div>
         </div>
