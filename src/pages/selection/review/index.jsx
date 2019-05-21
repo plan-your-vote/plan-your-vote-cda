@@ -140,21 +140,22 @@ class Review extends Component {
   };
 
   mcQ = () => {
-    const test = JSON.parse(sessionStorage.getItem('capitalAnswers'));
- 
-    // console.log(test)
+    const data = JSON.parse(sessionStorage.getItem('capitalAnswers'));
 
-    // test.map(mcQuestions => {
-      // console.log(mcQuestions.ballotIssueID)
+    if (!data) {
+      return null;
+    }
+
+    return data.map(mcQuestions => {
       return (
         <ReviewQuestions
-          // key={mcQuestions.ballotIssueID}
-          title={test.ballotIssueID}
-          // answer={mcQuestions.ballotIssueAnswer}
-          // description={mcQuestions.ballotIssueDescription}
+          key={mcQuestions.ballotIssueID}
+          title={mcQuestions.ballotIssueTitle}
+          answer={mcQuestions.ballotIssueAnswer}
+          description={mcQuestions.ballotIssueDescription}
         />
       );
-    // });
+    });
   };
 
   candidatesSummary = (positionName, numberNeeded) => {

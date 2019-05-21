@@ -1,28 +1,12 @@
 import React from 'react';
 
-const ReviewQuestions = ({ title }) => {
-    
-  if (!title) {
-    return null;
-  }
-  console.log(title);
-//     console.log(title);
-
-//   let location = pollDetails[0].address;
-//   let votingDay = '';
-
-  const sentence = () => {
-    console.log('hello')
-  };
-
-//   votingDay = votingDay.substring(10, 0);
-
+const ReviewQuestions = ({ title, answer, description }) => {
   return (
-    <>
-      <p>
-        <span className='pollPoints'>Voting Days:</span> {sentence()}
-      </p>
-    </>
+    <div>
+      <h4>{title}</h4>
+      <p>Question: {description}</p>
+      <p>Answer: {answer}</p>
+    </div>
   );
 };
 
