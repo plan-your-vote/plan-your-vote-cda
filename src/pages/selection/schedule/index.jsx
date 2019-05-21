@@ -52,6 +52,7 @@ class Schedule extends Component {
     this.initializeUserCoordinates();
     this.loadPollingPlaces();
     this.loadDistance();
+    this.loadPollingHeader();
   }
 
   componentDidUpdate() {
@@ -115,6 +116,19 @@ class Schedule extends Component {
       sessionStorage.setItem('pollingPlace', JSON.stringify(selectedStationCopy))
     })
   };
+
+  loadPollingHeader = async () => {
+    await pyv.get('/api/steps/3').then(response => {
+      if (this._isMounted) {
+        this.setState({
+          page: {
+            title: response.data.stepTitle,
+            description: response.data.stepDescription
+          }
+        });
+      }
+    })
+  }
 
   loadPollingPlaces = async () => {
     await pyv.get('/api/PollingPlaces').then(response => {
