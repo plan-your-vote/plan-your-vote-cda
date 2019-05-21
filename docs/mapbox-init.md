@@ -1,7 +1,7 @@
 ---
 id: mapbox-init
-title: Mapbox - Initial Setup
-sidebar_label: Mapbox - Initial Setup
+title: Initial Setup
+sidebar_label: Initial Setup
 ---
 
 1. Go to [Mapbox](https://www.mapbox.com/) website

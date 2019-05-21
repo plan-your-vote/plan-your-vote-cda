@@ -26,21 +26,6 @@ Notes:
 
 ## List of Files
 
-### Front-End
-
-All files for this function are under `Spa/ClientApp/src/`.
-
-#### Static Resource Files
-
-- `assets/css/`: Contains CSS files to use for the entire SPA
-
-#### Function Files
-
-- `index.html`
-  - `<link id="theme" href="" rel="stylesheet">`
-- `app/app.component.ts`
-- `app/services/theme.service.ts`
-
 ### Back-End
 
 `Themes` is implement using the following files:

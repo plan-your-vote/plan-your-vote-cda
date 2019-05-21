@@ -29,6 +29,10 @@
       "Dockerization": {
         "title": "Dockerization"
       },
+      "elections": {
+        "title": "Running Election vs. Managed Election",
+        "sidebar_label": "Running Election vs. Managed Election"
+      },
       "installation": {
         "title": "Installation",
         "sidebar_label": "Installation"
@@ -40,8 +44,8 @@
         "title": "map"
       },
       "mapbox-init": {
-        "title": "Mapbox - Initial Setup",
-        "sidebar_label": "Mapbox - Initial Setup"
+        "title": "Initial Setup",
+        "sidebar_label": "Initial Setup"
       },
       "PDF": {
         "title": "PDF"
@@ -49,6 +53,10 @@
       "setting-up": {
         "title": "Setting Up",
         "sidebar_label": "Setting Up"
+      },
+      "swagger": {
+        "title": "API Endpoints",
+        "sidebar_label": "API Endpoints"
       },
       "unit-test": {
         "title": "unit-test"
@@ -62,6 +70,7 @@
     "categories": {
       "Getting Started": "Getting Started",
       "Guides": "Guides",
+      "CMS": "CMS",
       "Tutorial": "Tutorial",
       "Mapbox": "Mapbox"
     }
