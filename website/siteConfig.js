@@ -10,7 +10,7 @@
 
 const PROJECT_NAME = 'Plan Your Vote';
 const GITHUB_USERNAME = 'AmyHong0502';
-const GITHUB_REPO_NAME = 'pyv-spa';
+const GITHUB_REPO_NAME = 'plan-your-vote-cda';
 
 // List of projects/orgs using your project for the users page.
 const users = [
