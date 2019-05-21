@@ -13,17 +13,20 @@ class Review extends Component {
     pageTitle: '',
     pageDescription: null,
     ballotIssues: [],
-    candidatesSelected: []
+    candidatesSelected: [],
+    positionsSummary: []
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.loadApiData().then(response => {
+      const positionsSummary = this.summarizeCandidates(response.races.races);
       if (this._isMounted) {
         this.setState({
           pageTitle: response.step.stepTitle,
           pageDescription: response.step.stepDescription,
           ballotIssues: response.ballotIssues.ballotIssues,
+          positionsSummary,
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
@@ -49,6 +52,17 @@ class Review extends Component {
     };
 
     return data;
+  };
+
+  summarizeCandidates = (races = []) => {
+    const positionsSummary = [];
+    races.forEach(race => {
+      positionsSummary.push({
+        positionName: race.positionName,
+        numberNeeded: race.numberNeeded
+      });
+    });
+    return positionsSummary;
   };
 
   renderCandidates = race => {
@@ -147,13 +161,15 @@ class Review extends Component {
     return (
       <>
         <div className='row'>
-          <h4>
-            {`${positionName} ${this.candidateCount(
-              positionName
-            )} of ${numberNeeded}`}
-          </h4>
+          <div className='col-12'>
+            <h4>
+              {`${positionName} ${this.candidateCount(
+                positionName
+              )} of ${numberNeeded}`}
+            </h4>
+          </div>
+          <div className='col-12'>{this.renderCandidates('Councillor')}</div>
         </div>
-        <div className='row'>{this.renderCandidates('Councillor')}</div>
       </>
     );
   };
