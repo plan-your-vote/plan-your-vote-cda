@@ -14,19 +14,19 @@ class Review extends Component {
     pageDescription: null,
     ballotIssues: [],
     candidatesSelected: [],
-    positionsSummary: []
+    racesSummary: []
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.loadApiData().then(response => {
-      const positionsSummary = this.summarizeCandidates(response.races.races);
+      const racesSummary = this.summarizeCandidates(response.races.races);
       if (this._isMounted) {
         this.setState({
           pageTitle: response.step.stepTitle,
           pageDescription: response.step.stepDescription,
           ballotIssues: response.ballotIssues.ballotIssues,
-          positionsSummary,
+          racesSummary,
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
@@ -55,14 +55,14 @@ class Review extends Component {
   };
 
   summarizeCandidates = (races = []) => {
-    const positionsSummary = [];
+    const racesSummary = [];
     races.forEach(race => {
-      positionsSummary.push({
+      racesSummary.push({
         positionName: race.positionName,
         numberNeeded: race.numberNeeded
       });
     });
-    return positionsSummary;
+    return racesSummary;
   };
 
   renderCandidates = race => {
@@ -160,16 +160,14 @@ class Review extends Component {
   candidatesSummary = (positionName, numberNeeded) => {
     return (
       <>
-        <div className='row'>
-          <div className='col-12'>
-            <h4>
-              {`${positionName} ${this.candidateCount(
-                positionName
-              )} of ${numberNeeded}`}
-            </h4>
-          </div>
-          <div className='col-12'>{this.renderCandidates('Councillor')}</div>
+        <div className='col-12'>
+          <h4>
+            {`${positionName} ${this.candidateCount(
+              positionName
+            )} of ${numberNeeded}`}
+          </h4>
         </div>
+        <div className='col-12'>{this.renderCandidates('Councillor')}</div>
       </>
     );
   };
@@ -190,10 +188,13 @@ class Review extends Component {
             YOUR CANDIDATES IN BALLOT ORDER:
           </h3>
         </div>
-        {this.candidatesSummary('Mayer', 1)}
-        {this.candidatesSummary('Councillor', 10)}
-        {this.candidatesSummary('School trustee', 9)}
-        {this.candidatesSummary('Park Board commissioner', 5)}
+        {this.state.racesSummary.map(race => {
+          return (
+            <div className='row' key={race.positionName}>
+              {this.candidatesSummary(race.positionName, race.numberNeeded)}
+            </div>
+          );
+        })}
         <div className='row reviewHeaderTitle'>
           <h3 className='card-subtitle mb-2 text-muted'>
             YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS:
