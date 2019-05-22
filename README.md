@@ -21,3 +21,8 @@
 This project is licensed under the TODO License. Please see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
+
+## Docs 
+
+- See `https://<username>.github.io/<repo-name>`
+  - Example: `https://amyhong0502.github.io/plan-your-vote-cda/`
