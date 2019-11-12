@@ -38,7 +38,7 @@ class Home extends Component {
         aria-label='Start Voting: link to step 1 of planning your vote. Reminder: This is a planning application, actual voting must be done in person on election day.'
         className='get-started get-started-new'
       >
-        <span className='text'>Start Planning!</span>
+        <span className='text'>Start planning your vote!</span>
         &nbsp;
         <span className='fas fa-chevron-right' />
       </Link>
