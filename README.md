@@ -5,7 +5,7 @@
 ##### Clone the repo
 
 ```bash
-$ git clone https://github.com/msalamat/plan-your-vote-cda.git`
+$ git clone https://github.com/msalamat/plan-your-vote-cda.git
 $ cd plan-your-vote-cda/
 ```
 
@@ -74,6 +74,8 @@ Now, give a meaningful name to your pull request by prepending your issue number
 
 [Figure 4](https://imgur.com/27gCLII)
 
+Now, you can finally click the green "Create pull request" button.
+
 If everything proceeded without failure, you should see the following page. The review will be done soon and your hard earned work will be etched into the project's history.
 
 [Figure 5](https://imgur.com/xq1JTJc)
@@ -81,7 +83,8 @@ If everything proceeded without failure, you should see the following page. The 
 With a good mental, this should have been a great and easy process. Good work for helping progress your city's future, citizen.
 
 ##### Ending
-When you are done with your branch, delete it.
+
+Once the pull request has been approved, you are safe to delete your branch.
 
 ```bash
 $ git checkout develop
