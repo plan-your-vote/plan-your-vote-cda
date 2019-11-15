@@ -1,12 +1,11 @@
 import React from 'react';
 import { CMS_BASE_URL } from 'constants/baseURL';
-import './style.css';
 
 const CandidateCard = ({ candidate, displayModal }) => {
   return (
-    <div className='col-sm-3'>
+    <div className='col-sm-3 col-6'>
       <div
-        className='card'
+        class='card'
         onClick={() => displayModal(candidate)}
         data-toggle='modal'
         data-target={`#candidate-${candidate.candidateId}-modal`}
