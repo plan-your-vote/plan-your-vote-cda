@@ -25,7 +25,7 @@ const CandidateModal = ({
     return priority.text;
   };
 
-  /** Darren Add the two function to fix the platform issue#83. */
+  /** Darren Add the two function to fix the platform issue#87. */
   const getDesiredDetailOthers = () =>{
     let desiredDetailOthers = [];
     candidate.details.map(detail => {
@@ -48,7 +48,7 @@ const CandidateModal = ({
       </div>
     );
   })
-  /** Darren Add the two function to fix the platform issue#83. */
+  /** Darren Add the two function to fix the platform issue#87. */
   const contactMethodList = [
     'Phone',
     'Email',
