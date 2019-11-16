@@ -33,7 +33,8 @@ class App extends Component {
         format: ''
       }
     ],
-    themeHref: ''
+    themeHref: '',
+    socialMedia: []
   };
 
   componentDidMount() {
@@ -51,6 +52,13 @@ class App extends Component {
           images: result.images
         });
       });
+    await fetch(`${CMS_BASE_URL}/api/socialmedia`)
+        .then(res=> res.json())
+        .then(result => {
+          this.setState( {
+            socialMedia: result.socialMedias
+          });
+        });
   };
 
   setTheme = () => {
@@ -89,6 +97,7 @@ class App extends Component {
             logo={this.state.images.find(image => {
               return image.placement === 'Footer Logo';
             })}
+            socialMedia={this.state.socialMedia}
           />
         </Router>
       </>
