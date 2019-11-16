@@ -13,11 +13,13 @@ class Candidates extends Component {
 
   state = {
     races: [],
+    filteredRaces: [],
     candidatesHeader: {
       stepTitle: '',
       stepDescription: ''
     },
     selectedCandidates: [],
+    selectedRace: '',
     currentCard: {
       candidateId: '',
       name: '',
@@ -44,8 +46,15 @@ class Candidates extends Component {
     this.loadCandidatesApi().then(response => {
       if (this._isMounted) {
         const { stepTitle, stepDescription, stepNumber } = response.step;
+        let races = response.races.races;
+        for (const race of races) {
+          race.candidates.sort((a, b) => {
+            return a.ballotOrder - b.ballotOrder;
+          });
+        }
         this.setState({
           races: response.races.races,
+          filteredRaces: response.races.races,
           candidatesHeader: {
             stepTitle,
             stepDescription,
@@ -67,6 +76,15 @@ class Candidates extends Component {
     return data;
   };
 
+  toggleHighlightedCandidate(id) {
+    let candidate = document.getElementById(`candidate-card-${id}`);
+    if (candidate.style.border === "1px solid crimson") {
+      candidate.style.border = "";
+    } else {
+      candidate.style.border = "1px solid crimson";
+    }
+  } 
+
   selectBtn = (position, candidate) => event => {
     const { selectedCandidates } = this.state;
     const newCandidates = selectedCandidates.slice(0);
@@ -76,6 +94,8 @@ class Candidates extends Component {
 
     if (found > -1) {
       newCandidates.splice(found, 1);
+			this.toggleHighlightedCandidate(candidate.candidateId);
+
     } else {
       const temp = {
         candidateId: candidate.candidateId,
@@ -88,6 +108,7 @@ class Candidates extends Component {
       };
 
       newCandidates.push(temp);
+			this.toggleHighlightedCandidate(candidate.candidateId);
     }
 
     this.setState({ selectedCandidates: newCandidates }, () => {
@@ -156,20 +177,29 @@ class Candidates extends Component {
     }
 
     let races = this.state.races;
-
     if (e.target.value === 'ballot-order') {
       for (const race of races) {
         race.candidates.sort((a, b) => {
           return a.ballotOrder - b.ballotOrder;
         });
       }
-    } else if (e.target.value === 'asc') {
+    } else if (e.target.value === 'ascl') {
       for (const race of races) {
-        race.candidates.sort(this.sortByNameAsc);
+        race.candidates.sort(this.sortByLastNameAsc);
       }
-    } else if (e.target.value === 'desc') {
+    } else if (e.target.value === 'descl') {
       for (const race of races) {
-        race.candidates.sort(this.sortByNameDesc);
+        race.candidates.sort(this.sortByLastNameDesc);
+      }
+    }
+    //added
+    else if (e.target.value === 'ascf') {
+      for (const race of races) {
+        race.candidates.sort(this.sortByFirstNameAsc);
+      }
+    } else if (e.target.value === 'descf') {
+      for (const race of races) {
+        race.candidates.sort(this.sortByFirstNameDesc);
       }
     }
 
@@ -180,25 +210,92 @@ class Candidates extends Component {
     }
   };
 
-  sortByNameAsc = (a, b) => {
-    if (a.name < b.name) {
-      return -1;
+  filterByRace = e => {
+    if (this._isMounted) {
+      this.setState({
+        selectedRace: e.target.value
+      })
     }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  };
 
-  sortByNameDesc = (a, b) => {
-    if (a.name < b.name) {
-      return 1;
+    switch(e.target.value) {
+      case 'race-all': 
+        this.setState({
+          races: this.state.filteredRaces
+        })
+        break
+      case 'race-councillor': 
+        this.setState({
+          races: this.state.filteredRaces.filter((race) => race.positionName === "Councillor")
+        })
+        break
+      case 'race-parkboardcommissioner': 
+        this.setState({
+          races: this.state.filteredRaces.filter((race) => race.positionName === "Park Board commissioner")
+        })
+        break
+      case 'race-schooltrustee':
+        this.setState({
+          races: this.state.filteredRaces.filter((race) => race.positionName === "School trustee")
+        })
+        break
+      case 'race-vicepresident': 
+        this.setState({
+          races: this.state.filteredRaces.filter((race) => race.positionName === "Vice President")
+        })
+        break
+      case 'race-mayor': 
+        this.setState({
+          races: this.state.filteredRaces.filter((race) => race.positionName === "Mayor")
+        })
+        break
+      default: 
+        this.setState({
+          races: this.state.filteredRaces
+        })
+      }
     }
-    if (a.name > b.name) {
-      return -1;
-    }
-    return 0;
-  };
+
+    //original function
+    sortByLastNameAsc = (a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    };
+  
+    sortByLastNameDesc = (a, b) => {
+      if (a.name < b.name) {
+        return 1;
+      }
+      if (a.name > b.name) {
+        return -1;
+      }
+      return 0;
+    };
+  
+    //added
+    sortByFirstNameAsc = (a, b) => {
+      if (a.name.split(" ")[1] < b.name.split(" ")[1]) {
+        return -1;
+      }
+      if (a.name.split(" ")[1] > b.name.split(" ")[1]) {
+        return 1;
+      }
+      return 0;
+    };
+  
+    sortByFirstNameDesc = (a, b) => {
+      if (a.name.split(" ")[1] < b.name.split(" ")[1]) {
+        return 1;
+      }
+      if (a.name.split(" ")[1] > b.name.split(" ")[1]) {
+        return -1;
+      }
+      return 0;
+    };
 
   render() {
     const { candidatesHeader } = this.state;
@@ -255,9 +352,24 @@ class Candidates extends Component {
           value={this.state.sortOption}
         >
           <option value='ballot-order'>Ballot Order</option>
-          <option value='asc'>A to Z</option>
-          <option value='desc'>Z to A</option>
+          <option value='ascl'>A to Z by Last Name</option>
+          <option value='ascf'>A to Z by First Name</option>
+          <option value='descl'>Z to A by Last Name</option>
+          <option value='descf'>Z to A by First Name</option>
         </select>
+        <select
+          className='custom-select mb-3'
+          onChange={this.filterByRace}
+          value={this.state.selectedRace}
+        >
+          <option value='race-all'>All</option>
+          <option value='race-councillor'>Councillor</option>
+          <option value='race-parkboardcommissioner'>Park Board Commissioner</option>
+          <option value='race-schooltrustee'>School Trustee</option>
+          <option value='race-vicepresident'>Vice President</option>
+          <option value='race-mayor'>Mayor</option>
+        </select>
+
         <SectionHeader
           title={candidatesHeader.stepTitle}
           level='2'
