@@ -25,6 +25,30 @@ const CandidateModal = ({
     return priority.text;
   };
 
+  /** Darren Add the two function to fix the platform issue#83. */
+  const getDesiredDetailOthers = () =>{
+    let desiredDetailOthers = [];
+    candidate.details.map(detail => {
+      if (detail.title !== 'Priority 1' && detail.title !== 'Priority 2' && detail.title !== 'Priority 3') {
+        desiredDetailOthers.push(detail);
+      }
+      return null;
+     });
+    return desiredDetailOthers;
+  }
+  var data = getDesiredDetailOthers();
+
+  const detailOthers = data.map((detail,index) => {
+    return (
+      <div key={index}>
+        <p className='modalTitles'>
+            {detail.title}
+        </p>
+        {detail.text}
+      </div>
+    );
+  })
+  /** Darren Add the two function to fix the platform issue#83. */
   const contactMethodList = [
     'Phone',
     'Email',
@@ -166,10 +190,9 @@ const CandidateModal = ({
               <p>1. {displayPriority(getDesiredDetail('Priority 1'))}</p>
               <p>2. {displayPriority(getDesiredDetail('Priority 2'))}</p>
               <p>3. {displayPriority(getDesiredDetail('Priority 3'))}</p>
-              <p className='modalTitles'>Platform</p>
-              {displayPriority(getDesiredDetail('Platform'))}
-              <p className='modalTitles'>Biography</p>
-              {displayPriority(getDesiredDetail('Biography'))}
+
+              {detailOthers}
+              
               {displayContact}
             </div>
             <div className='modal-footer'>
