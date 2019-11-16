@@ -9,6 +9,7 @@ const CandidateCard = ({ candidate, displayModal }) => {
         onClick={() => displayModal(candidate)}
         data-toggle='modal'
         data-target={`#candidate-${candidate.candidateId}-modal`}
+				id={`candidate-card-${candidate.candidateId}`}
       >
         <img
           src={`${CMS_BASE_URL}/${candidate.picture}`}
