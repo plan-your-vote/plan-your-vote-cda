@@ -1,28 +1,92 @@
-# Plan Your Vote [![GitHub license](https://flat.badgen.net/badge/license/undefined/blue)](./LICENSE.txt) [![PRs Welcome](https://flat.badgen.net/badge/PRs/welcome/green)](https://github.com/AmyHong0502/pyv-spa/pulls) [![Known Vulnerabilities](https://snyk.io/test/github/AmyHong0502/pyv-spa/badge.svg?targetFile=website%2Fpackage.json)](https://snyk.io/test/github/AmyHong0502/pyv-spa?targetFile=website%2Fpackage.json) [![Maintainability](https://api.codeclimate.com/v1/badges/637bf88221afe9de3f4d/maintainability)](https://codeclimate.com/github/AmyHong0502/pyv-spa/maintainability) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+## Getting started
 
-| ![IE / Microsoft Edge](https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png)<br>IE / Edge | ![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)<br>Firefox | ![Google Chrome](https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)<br>Chrome | ![Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png)<br>Safari | ![iOS Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png)<br>iOS Safari |
-| ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| IE 11                                                                                                                     | Firefox 999+                                                                                                      | Chrome 999+                                                                                                          | Safari 999+                                                                                                   | Safari 999+                                                                                                                   |
+### Terminal side
 
-## Getting Started
+##### Clone the repo
 
-### Prerequisites
+```bash
+$ git clone https://github.com/msalamat/plan-your-vote-cda.git
+$ cd plan-your-vote-cda/
+```
 
-### Installing
+##### Make sure everything is fine
 
-### Deployment
+```bash
+$ git status
+$ git branch -a
+```
 
-## Built with
+##### Make sure we are in develop, if not,
 
-- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+```bash
+$ git checkout develop
+```
 
-## License
+##### Branch off and checkout into it using following the naming convention
 
-This project is licensed under the TODO License. Please see the [LICENSE.md](LICENSE.md) file for details.
+```bash
+$ git checkout -b issue-<number>
+```
+e.g.
+```bash
+$ git checkout -b issue-999
+```
 
-## Acknowledgments
+##### Make your changes. Then commit them to your own branch.
 
-## Docs 
+e.g.
+I make changes to src/pages/home/index.jsx
 
-- See `https://<username>.github.io/<repo-name>`
-  - Example: `https://amyhong0502.github.io/plan-your-vote-cda/`
+```bash
+$ git add . OR $ git add src/pages/home/index.jsx
+$ git commit -m "issue-999 update main page title"
+$ git push
+```
+
+You will be asked to set your upstream before. Set it like so while pushing:
+
+```bash
+$ git push --set-upstream origin issue-<number>
+```
+e.g.
+```bash
+$ git push --set-upstream origin issue-999
+```
+
+Your changes to git will be either approved or disapproved.
+
+#### GitHub side
+
+
+Now, it's time to head over to GitHub. You should see your recently pushed branch viewable on GitHub's interface. Click "Compare & pull request".
+
+[Figure 1](https://imgur.com/5wlN54W)
+
+Now, make sure to change to the right base repository. This step is very important, as we are not pushing into the original repository.
+
+[Figure 2](https://imgur.com/uYQDZm2)
+
+We wish to push our commits into the develop branch, so we select the base branch to be develop.
+
+[Figure 3](https://imgur.com/HE74cns)
+
+Now, give a meaningful name to your pull request by prepending your issue number to the title section.
+
+[Figure 4](https://imgur.com/27gCLII)
+
+Now, you can finally click the green "Create pull request" button.
+
+If everything proceeded without failure, you should see the following page. The review will be done soon and your hard earned work will be etched into the project's history.
+
+[Figure 5](https://imgur.com/xq1JTJc)
+
+With a good mental, this should have been a great and easy process. Good work for helping progress your city's future, citizen.
+
+##### Ending
+
+Once the pull request has been approved, you are safe to delete your branch.
+
+```bash
+$ git checkout develop
+$ git branch -D issue-999
+```
