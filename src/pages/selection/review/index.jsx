@@ -42,12 +42,13 @@ class Review extends Component {
 
   loadApiData = async () => {
     const ballotIssues = await pyv.get('/api/ballotissues');
-    const steps = await pyv.get('/api/steps');
+    //const steps = await pyv.get('/api/steps');
+    const step = await pyv.get('/api/steps/4');
     const races = await pyv.get('/api/races');
 
     const data = {
       ballotIssues: ballotIssues.data,
-      step: steps.data[3],
+      step: step.data,
       races: races.data
     };
 
