@@ -76,6 +76,15 @@ class Candidates extends Component {
     return data;
   };
 
+  toggleHighlightedCandidate(id) {
+    let candidate = document.getElementById(`candidate-card-${id}`);
+    if (candidate.style.border === "1px solid crimson") {
+      candidate.style.border = "";
+    } else {
+      candidate.style.border = "1px solid crimson";
+    }
+  } 
+
   selectBtn = (position, candidate) => event => {
     const { selectedCandidates } = this.state;
     const newCandidates = selectedCandidates.slice(0);
@@ -85,6 +94,8 @@ class Candidates extends Component {
 
     if (found > -1) {
       newCandidates.splice(found, 1);
+			this.toggleHighlightedCandidate(candidate.candidateId);
+
     } else {
       const temp = {
         candidateId: candidate.candidateId,
@@ -97,6 +108,7 @@ class Candidates extends Component {
       };
 
       newCandidates.push(temp);
+			this.toggleHighlightedCandidate(candidate.candidateId);
     }
 
     this.setState({ selectedCandidates: newCandidates }, () => {
@@ -218,12 +230,12 @@ class Candidates extends Component {
         break
       case 'race-parkboardcommissioner': 
         this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "Park Board commissioner")
+          races: this.state.filteredRaces.filter((race) => race.positionName === "Park Board Commissioner")
         })
         break
       case 'race-schooltrustee':
         this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "School trustee")
+          races: this.state.filteredRaces.filter((race) => race.positionName === "School Trustee")
         })
         break
       case 'race-vicepresident': 

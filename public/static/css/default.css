@@ -183,7 +183,7 @@ a {
 }
 
 /* Navbar */
-#header {
+nav {
   background-image: linear-gradient(
     135deg,
     rgba(230, 0, 81, 1) 0%,
@@ -300,11 +300,10 @@ th,
   padding-top: 0;
 }
 
-.step-selection nav > a {
+.step-selection .navbar a {
   background-color: #e60050;
   border-radius: 25px;
   border-right: 2px solid #fff;
-  border-top: 2px solid #fff;
   color: #fff;
 }
 
@@ -335,7 +334,6 @@ th,
   font-size: 1.5em;
   display: inline-block;
   font-family: Helvetica;
-  margin-top: 20px;
 }
 
 .nextBtn {
@@ -345,7 +343,6 @@ th,
     border-right: 2px solid rgb(255, 255, 255);
     float: right;
     font-size: 1.5em;
-    margin-top: 20px;
 }
 
 /* Review Page Styling */
