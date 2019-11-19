@@ -60,7 +60,7 @@ class App extends Component {
           });
         });
   };
-
+  
   setTheme = () => {
     switch (this.state.themeName) {
       case 'Maple':
@@ -68,6 +68,12 @@ class App extends Component {
         break;
       case 'Snowdrop':
         this.setState({ themeHref: `${themes.BASE}${themes.SNOWDROP}` });
+        break;
+      case 'Green':
+        this.setState({ themeHref: `${themes.BASE}${themes.GREEN}` });
+        break;
+      case 'Ocean':
+        this.setState({ themeHref: `${themes.BASE}${themes.OCEAN}` });
         break;
       default:
         this.setState({ themeHref: `${themes.BASE}${themes.DEFAULT}` });
