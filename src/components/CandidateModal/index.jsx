@@ -25,6 +25,12 @@ const CandidateModal = ({
     return priority.text;
   };
 
+  const displayHTML = htmlString => (
+    <span
+      dangerouslySetInnerHTML={{ __html: htmlString }}
+    ></span>
+  );
+
   /** Darren Add the two function to fix the platform issue#87. */
   const getDesiredDetailOthers = () =>{
     let desiredDetailOthers = [];
@@ -41,10 +47,10 @@ const CandidateModal = ({
   const detailOthers = data.map((detail,index) => {
     return (
       <div key={index}>
-        <p className='modalTitles'>
-            {detail.title}
-        </p>
-        {detail.text}
+        <span className="modalTitles">
+          {displayHTML(detail.title)}
+        </span>
+        {displayHTML(detail.text)}
       </div>
     );
   })
@@ -187,9 +193,19 @@ const CandidateModal = ({
             <div className='modalScroll'>
               <span className='modalTitles'>Top 3 Priorities</span>
               <br />
-              <p>1. {displayPriority(getDesiredDetail('Priority 1'))}</p>
-              <p>2. {displayPriority(getDesiredDetail('Priority 2'))}</p>
-              <p>3. {displayPriority(getDesiredDetail('Priority 3'))}</p>
+              <ol>
+                <li>
+                  {displayHTML(displayPriority(getDesiredDetail("Priority 1")))}
+                </li>
+                <li>
+                  
+                  {displayHTML(displayPriority(getDesiredDetail("Priority 2")))}
+                </li>
+                <li>
+                  
+                  {displayHTML(displayPriority(getDesiredDetail("Priority 3")))}
+                </li>
+              </ol>
 
               {detailOthers}
               
