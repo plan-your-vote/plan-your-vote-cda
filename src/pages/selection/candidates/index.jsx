@@ -230,12 +230,12 @@ class Candidates extends Component {
         break
       case 'race-parkboardcommissioner': 
         this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "Park Board commissioner")
+          races: this.state.filteredRaces.filter((race) => race.positionName === "Park Board Commissioner")
         })
         break
       case 'race-schooltrustee':
         this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "School trustee")
+          races: this.state.filteredRaces.filter((race) => race.positionName === "School Trustee")
         })
         break
       case 'race-vicepresident': 
