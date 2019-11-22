@@ -197,50 +197,23 @@ class Candidates extends Component {
       });
     }
   };
-
+  /* Peter Kim cda issue 78: filterByRace is called whenever a race selection dropdown value is 
+     selected. This checks the chosen value, and if it is 'All', (currently hard-coded into HTML)
+     displays all races. If a specific race is chosen, a filtered race result is displayed.
+     Note that this actually updates the race state, to display only the chosen race-related UI. */
   filterByRace = e => {
     if (this._isMounted) {
       this.setState({
         selectedRace: e.target.value
       })
     }
-
-    switch(e.target.value) {
-      case 'race-all': 
-        this.setState({
-          races: this.state.filteredRaces
-        })
-        break
-      case 'race-councillor': 
-        this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "Councillor")
-        })
-        break
-      case 'race-parkboardcommissioner': 
-        this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "Park Board Commissioner")
-        })
-        break
-      case 'race-schooltrustee':
-        this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "School Trustee")
-        })
-        break
-      case 'race-vicepresident': 
-        this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "Vice President")
-        })
-        break
-      case 'race-mayor': 
-        this.setState({
-          races: this.state.filteredRaces.filter((race) => race.positionName === "Mayor")
-        })
-        break
-      default: 
-        this.setState({
-          races: this.state.filteredRaces
-        })
-      }
+    e.target.value === 'All' ? 
+      this.setState({
+        races: this.state.filteredRaces
+      }) :
+      this.setState({
+        races: this.state.filteredRaces.filter((race) => race.positionName === e.target.value)
+      })
     }
 
     //original function
@@ -325,6 +298,18 @@ class Candidates extends Component {
       });
     });
 
+    /* Peter Kim, cda issue 78: Created a const raceFilter to dynamically render all race options 
+       available from race state into option tags. Since "All" option is not included within the 
+       race state, manually going to insert the "All" option within the HTML return below. 
+       TODO: Should "All" option be part of the "races" state? It seems like a desirable option for 
+       any election to have. */
+    const raceFilter = this.state.filteredRaces.length === 0 ? null 
+    : this.state.filteredRaces.map((race => {
+      return (
+        <option value={race.positionName} key={race.positionName}>{race.positionName}</option>
+      );
+    }))
+
     return (
       <div className='container'>
         <div className='canTable'>
@@ -350,12 +335,8 @@ class Candidates extends Component {
           onChange={this.filterByRace}
           value={this.state.selectedRace}
         >
-          <option value='race-all'>All</option>
-          <option value='race-councillor'>Councillor</option>
-          <option value='race-parkboardcommissioner'>Park Board Commissioner</option>
-          <option value='race-schooltrustee'>School Trustee</option>
-          <option value='race-vicepresident'>Vice President</option>
-          <option value='race-mayor'>Mayor</option>
+          <option value='All' key='All'>All</option> 
+          {raceFilter}
         </select>
 
         <SectionHeader
