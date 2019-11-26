@@ -6,7 +6,7 @@ const SelectionNavitation = () => {
   return (
     <nav class="nav nav-justified">
           <Link to={routes.CANDIDATES} className="nav-item nav-link col-sm">Candidates</Link>
-          <Link to={routes.CAPITAL} className="nav-item nav-link col-sm">Capital</Link>
+          <Link to={routes.CAPITAL} className="nav-item nav-link col-sm">Questions</Link>
           <Link to={routes.SCHEDULE} className="nav-item nav-link col-sm">Schedule</Link>
           <Link to={routes.REVIEW} className="nav-item nav-link col-sm">Review</Link>
     </nav>
