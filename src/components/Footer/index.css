@@ -24,3 +24,21 @@
   color: #0077b5;
   filter: opacity(0.65);
 }
+
+#instagram > .fa-circle {
+  color: #C13584;
+}
+
+#instagram:hover {
+  color: #C13584;
+  filter: opacity(0.65);
+}
+
+#youtube > .fa-circle {
+  color: #C4302b;
+}
+
+#youtube:hover {
+  color: #C4302b;
+  filter: opacity(0.65);
+}
