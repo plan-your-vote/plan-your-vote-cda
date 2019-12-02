@@ -44,6 +44,9 @@ class Candidates extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(response => {
+      let selections = JSON.parse(window.sessionStorage.getItem('selectedCandidateRaces'));
+      if (selections == null)
+        selections = [];
       if (this._isMounted) {
         const { stepTitle, stepDescription, stepNumber } = response.step;
         let races = response.races.races;
@@ -59,7 +62,8 @@ class Candidates extends Component {
             stepTitle,
             stepDescription,
             stepNumber
-          }
+          },
+          selectedCandidates: selections,
         });
       }
     });
