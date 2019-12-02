@@ -94,45 +94,49 @@ class Review extends Component {
   removeFunc = candidate => {
     const { candidatesSelected } = this.state;
 
-    let storageCopy = candidatesSelected.slice(0);
+    // this.storageCopy = candidatesSelected.slice(0);
     const found = candidatesSelected.findIndex(
       cand => cand.candidateId === candidate.candidateId
     );
 
     if (found > -1) {
-      storageCopy.splice(found, 1);
+      candidatesSelected.splice(found, 1);
     } else {
       console.error('Candidate Not Found!?');
     }
 
     this.setState(
       {
-        candidatesSelected: storageCopy
+        candidatesSelected
       },
       () => {
         if (found > -1) {
           sessionStorage.removeItem('selectedCandidateRaces');
+          console.log(1231231);
         }
         sessionStorage.setItem(
           'selectedCandidateRaces',
-          JSON.stringify(storageCopy)
+          JSON.stringify(candidatesSelected)
         );
       }
     );
   };
 
   candidateCount = positionName => {
-    const storage = JSON.parse(
-      sessionStorage.getItem('selectedCandidateRaces')
-    );
-    let count = 0;
+    const { candidatesSelected } = this.state;
+    // const storage = JSON.parse(
+    //   sessionStorage.getItem('selectedCandidateRaces')
+    // );
 
-    if (!storage) {
+    let count = 0;
+    console.log(candidatesSelected.length);
+    if (!candidatesSelected) {
       return count;
     }
 
-    for (let i = 0; i < storage.length; i++) {
-      if (storage[i].candidatePosition === positionName) {
+    for (let i = 0; i < candidatesSelected.length; i++) {
+      if (candidatesSelected[i].candidatePosition === positionName) {
+        console.log(candidatesSelected[i]);
         count += 1;
       }
     }
