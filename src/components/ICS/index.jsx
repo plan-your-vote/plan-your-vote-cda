@@ -1,4 +1,5 @@
 import React from 'react';
+import onButtonClick from 'components/PDF';
 
 const dateSelector = dates => {
   const options = dates.map(date => {
@@ -8,7 +9,8 @@ const dateSelector = dates => {
   return <select id='dateSelector'>{options}</select>;
 };
 
-const ICS = () => {
+
+const ICS = ({data}) => {
   return (
     <div>
       <label
@@ -24,6 +26,7 @@ const ICS = () => {
       <button
         aria-label='Generating and downloading pdf summary of your plan. Remember to officially vote in person on election day.'
         className='btn btn-secondary'
+        onClick={() => onButtonClick(data)}
       >
         Generate Voting Plan PDF
       </button>

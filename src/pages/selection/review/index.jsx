@@ -30,7 +30,8 @@ class Review extends Component {
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
-          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace'))
+          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace')),
+          race: response.races.races,
         });
       }
     });
@@ -218,7 +219,7 @@ class Review extends Component {
           <div className='col-md-6' />
           <div className='col-md-6'>
             <Email />
-            <ICS />
+            <ICS data={this.state}/>
           </div>
         </div>
         <Link to={routes.SCHEDULE} className='btn btn-secondary backBtn'>
