@@ -95,7 +95,6 @@ class Review extends Component {
   removeFunc = candidate => {
     const { candidatesSelected } = this.state;
 
-    // this.storageCopy = candidatesSelected.slice(0);
     const found = candidatesSelected.findIndex(
       cand => cand.candidateId === candidate.candidateId
     );
@@ -113,7 +112,6 @@ class Review extends Component {
       () => {
         if (found > -1) {
           sessionStorage.removeItem('selectedCandidateRaces');
-          console.log(1231231);
         }
         sessionStorage.setItem(
           'selectedCandidateRaces',
@@ -125,19 +123,14 @@ class Review extends Component {
 
   candidateCount = positionName => {
     const { candidatesSelected } = this.state;
-    // const storage = JSON.parse(
-    //   sessionStorage.getItem('selectedCandidateRaces')
-    // );
 
     let count = 0;
-    console.log(candidatesSelected.length);
     if (!candidatesSelected) {
       return count;
     }
 
     for (let i = 0; i < candidatesSelected.length; i++) {
       if (candidatesSelected[i].candidatePosition === positionName) {
-        console.log(candidatesSelected[i]);
         count += 1;
       }
     }
