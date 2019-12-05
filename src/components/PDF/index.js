@@ -18,6 +18,7 @@ const fonts = {
     ZapfDingbats: require('pdfjs/font/ZapfDingbats.js'),
 }
 
+// Style objects
 const normal_cell = { lineHeight: 2, textAlign: "center" };
 const bold_cell = { lineHeight: 2, textAlign: "center", font: fonts.HelveticaBold, fontSize: 13 };
 const tableStyle = {
@@ -28,21 +29,21 @@ const tableStyle = {
 
 
 function render(data) {
-    const fetchArray = [fetch(logo), fetch(check)];
+    const fetchArray = [fetch(logo), fetch(check)];// array of Promises for fetching images
     return Promise.all(fetchArray)
         .then(res => Promise.all(res.map(r => r.arrayBuffer())))
         .then(imagesData => {
             const logo = new pdfjs.Image(imagesData[0]);
             const check = new pdfjs.Image(imagesData[1]);
-            const first = new pdfjs.Document({ padding: 10 });
-            const middle = new pdfjs.Document({ padding: 10 });
-            const last = new pdfjs.Document({ padding: 10 });
+            const first = new pdfjs.Document({ padding: 10 }); // pdf for first page
+            const middle = new pdfjs.Document({ padding: 10 }); // pdf for ballot order
+            const last = new pdfjs.Document({ padding: 10 }); // pdf for miscelleous questions
             buildFirstPage(first, logo, data);
             buildMiddlePage(middle, check, data);
             return Promise.all([first.asBuffer(), middle.asBuffer()])
                 .then(buffers => {
-                    last.addPagesOf(new pdfjs.ExternalDocument(buffers[0]));
-                    last.addPagesOf(new pdfjs.ExternalDocument(buffers[1]));
+                    last.addPagesOf(new pdfjs.ExternalDocument(buffers[0]));// adds the first page to the pdf
+                    last.addPagesOf(new pdfjs.ExternalDocument(buffers[1]));// adds ballot-order pages
                     buildLastPage(last);
                     return last.asBuffer()
                 }).then(buf => {
@@ -52,6 +53,7 @@ function render(data) {
         })
 }
 
+// This content is hard-coded for now but can be changed in the future
 function buildFirstPage(doc, logo, data) {
     const header = doc.header().table({ widths: [null, null], paddingBottom: 1 * pdfjs.cm }).row()
     header.cell().image(logo, { height: 2 * pdfjs.cm })
@@ -200,6 +202,7 @@ function buildMiddlePage(doc, check, data) {
 const onButtonClick = function (data) {
     render(data)
         .then(function (url) {
+          // Downloading the file 
             const link = document.createElement('a');
             // create a blobURI pointing to our Blob
             link.href = url;
