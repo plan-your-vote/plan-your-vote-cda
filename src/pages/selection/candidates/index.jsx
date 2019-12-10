@@ -360,10 +360,13 @@ class Candidates extends Component {
           level='2'
           description={candidatesHeader.stepDescription}
         />
+        <Link to={routes.CAPITAL} className='btn btn-secondary nextBtn'>
+          NEXT
+        </Link>
         {candidates}
         {this.renderModal()}
         <br />
-        <Link to={routes.CAPITAL} className='btn btn-secondary  nextBtn'>
+        <Link to={routes.CAPITAL} className='btn btn-secondary nextBtn'>
           NEXT
         </Link>
         <br />
