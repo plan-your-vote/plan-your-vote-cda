@@ -43,13 +43,14 @@ const CandidateModal = ({
     return desiredDetailOthers;
   }
   var data = getDesiredDetailOthers();
-
+  /* Peter Kim. Front-end issue #3.
+     Added a colon between detail.title and detail.text. */
   const detailOthers = data.map((detail,index) => {
     return (
       <div key={index}>
         <span className="modalTitles">
           {displayHTML(detail.title)}
-        </span>
+        : </span>
         {displayHTML(detail.text)}
       </div>
     );
