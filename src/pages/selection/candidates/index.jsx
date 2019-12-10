@@ -307,7 +307,11 @@ class Candidates extends Component {
           });
 
     const positionsSummary = [];
-    this.state.races.forEach(race => {
+    /* Peter Kim. Front-End issue #4. This fixes the bug where filter by race breaks
+       when attempting to filter after a candidate selection. the state "filteredRaces"
+       will have a constant length (of all races), compared to the state "races" which
+       would update dynamically, based on user selection.  */
+    this.state.filteredRaces.forEach(race => {
       positionsSummary.push({
         positionName: race.positionName,
         numberNeeded: race.numberNeeded
