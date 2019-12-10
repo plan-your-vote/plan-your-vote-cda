@@ -49,7 +49,7 @@ const CandidateModal = ({
     return (
       <div key={index}>
         <span className="modalTitles">
-          {displayHTML(detail.title)}
+          {displayHTML(detail.title)}:{" "}
         : </span>
         {displayHTML(detail.text)}
       </div>
