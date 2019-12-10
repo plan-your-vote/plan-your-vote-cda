@@ -1,6 +1,6 @@
-a {
-    color: #0072ee;
-  }
+.nav-item{
+  color:inherit
+}
   
   /* Home page */
   .intro h1 {
