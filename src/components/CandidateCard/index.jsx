@@ -5,7 +5,7 @@ const CandidateCard = ({ candidate, displayModal }) => {
   return (
     <div className='col-sm-3 col-6'>
       <div
-        class='card'
+        className='card'
         onClick={() => displayModal(candidate)}
         data-toggle='modal'
         data-target={`#candidate-${candidate.candidateId}-modal`}
