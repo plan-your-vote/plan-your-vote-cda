@@ -50,7 +50,7 @@ const CandidateModal = ({
       <div key={index}>
         <span className="modalTitles">
           {displayHTML(detail.title)}:{" "}
-        : </span>
+         </span>
         {displayHTML(detail.text)}
       </div>
     );
