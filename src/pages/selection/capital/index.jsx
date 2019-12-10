@@ -105,14 +105,20 @@ class Capital extends Component {
               level='2'
               description={this.state.header.stepDescription}
             />
+            <Link to={routes.CANDIDATES} className='btn btn-secondary backBtn'>
+              BACK
+            </Link>
+            <Link to={routes.SCHEDULE} className='btn btn-secondary nextBtn'>
+              NEXT
+            </Link>
           </div>
         </div>
         <div className='row mb-4'>{mcQ}</div>
         <br />
-        <Link to={routes.CANDIDATES} className='btn btn-secondary  backBtn'>
+        <Link to={routes.CANDIDATES} className='btn btn-secondary backBtn'>
           BACK
         </Link>
-        <Link to={routes.SCHEDULE} className='btn btn-secondary  nextBtn'>
+        <Link to={routes.SCHEDULE} className='btn btn-secondary nextBtn'>
           NEXT
         </Link>
         <br />
