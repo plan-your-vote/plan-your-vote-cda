@@ -1,3 +1,12 @@
+.fa-circle {
+  color: #38a1f3;
+}
+
+.fa-stack:hover {
+  color: #38a1f3;
+  filter: opacity(0.65);
+}
+
 #twitter > .fa-circle {
   color: #38a1f3;
 }
@@ -22,5 +31,23 @@
 
 #linkedin:hover {
   color: #0077b5;
+  filter: opacity(0.65);
+}
+
+#instagram > .fa-circle {
+  color: #C13584;
+}
+
+#instagram:hover {
+  color: #C13584;
+  filter: opacity(0.65);
+}
+
+#youtube > .fa-circle {
+  color: #C4302b;
+}
+
+#youtube:hover {
+  color: #C4302b;
   filter: opacity(0.65);
 }

@@ -13,11 +13,13 @@ class Candidates extends Component {
 
   state = {
     races: [],
+    filteredRaces: [],
     candidatesHeader: {
       stepTitle: '',
       stepDescription: ''
     },
     selectedCandidates: [],
+    selectedRace: '',
     currentCard: {
       candidateId: '',
       name: '',
@@ -42,15 +44,26 @@ class Candidates extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.loadCandidatesApi().then(response => {
+      let selections = JSON.parse(window.sessionStorage.getItem('selectedCandidateRaces'));
+      if (selections == null)
+        selections = [];
       if (this._isMounted) {
         const { stepTitle, stepDescription, stepNumber } = response.step;
+        let races = response.races.races;
+        for (const race of races) {
+          race.candidates.sort((a, b) => {
+            return a.ballotOrder - b.ballotOrder;
+          });
+        }
         this.setState({
           races: response.races.races,
+          filteredRaces: response.races.races,
           candidatesHeader: {
             stepTitle,
             stepDescription,
             stepNumber
-          }
+          },
+          selectedCandidates: selections,
         });
       }
     });
@@ -67,6 +80,15 @@ class Candidates extends Component {
     return data;
   };
 
+  toggleHighlightedCandidate(id) {
+    let candidate = document.getElementById(`candidate-card-${id}`);
+    if (candidate.style.border === "1px solid crimson") {
+      candidate.style.border = "";
+    } else {
+      candidate.style.border = "1px solid crimson";
+    }
+  } 
+
   selectBtn = (position, candidate) => event => {
     const { selectedCandidates } = this.state;
     const newCandidates = selectedCandidates.slice(0);
@@ -76,6 +98,8 @@ class Candidates extends Component {
 
     if (found > -1) {
       newCandidates.splice(found, 1);
+			this.toggleHighlightedCandidate(candidate.candidateId);
+
     } else {
       const temp = {
         candidateId: candidate.candidateId,
@@ -88,6 +112,7 @@ class Candidates extends Component {
       };
 
       newCandidates.push(temp);
+			this.toggleHighlightedCandidate(candidate.candidateId);
     }
 
     this.setState({ selectedCandidates: newCandidates }, () => {
@@ -156,20 +181,29 @@ class Candidates extends Component {
     }
 
     let races = this.state.races;
-
     if (e.target.value === 'ballot-order') {
       for (const race of races) {
         race.candidates.sort((a, b) => {
           return a.ballotOrder - b.ballotOrder;
         });
       }
-    } else if (e.target.value === 'asc') {
+    } else if (e.target.value === 'ascl') {
       for (const race of races) {
-        race.candidates.sort(this.sortByNameAsc);
+        race.candidates.sort(this.sortByLastNameAsc);
       }
-    } else if (e.target.value === 'desc') {
+    } else if (e.target.value === 'descl') {
       for (const race of races) {
-        race.candidates.sort(this.sortByNameDesc);
+        race.candidates.sort(this.sortByLastNameDesc);
+      }
+    }
+    //added
+    else if (e.target.value === 'ascf') {
+      for (const race of races) {
+        race.candidates.sort(this.sortByFirstNameAsc);
+      }
+    } else if (e.target.value === 'descf') {
+      for (const race of races) {
+        race.candidates.sort(this.sortByFirstNameDesc);
       }
     }
 
@@ -179,26 +213,66 @@ class Candidates extends Component {
       });
     }
   };
+  /* Peter Kim cda issue 78: filterByRace is called whenever a race selection dropdown value is 
+     selected. This checks the chosen value, and if it is 'All', (currently hard-coded into HTML)
+     displays all races. If a specific race is chosen, a filtered race result is displayed.
+     Note that this actually updates the race state, to display only the chosen race-related UI. */
+  filterByRace = e => {
+    if (this._isMounted) {
+      this.setState({
+        selectedRace: e.target.value
+      })
+    }
+    e.target.value === 'All' ? 
+      this.setState({
+        races: this.state.filteredRaces
+      }) :
+      this.setState({
+        races: this.state.filteredRaces.filter((race) => race.positionName === e.target.value)
+      })
+    }
 
-  sortByNameAsc = (a, b) => {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  };
-
-  sortByNameDesc = (a, b) => {
-    if (a.name < b.name) {
-      return 1;
-    }
-    if (a.name > b.name) {
-      return -1;
-    }
-    return 0;
-  };
+    //original function
+    sortByLastNameAsc = (a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    };
+  
+    sortByLastNameDesc = (a, b) => {
+      if (a.name < b.name) {
+        return 1;
+      }
+      if (a.name > b.name) {
+        return -1;
+      }
+      return 0;
+    };
+  
+    //added
+    sortByFirstNameAsc = (a, b) => {
+      if (a.name.split(" ")[1] < b.name.split(" ")[1]) {
+        return -1;
+      }
+      if (a.name.split(" ")[1] > b.name.split(" ")[1]) {
+        return 1;
+      }
+      return 0;
+    };
+  
+    sortByFirstNameDesc = (a, b) => {
+      if (a.name.split(" ")[1] < b.name.split(" ")[1]) {
+        return 1;
+      }
+      if (a.name.split(" ")[1] > b.name.split(" ")[1]) {
+        return -1;
+      }
+      return 0;
+    };
 
   render() {
     const { candidatesHeader } = this.state;
@@ -233,12 +307,28 @@ class Candidates extends Component {
           });
 
     const positionsSummary = [];
-    this.state.races.forEach(race => {
+    /* Peter Kim. Front-End issue #4. This fixes the bug where filter by race breaks
+       when attempting to filter after a candidate selection. the state "filteredRaces"
+       will have a constant length (of all races), compared to the state "races" which
+       would update dynamically, based on user selection.  */
+    this.state.filteredRaces.forEach(race => {
       positionsSummary.push({
         positionName: race.positionName,
         numberNeeded: race.numberNeeded
       });
     });
+
+    /* Peter Kim, cda issue 78: Created a const raceFilter to dynamically render all race options 
+       available from race state into option tags. Since "All" option is not included within the 
+       race state, manually going to insert the "All" option within the HTML return below. 
+       TODO: Should "All" option be part of the "races" state? It seems like a desirable option for 
+       any election to have. */
+    const raceFilter = this.state.filteredRaces.length === 0 ? null 
+    : this.state.filteredRaces.map((race => {
+      return (
+        <option value={race.positionName} key={race.positionName}>{race.positionName}</option>
+      );
+    }))
 
     return (
       <div className='container'>
@@ -255,18 +345,32 @@ class Candidates extends Component {
           value={this.state.sortOption}
         >
           <option value='ballot-order'>Ballot Order</option>
-          <option value='asc'>A to Z</option>
-          <option value='desc'>Z to A</option>
+          <option value='ascl'>A to Z by Last Name</option>
+          <option value='ascf'>A to Z by First Name</option>
+          <option value='descl'>Z to A by Last Name</option>
+          <option value='descf'>Z to A by First Name</option>
         </select>
+        <select
+          className='custom-select mb-3'
+          onChange={this.filterByRace}
+          value={this.state.selectedRace}
+        >
+          <option value='All' key='All'>All</option> 
+          {raceFilter}
+        </select>
+
         <SectionHeader
           title={candidatesHeader.stepTitle}
           level='2'
           description={candidatesHeader.stepDescription}
         />
+        <Link to={routes.CAPITAL} className='btn btn-secondary nextBtn'>
+          NEXT
+        </Link>
         {candidates}
         {this.renderModal()}
         <br />
-        <Link to={routes.CAPITAL} className='btn btn-secondary  nextBtn'>
+        <Link to={routes.CAPITAL} className='btn btn-secondary nextBtn'>
           NEXT
         </Link>
         <br />

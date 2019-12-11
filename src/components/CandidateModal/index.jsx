@@ -25,6 +25,37 @@ const CandidateModal = ({
     return priority.text;
   };
 
+  const displayHTML = htmlString => (
+    <span
+      dangerouslySetInnerHTML={{ __html: htmlString }}
+    ></span>
+  );
+
+  /** Darren Add the two function to fix the platform issue#87. */
+  const getDesiredDetailOthers = () =>{
+    let desiredDetailOthers = [];
+    candidate.details.map(detail => {
+      if (detail.title !== 'Priority 1' && detail.title !== 'Priority 2' && detail.title !== 'Priority 3') {
+        desiredDetailOthers.push(detail);
+      }
+      return null;
+     });
+    return desiredDetailOthers;
+  }
+  var data = getDesiredDetailOthers();
+  /* Peter Kim. Front-end issue #3.
+     Added a colon between detail.title and detail.text. */
+  const detailOthers = data.map((detail,index) => {
+    return (
+      <div key={index}>
+        <span className="modalTitles">
+          {displayHTML(detail.title)}:{" "}
+        </span>
+        {displayHTML(detail.text)}
+      </div>
+    );
+  })
+  /** Darren Add the two function to fix the platform issue#87. */
   const contactMethodList = [
     'Phone',
     'Email',
@@ -163,13 +194,22 @@ const CandidateModal = ({
             <div className='modalScroll'>
               <span className='modalTitles'>Top 3 Priorities</span>
               <br />
-              <p>1. {displayPriority(getDesiredDetail('Priority 1'))}</p>
-              <p>2. {displayPriority(getDesiredDetail('Priority 2'))}</p>
-              <p>3. {displayPriority(getDesiredDetail('Priority 3'))}</p>
-              <p className='modalTitles'>Platform</p>
-              {displayPriority(getDesiredDetail('Platform'))}
-              <p className='modalTitles'>Biography</p>
-              {displayPriority(getDesiredDetail('Biography'))}
+              <ol>
+                <li>
+                  {displayHTML(displayPriority(getDesiredDetail("Priority 1")))}
+                </li>
+                <li>
+                  
+                  {displayHTML(displayPriority(getDesiredDetail("Priority 2")))}
+                </li>
+                <li>
+                  
+                  {displayHTML(displayPriority(getDesiredDetail("Priority 3")))}
+                </li>
+              </ol>
+
+              {detailOthers}
+              
               {displayContact}
             </div>
             <div className='modal-footer'>

@@ -30,7 +30,8 @@ class Review extends Component {
           candidatesSelected: JSON.parse(
             sessionStorage.getItem('selectedCandidateRaces')
           ),
-          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace'))
+          pollDetails: JSON.parse(sessionStorage.getItem('pollingPlace')),
+          race: response.races.races,
         });
       }
     });
@@ -39,6 +40,59 @@ class Review extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+  finalInfo = () => {
+    let emailAddress = document.getElementById("email").value;
+    
+    // console.log(emailAddress);
+    let candidates = this.state.candidatesSelected;
+    let pollDetail = this.state.pollDetails;
+    let capAnswers = JSON.parse(sessionStorage.getItem('capitalAnswers'));
+    // console.log(candidates);
+    // console.log(pollDetail);
+    console.log(capAnswers);
+    let candidatesToLink = "";
+    let pollDetailToLink = "";
+    let capAnswersToLink = "";
+    
+    // store candidates info
+    candidatesToLink = "YOUR CANDIDATES IN BALLOT ORDER \n\n";
+    if(candidates.length){
+      for(let i = 0; i < candidates.length; i++){
+        candidatesToLink += "Name: " + candidates[i].name + "\n"
+                            + "Organization: " + candidates[i].organizationName + "\n"
+                            + "Candidate Position: " + candidates[i].candidatePosition + "\n\n"  
+      }
+    }
+    candidatesToLink += "\n";
+    
+    // store voting location info
+
+    if(pollDetail){
+      pollDetailToLink = "VOTING DAY DETAILS" + "\n\n";
+      pollDetailToLink += "Place: " + pollDetail[0].pollingPlaceName + "\n"
+          + "Address: " + pollDetail[0].address + "\n"
+          + "Phone: " + pollDetail[0].phone + "\n"
+          + "Wheelchair availability: " + pollDetail[0].wheelchairInfo + "\n\n";
+      pollDetailToLink += '\n';
+    }
+    
+    
+    // store ballot issue answers
+    if(capAnswers){
+      capAnswersToLink = "YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS" + "\n\n"
+      for(let i = 0; i < capAnswers.length; i++){
+        capAnswersToLink += capAnswers[i].ballotIssueTitle + "\n\n"
+            + "Your answer: " + capAnswers[i].ballotIssueAnswer + "\n\n";
+      }
+    }
+
+    
+    let link = `mailto:?${emailAddress}`
+        + "&subject=" + escape("This is my subject")
+        + "&body=" + escape(candidatesToLink) + escape(pollDetailToLink) + escape(capAnswersToLink);
+    window.location.href = link;
+  };
 
   loadApiData = async () => {
     const ballotIssues = await pyv.get('/api/ballotissues');
@@ -94,20 +148,19 @@ class Review extends Component {
   removeFunc = candidate => {
     const { candidatesSelected } = this.state;
 
-    let storageCopy = candidatesSelected.slice(0);
     const found = candidatesSelected.findIndex(
       cand => cand.candidateId === candidate.candidateId
     );
 
     if (found > -1) {
-      storageCopy.splice(found, 1);
+      candidatesSelected.splice(found, 1);
     } else {
       console.error('Candidate Not Found!?');
     }
 
     this.setState(
       {
-        candidatesSelected: storageCopy
+        candidatesSelected
       },
       () => {
         if (found > -1) {
@@ -115,24 +168,22 @@ class Review extends Component {
         }
         sessionStorage.setItem(
           'selectedCandidateRaces',
-          JSON.stringify(storageCopy)
+          JSON.stringify(candidatesSelected)
         );
       }
     );
   };
 
   candidateCount = positionName => {
-    const storage = JSON.parse(
-      sessionStorage.getItem('selectedCandidateRaces')
-    );
-    let count = 0;
+    const { candidatesSelected } = this.state;
 
-    if (!storage) {
+    let count = 0;
+    if (!candidatesSelected) {
       return count;
     }
 
-    for (let i = 0; i < storage.length; i++) {
-      if (storage[i].candidatePosition === positionName) {
+    for (let i = 0; i < candidatesSelected.length; i++) {
+      if (candidatesSelected[i].candidatePosition === positionName) {
         count += 1;
       }
     }
@@ -213,8 +264,8 @@ class Review extends Component {
         <div className='row'>
           <div className='col-md-6' />
           <div className='col-md-6'>
-            <Email />
-            <ICS />
+            <Email finalInfo={this.finalInfo}/>
+            <ICS data={this.state}/>
           </div>
         </div>
         <Link to={routes.SCHEDULE} className='btn btn-secondary backBtn'>
