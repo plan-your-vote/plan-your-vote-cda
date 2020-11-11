@@ -47,7 +47,7 @@ class App extends Component {
       .then(res => res.json())
       .then(result => {
         this.setState({
-          themeName: result.selectedTheme.themeName,
+          themeName: result.SelectedTheme.ThemeName,
           images: result.images
         });
       });
