@@ -22,7 +22,8 @@ class App extends Component {
         type: '',
         value: '',
         description: '',
-        format: ''
+        format: '',
+        alt: ''
       },
       {
         id: '',
@@ -30,7 +31,8 @@ class App extends Component {
         type: '',
         value: '',
         description: '',
-        format: ''
+        format: '',
+        alt: ''
       }
     ],
     themeHref: ''
