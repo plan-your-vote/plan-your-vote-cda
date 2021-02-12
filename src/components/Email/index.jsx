@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
+
 
 const row = (id, labelText, ariaRequired, inputName) => {
   return (
@@ -19,17 +22,23 @@ const row = (id, labelText, ariaRequired, inputName) => {
   );
 };
 
+function shoot(){
+  console.log("Email Sent");
+}
+
 const Email = () => {
   return (
     <div>
       {row('email', 'E-mail Address', true, 'email')}
       {row('subject', 'Subject', false, 'subject')}
       {row('message', 'Message', false, 'message')}
-      <button className='btn btn-secondary' aria-label='send email'>
+      <button id='root' className='btn btn-secondary' aria-label='send email' onClick={shoot}>
         Send Reminder Email
       </button>
     </div>
   );
 };
 
+
+ReactDOM.render(<button />, document.getElementById("root"));
 export default Email;
