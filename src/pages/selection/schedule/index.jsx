@@ -221,6 +221,13 @@ class Schedule extends Component {
               level='2'
               description={this.state.page.description}
             />
+            <Link to={routes.CAPITAL} className='btn btn-secondary backBtn'>
+              BACK
+            </Link>
+            <Link to={routes.REVIEW} className='btn btn-secondary nextBtn'>
+              NEXT
+            </Link>
+            <br/><br/>
           </div>
           <div className='col-md-6'>
             <Map

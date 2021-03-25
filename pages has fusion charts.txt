@@ -1,0 +1,148 @@
+Search "new FusionCharts" (118 hits in 53 files)
+
+https://cmsdev.vancouver.ca/fs-stacked.aspx (1 hit)
+
+https://cmsdev.vancouver.ca/green-vancouver/access-to-nature.aspx (4 hits)
+
+https://cmsdev.vancouver.ca/green-vancouver/clean-air.aspx (1 hit)
+	Line 467: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/clean-water.aspx (1 hit)
+	Line 476: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/climate-and-renewables.aspx (1 hit)
+	Line 473: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/climate-change-adaptation-strategy.aspx (2 hits)
+	Line 663: var OnlineChart = new FusionCharts({
+	Line 846: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/green-buildings.aspx (2 hits)
+
+https://cmsdev.vancouver.ca/green-vancouver/green-economy.aspx (2 hits)
+	Line 478:         var OnlinegjChart = new FusionCharts({
+	Line 677:         var OnlinegbChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/green-transportation.aspx (2 hits)
+	Line 481: var OnlineFTChart = new FusionCharts({
+	Line 640: var OnlineDDChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/lighter-footprint.aspx (2 hits)
+	Line 494:         var OnlineefChart = new FusionCharts({
+	Line 667: var OnlinepeChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/local-food.aspx (1 hit)
+	Line 467: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/plan-focus-areas-demo.aspx (4 hits)
+
+https://cmsdev.vancouver.ca/green-vancouver/rain-and-snow-climate.aspx (1 hit)
+	Line 440: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/sea-level-rise.aspx (1 hit)
+	Line 1001: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/temperature-climate.aspx (1 hit)
+	Line 426: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/what-we-have-learned.aspx (1 hit)
+	Line 618:             var onlinechartTMP = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/why-renewable-city.aspx (1 hit)
+	Line 449: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/green-vancouver/zero-waste.aspx (1 hit)
+	Line 467: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/home-property-development/cac-guidelines.aspx (1 hit)
+	Line 483: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/home-property-development/city-wide-development-cost-levy-update.aspx (2 hits)
+	Line 488: var pieOnlineChart = new FusionCharts({
+	Line 822: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/home-property-development/demo-content-page.aspx (3 hits)
+
+https://cmsdev.vancouver.ca/home-property-development/statistics-on-construction-activity.aspx (1 hit)
+	Line 418: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/home-property-development/utilities-dcl.aspx (1 hit)
+	Line 493: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/internal/fs-bar.aspx (1 hit)
+	Line 353: var OnlineChart = new FusionCharts({ 
+https://cmsdev.vancouver.ca/internal/fs-mlevel-pie.aspx (1 hit)
+	Line 353: var OnlineChart = new FusionCharts({ 
+https://cmsdev.vancouver.ca/internal/fs-mseries-col.aspx (1 hit)
+	Line 351: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/internal/fs-stacked.aspx (1 hit)
+	Line 353: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/internal/Section-Navigation-Test.aspx (7 hits)
+
+https://cmsdev.vancouver.ca/parks-recreation-culture/park-board-capital-planning.aspx (2 hits)
+	Line 524: var onlinechartbudgetpie = new FusionCharts({
+	Line 618: var onlinechartbudgetpie = new FusionCharts({
+https://cmsdev.vancouver.ca/parks-recreation-culture/vote-view-results.aspx (1 hit)
+	Line 371: var revenueChart = new FusionCharts({ 
+https://cmsdev.vancouver.ca/people-programs/a-good-start.aspx (1 hit)
+	Line 519: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/a-home-for-everyone.aspx (1 hit)
+	Line 520: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/active-living-and-getting-outside.aspx (1 hit)
+	Line 518: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/being-and-feeling-safe-and-included.aspx (3 hits)
+	Line 508:             var onlinechartdark = new FusionCharts({
+	Line 571:             var onlinechartinclusion = new FusionCharts({
+	Line 659:             var onlinechartcrime = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/collaborative-leadership.aspx (1 hit)
+	Line 506: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/cultivating-connections.aspx (1 hit)
+	Line 529: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/drugs.aspx (1 hit)
+	Line 720:   var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/expressing-ourselves.aspx (4 hits)
+
+https://cmsdev.vancouver.ca/people-programs/feeding-ourselves-well.aspx (1 hit)
+	Line 518: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/getting-around.aspx (1 hit)
+	Line 521: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/healthy-human-services.aspx (1 hit)
+	Line 523: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/lifelong-learning.aspx (1 hit)
+	Line 520: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/people-programs/making-ends-meet-and-working-well.aspx (3 hits)
+	Line 526:             var onlinechartwage = new FusionCharts({
+	Line 614:             var onlinechartincome = new FusionCharts({
+	Line 708:             var onlinechartlow = new FusionCharts({
+https://cmsdev.vancouver.ca/streets-transportation/cambie-bridge-improvements.aspx (1 hit)
+	Line 584: var OnlineChart = new FusionCharts({
+https://cmsdev.vancouver.ca/streets-transportation/collision-injury-data.aspx (3 hits)
+	Line 487: var OnlineTFChart = new FusionCharts({
+	Line 754: var OnlineCDChart = new FusionCharts({
+	Line 894: var OnlineSIChart = new FusionCharts({
+https://cmsdev.vancouver.ca/streets-transportation/west-end-parking-strategy.aspx (8 hits)
+
+https://cmsdev.vancouver.ca/your-government/budget-money-out-running-the-city.aspx (3 hits)
+	Line 509: var onlinechartcaex = new FusionCharts({
+	Line 621: var OnlineChartOpEx = new FusionCharts({
+	Line 769: 
+https://cmsdev.vancouver.ca/your-government/capital-and-operating-budgets.aspx (2 hits)
+	Line 1069: var onlinechartcaex = new FusionCharts({ 
+	Line 1170: var OnlineChartOpEx = new FusionCharts({ 
+https://cmsdev.vancouver.ca/your-government/capital-plan-2019-2022.aspx (5 hits)
+	Line 505: var OnlineEAChart = new FusionCharts({
+	Line 603: var OnlineNAChart = new FusionCharts({
+	Line 693: var onlinechartwhoexistingbudgetpie = new FusionCharts({
+	Line 751: var onlinechartwhonewbudgetpie = new FusionCharts({
+	Line 3411: var onlinechartbudgetpie = new FusionCharts({
+https://cmsdev.vancouver.ca/your-government/election-results-2018-test.aspx (7 hits)
+	Line 1158:                         var chartInstance1 = new FusionCharts({
+	Line 1169:                         var chartInstance2 = new FusionCharts({
+	Line 1180:                         var chartInstance3 = new FusionCharts({
+	Line 1191:                         var chartInstance4 = new FusionCharts({
+	Line 1202:                         var chartInstance5 = new FusionCharts({
+	Line 1213:                         var chartInstance6 = new FusionCharts({
+	Line 1224:                         var chartInstance7 = new FusionCharts({
+https://cmsdev.vancouver.ca/your-government/election-results-2018-test2.aspx (7 hits)
+	Line 1158:                         var chartInstance1 = new FusionCharts({
+	Line 1169:                         var chartInstance2 = new FusionCharts({
+	Line 1180:                         var chartInstance3 = new FusionCharts({
+	Line 1191:                         var chartInstance4 = new FusionCharts({
+	Line 1202:                         var chartInstance5 = new FusionCharts({
+	Line 1213:                         var chartInstance6 = new FusionCharts({
+	Line 1224:                         var chartInstance7 = new FusionCharts({
+https://cmsdev.vancouver.ca/your-government/election-results-2018.aspx (7 hits)
+	Line 1189:                         var chartInstance1 = new FusionCharts({
+	Line 1200:                         var chartInstance2 = new FusionCharts({
+	Line 1211:                         var chartInstance3 = new FusionCharts({
+	Line 1222:                         var chartInstance4 = new FusionCharts({
+	Line 1233:                         var chartInstance5 = new FusionCharts({
+	Line 1244:                         var chartInstance6 = new FusionCharts({
+	Line 1255:                         var chartInstance7 = new FusionCharts({
+https://cmsdev.vancouver.ca/your-government/funding.aspx (4 hits)
+	Line 417: var onlinechartopre = new FusionCharts({ 
+	Line 505: var onlinecharttax = new FusionCharts({ 
+	Line 558: var onlinecharttaic = new FusionCharts({ 
+	Line 710: 

@@ -7,11 +7,14 @@
     "axios": "^0.18.0",
     "mapbox": "^1.0.0-beta10",
     "mapbox-gl": "^0.54.0",
+    "moment": "^2.29.1",
+    "pdfjs": "^2.3.2",
     "react": "^16.8.6",
+    "react-add-to-calendar-hoc": "^1.0.10",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0"
+    "react-scripts": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

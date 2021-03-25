@@ -32,6 +32,11 @@ img {
   padding: 0 8%;
 }
 
+/* First element of multiple choice question on capital-plan */
+.mt-5:first-child {
+  margin-top: 1rem !important;
+}
+
 /* NavBar */
 #nav-logo {
   height: 2em;
@@ -44,6 +49,22 @@ img {
 
 nav {
   font-size: 14px;
+}
+
+.ics-choice select {
+  margin: 20px;
+}
+
+.ics-email button{
+  margin-top: 20px;
+}
+
+.candi-section {
+  margin-top: 40px;
+}
+
+.candi-summary{
+  margin: 40px 0;
 }
 
 @media (min-width: 768px) {

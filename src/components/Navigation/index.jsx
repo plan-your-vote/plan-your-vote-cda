@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { CMS_BASE_URL } from 'constants/baseURL';
 import * as routes from 'constants/routes';
 
 const navItem = (text, link, ariaLabel) => {
@@ -21,7 +21,7 @@ const Navigation = ({ logo }) => {
           <img
             className='navbar-brand'
             id='nav-logo'
-            src={logo.value}
+            src={`${CMS_BASE_URL}/images/logo/logo.png`} //"/admin/Themes/getImg"
             alt={logo.description}
           />
         </Link>

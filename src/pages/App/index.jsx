@@ -33,7 +33,8 @@ class App extends Component {
         format: ''
       }
     ],
-    themeHref: ''
+    themeHref: '',
+    socialMedia: []
   };
 
   componentDidMount() {
@@ -47,12 +48,19 @@ class App extends Component {
       .then(res => res.json())
       .then(result => {
         this.setState({
-          themeName: result.selectedTheme.themeName,
+          themeName: result.SelectedTheme.ThemeName, 
           images: result.images
         });
       });
+    await fetch(`${CMS_BASE_URL}/api/socialmedia`)
+        .then(res=> res.json())
+        .then(result => {
+          this.setState( {
+            socialMedia: result.socialMedias
+          });
+        });
   };
-
+  
   setTheme = () => {
     switch (this.state.themeName) {
       case 'Maple':
@@ -60,6 +68,12 @@ class App extends Component {
         break;
       case 'Snowdrop':
         this.setState({ themeHref: `${themes.BASE}${themes.SNOWDROP}` });
+        break;
+      case 'Green':
+        this.setState({ themeHref: `${themes.BASE}${themes.GREEN}` });
+        break;
+      case 'Ocean':
+        this.setState({ themeHref: `${themes.BASE}${themes.OCEAN}` });
         break;
       default:
         this.setState({ themeHref: `${themes.BASE}${themes.DEFAULT}` });
@@ -89,6 +103,7 @@ class App extends Component {
             logo={this.state.images.find(image => {
               return image.placement === 'Footer Logo';
             })}
+            socialMedia={this.state.socialMedia}
           />
         </Router>
       </>

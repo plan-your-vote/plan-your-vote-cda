@@ -1,16 +1,19 @@
 import React from 'react';
 import './index.css';
 
-const socialIcon = (id, className) => {
+const socialIcon = (id, className, link) => {
   return (
-    <li id={id} className='fa-stack'>
-      <i className='fas fa-circle fa-stack-2x' />
-      <i className={`fab ${className} fa-stack-1x fa-inverse`} />
-    </li>
+      <li id={id} className='fa-stack'>
+
+        <i className='fas fa-circle fa-stack-2x' />
+        <a href={link}>
+          <i className={`fab ${className} fa-stack-1x fa-inverse`} />
+        </a>
+      </li>
   );
 };
 
-const Footer = ({ logo }) => {
+const Footer = ({ logo, socialMedia }) => {
   return (
     <footer>
       <div className='container'>
@@ -33,9 +36,17 @@ const Footer = ({ logo }) => {
           </div>
           <div className='col-md-6'>
             <ul id='footer-share'>
-              {socialIcon('twitter', 'fa-twitter')}
-              {socialIcon('facebook', 'fa-facebook-f')}
-              {socialIcon('linkedin', 'fa-linkedin-in')}
+              {socialMedia.map((media, i) => {
+                let name = media.mediaName.toLowerCase();
+                let iconClass = name;
+                if (iconClass === 'facebook') {
+                  iconClass = iconClass+'-f';
+                }
+                if (iconClass === 'linkedin') {
+                  iconClass = iconClass+'-in';
+                }
+                return socialIcon(name, 'fa-' + iconClass, media.link)
+              })}
             </ul>
             <select
               aria-label='Change language to: '

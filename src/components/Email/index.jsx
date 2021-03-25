@@ -19,13 +19,11 @@ const row = (id, labelText, ariaRequired, inputName) => {
   );
 };
 
-const Email = () => {
+const Email = (props) => {
   return (
-    <div>
-      {row('email', 'E-mail Address', true, 'email')}
-      {row('subject', 'Subject', false, 'subject')}
-      {row('message', 'Message', false, 'message')}
-      <button className='btn btn-secondary' aria-label='send email'>
+    <div class="ics-email">
+      {row('email', 'E-mail Address:', true, 'email')}
+      <button className='btn btn-secondary' aria-label='send email' onClick={props.finalInfo}>
         Send Reminder Email
       </button>
     </div>
