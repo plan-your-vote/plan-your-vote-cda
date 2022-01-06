@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { MAPBOX_PUBLIC } from 'constants/mapbox';
 import './locations.css';
