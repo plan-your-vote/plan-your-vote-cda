@@ -166,18 +166,22 @@ class Schedule extends Component {
 
     const result = [];
 
-    distances.map(distance => {
-      const place = this.state.allPollingPlaces.find(pollingPlace => {
-        return pollingPlace.pollingPlaceId === distance.pollingPlaceID;
+    if (distances instanceof Array) {
+      distances.map(distance => {
+        if (distance.hasOwnProperty('distance')) {
+          const place = this.state.allPollingPlaces.find(pollingPlace => {
+            return pollingPlace.pollingPlaceId === distance.pollingPlaceID;
+          });
+
+          if (place) {
+            place['distance'] = distance.distance;
+            result.push(place);
+          }
+        }
+
+          return null; 
       });
-
-      if (place) {
-        place['distance'] = distance.distance;
-        result.push(place);
-      }
-
-      return null;
-    });
+    }
 
     if (this._isMounted) {
       this.setState({
