@@ -11,7 +11,7 @@
     "immer": "^9.0.7",
     "mapbox": "^1.0.0-beta10",
     "mapbox-gl": "^2.6.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "pdfjs": "^2.4.7",
     "postcss": "^8.4.5",
